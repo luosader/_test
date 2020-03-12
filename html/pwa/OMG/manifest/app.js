@@ -8,6 +8,8 @@ $(document).ready(function() {
         navigator.serviceWorker.register('sw.js');
     }
 
+    // console.log(!isPwa)
+    // console.log(!$.cookie('Delayed'))
     // 未安装过和没有点击隐藏按钮
     if (!isPwa && !$.cookie('Delayed')) {
         // 应用安装横幅事件
@@ -43,28 +45,26 @@ $(document).ready(function() {
             $('.jq-slide').slideUp(500);//滑动隐藏
         });
     } else {
-        // console.log(!isPwa)
-        // console.log(!$.cookie('Delayed'))
-        // $('.jq-slide').hide();
+        $('.jq-slide').hide();
     }
 
     // 已安装
     if (isPwa) {
-        let domain = new RegExp('^http[s]?:\/\/[^.]+\.([^/]+)', 'i');
-        let main = window.location.href.match(domain)[1].toLowerCase();
-        $(document).on('click', 'a', function(event) {
-            if (this.href && main === this.href.match(domain)[1].toLowerCase()) {
-                if (event.preventDefault) {
-                    event.preventDefault();
-                } else {
-                    window.event.returnValue = false;
-                }
-                window.location = this.href;
-                return false;
-            } else {
-                return true;
-            }
-        });
+        // let domain = new RegExp('^http[s]?:\/\/[^.]+\.([^/]+)', 'i');
+        // let main = window.location.href.match(domain)[1].toLowerCase();
+        // $(document).on('click', 'a', function(event) {
+        //     if (this.href && main === this.href.match(domain)[1].toLowerCase()) {
+        //         if (event.preventDefault) {
+        //             event.preventDefault();
+        //         } else {
+        //             window.event.returnValue = false;
+        //         }
+        //         window.location = this.href;
+        //         return false;
+        //     } else {
+        //         return true;
+        //     }
+        // });
 
         // console.log($.cookie('Hidden'))
         // install_stat('open', window.location.href);
