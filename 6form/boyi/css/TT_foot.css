@@ -1,0 +1,24 @@
+@charset "gb2312";
+/* CSS Document */
+.TT_footer{ width:100%; background:url(../images/body.jpg) repeat-x center top; position:relative; bottom:0px; left:0px; padding-top:1px;z-index:1;color:#888;}
+.TT_foot1{ width:1200px; margin:0px auto; height:163px; background:#ededed; border-top:2px solid #a40019;}
+.TT_foot01{ width:1200px; margin:0px auto;}
+.TT_foot01 ul li{width:334px;float:left; margin-top:19px; display:inline;}
+.TT_foot01 ul li.first{margin-left:135px;padding-right:135px;width:90px;}
+.TT_foot01 ul li.second{ border:1px solid #888; border-top:none; width:240px; border-bottom:none;padding-left:150px;margin-right:160px;}
+.TT_foot01 ul li.second h3,.TT_foot01 ul li.th h3{width:234px;}
+.TT_foot01 ul li.th{width:100px;}
+.TT_foot01 ul li h3{ float:left; height:24px; line-height:24px; color:#565656; font-family:"Î¢ÈíÑÅºÚ"; font-weight:normal;}
+.TT_foot01 ul li ol{ width:234px; float:left;}
+.TT_foot01 ul li ol li{ float:left; height:24px; line-height:24px; margin-top:0px; margin-right:0px;}
+.TT_foot01 ul li ol li a{ color:#888888;}
+.TT_foot01 ul li ol li a:hover{ color:#cb0d1c;}
+.TT_foot01 img{ float:left; margin-top:19px;}
+
+.TT_foot2{ width:1200px; margin:0px auto; background:#a40019; }
+.TT_foot2 p{ width:1200px; text-align:center; line-height:30px; color:#ffffff;}
+.TT_foot2 p a{ color:#ffffff; display:inline-block; padding-left:15px; padding-right:15px;}
+.TT_foot2 p a:hover{ color:#cb0d1c}
+#r_aside{position:fixed;top:30%;right:0; z-index:20;}
+#content{position:relative;}
+#r_aside p{width:42px;height:109px;position:absolute;top:84px;right:164px;background:url(../images/iamges_05.gif) no-repeat;cursor:pointer;}

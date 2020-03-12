@@ -1,0 +1,1 @@
+trueopenhttp://localhost/_test/html/pwa/igvault/index.html

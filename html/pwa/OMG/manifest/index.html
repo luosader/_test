@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PWA</title>
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+    <h1>PWA - Manifest</h1>
+
+    <div class="jq-slide">
+        <button type="button" class="jq-prompt">Prompt</button>
+        <button type="button" class="jq-hide">Hidden</button>
+    </div>
+
+    <!-- 霸屏广告 -->
+    <div class="jq-popup" style="display:none;background-color:#009241;">
+        <a href="http://localhost/_test/html/pwa/OMG/manifest/index.html">Coupon</a>
+        <a class="jq-popup-close" href="javascript:;">close</a>
+        <a class="jq-popup-gift" href="javascript:;">gift</a>
+        <input type="hidden" value="IGVFAST">
+    </div>
+    
+</body>
+
+<script src="asset/jquery.js"></script>
+<script src="asset/cookie.js"></script>
+<script src="./app.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $(".jq-popup .jq-popup-close").click(function(){
+        $.cookie('Hidden', true);
+        $(".jq-popup").fadeOut(500);//淡出隐藏
+    });
+    //coupon GETIT 复制到剪贴板
+    $(".jq-popup .jq-popup-gift").click(function(){
+        $(".jq-popup>input").select();
+        document.execCommand("Copy"); //执行浏览器复制命令
+        HS.page.showSuccess("The coupon has been copied and can be used when buying products");
+        setTimeout(function(){
+            HS.page.closeDialog();
+        },3000);
+        $.cookie('Hidden', true);
+        $(".jq-popup").fadeOut(500);//淡出隐藏
+    });
+});
+</script>
+
+</html>

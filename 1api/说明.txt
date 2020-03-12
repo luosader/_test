@@ -1,0 +1,13 @@
+qcloud 腾讯云接口
+cos-php-sdk-master
+COS_v4:cos-php-sdk-v4-master
+qcloudapi-sdk-php-master
+
+weixin  微信接口
+微信公众平台  platform
+微信支付    wx_pay
+
+taobao 支付宝接口
+taobao-sdk-PHP-auto
+
+msg 短信接口

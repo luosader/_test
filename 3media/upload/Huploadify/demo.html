@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+    <title>Huploadify - H5示例</title>
+    <link rel="stylesheet" type="text/css" href="Huploadify.css" />
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="jquery.Huploadify.js"></script>
+</head>
+<body>
+    <div id="upload"></div>
+    <script type="text/javascript">
+    $(function() {
+        $('#upload').Huploadify({
+            auto: false,
+            fileTypeExts: '*.jpg;*.jpeg;*.png;*.gif;*.bmp;*.zip;*.tar;*.7z;*.gz',
+            multi: false,
+            // formData:{key:123456,key2:'vvvv'},
+            fileSizeLimit: 2048,
+            showUploadedPercent: true, //是否实时显示上传的百分比，如20%
+            showUploadedSize: true,
+            removeTimeout: 9999999,
+            uploader: 'upload.php',
+            onInit: function() {
+                console.log('初始化');
+            },
+            onUploadStart: function() {
+                console.log('开始上传');
+            },
+            onUploadSuccess: function(file, text, _this) {
+                console.log('上传成功');
+                // 移除上传按钮
+                // _this.removeClass('uploadbtn');
+                _this.find('.uploadbtn').remove();
+            },
+            onUploadError: function() {
+                console.log('上传失败');
+            },
+            onUploadComplete: function(file, text) {
+                console.log("上传完成:文件信息\r\n");
+                console.log(file);
+                console.log('php端返回数据\r\n');
+                console.log(text);
+            },
+            onCancel: function(file) {
+                console.log('删除的文件\r\n');
+                console.log(file);
+            }
+        });
+    });
+    </script>
+</body>
+</html>

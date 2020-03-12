@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Manifest</title>
+
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <h1>Mmoxr</h1>
+    <div class="jq-pwa">
+        <p><a class="jq-pwa-add" href="javascript:void(0);">Add To Home Screen</a></p>
+        <p><a class="jq-pwa-hide" href="javascript:void(0);">Click To Hidden</a></p>
+    </div>
+</body>
+
+<script src="js/jquery.js"></script>
+<!-- <script src="js/cookie.js"></script> -->
+<!-- <script src="app.js"></script> -->
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+    // 注册Service Worker
+    if (navigator.serviceWorker != null) {
+        navigator.serviceWorker.register('sw.js')
+            .then(function(registartion) {
+                console.log('register sw success :', registartion.scope);
+            })
+            .catch(function(err) {
+                console.log(err.toString());
+            });
+    }
+
+    window.addEventListener('beforeinstallprompt', function(e) {
+        // beforeinstallprompt event fired
+        console.log('beforeinstallprompt:start')
+        e.userChoice.then(function(choiceResult) {
+            if (choiceResult.outcome === 'dismissed') {
+                console.log('用户取消安装应用');
+            } else {
+                console.log('用户安装了应用');
+            }
+        });
+    });
+
+
+
+
+
+
+
+
+});
+</script>
+</html>

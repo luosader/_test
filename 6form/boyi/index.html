@@ -1,0 +1,548 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>北京伯艺木门 官方网站 中国木门、实木门十大品牌 BOYER</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="木门,实木门,木门30强,伯艺木门,木门十大品牌,北京木门,实木复合门">
+<meta name="description" content="30强木门品牌-伯艺木门,追求高品质生活.木门十大品牌是北京伯艺创展木门生产实木门、实木复合门、工程门等，伯艺木门先后荣获中国木门30强、中国木门协会副会长单位、中国木门CTC产品质量和健康双认证,绿色环保产品认证等多项荣誉。本着只打造精品,为高品位人士服务的思想，让发展中的伯艺木门立足于北京面向全国，与世界接轨，让伯艺木门走进千家万户。">
+
+<link href="css/TT_head.css" rel="stylesheet" type="text/css" />
+<link href="css/shouye.css" rel="stylesheet" type="text/css" />
+<link href="css/TT_foot.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/jquery.touchSlider.js"></script>
+<script type="text/javascript" src="js/lamu.js"></script>
+</head>
+<body>
+<div class="TT_ggw" id="TT_ggw">
+	<a href="#" target="_blank"><img src="images/images_02.gif" width="100%" height="53" /></a>
+ 
+<span><a onclick="this.parentNode.parentNode.style.display='none';"><img src="images/close.jpg" /></a></span>
+</div>
+<script>
+function shoucang() {
+	var b = window.location.href;
+	var a = document.title;
+	try {
+		window.external.addFavorite(b, a);
+	} catch(c) {
+		try {
+			window.sidebar.addPanel(a, b, "");
+		} catch(c) {
+			alert("加入收藏失败，请使用Ctrl+D进行添加");
+		}
+	}
+}
+</script>
+<div class="TT_login">
+	<div class="TT_login01">
+	<p><span>HI,欢迎来到伯艺木门合肥旗舰店</span>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:;" onClick="shoucang();">收藏本站</a> </p>
+	<div class="TT_log01">
+	<span>服务热线：<font style="color:#a40018;"><b>0551-65882088</b></font></span> </div>
+</div>
+
+	
+	
+</div>
+<div class="TT_logo">
+<img src="images/images_05.gif" />
+<div class="TT_ss">
+<div class="TT_ss01">
+<form id="searchForm" onsubmit="return checkSearchForm()" action="search.php" method="get" name="searchForm">
+	<input type="text" autocomplete="off" value="" class="TT_input01" name="keywords" id="keyword">
+	<input type="submit" value="搜 索" class="TT_btn">
+</form>
+
+<script>  
+    $(document).ready(function(){  
+        var xhr=null;  
+        $('input[name="keywords"]').keyup(function() {  
+              if(xhr){  
+                  xhr.abort();//如果存在ajax的请求，就放弃请求  
+              }  
+            var inputText= $.trim(this.value);  
+            if(inputText!=""){//检测键盘输入的内容是否为空，为空就不发出请求  
+            xhr=$.ajax({  
+                type: 'GET',  
+                url: 'search.php',  
+                cache:false,//不从浏览器缓存中加载请求信息  
+                data: "keyword=" + inputText,//向服务器端发送的数据  
+                dataType: 'json',//服务器返回数据的类型为json  
+                success: function (json) {  
+                    if (json.length != 0) {//检测返回的结果是否为空  
+                        var lists = "<ul>";  
+                        $.each(json, function () {  
+                            lists += "<li>"+this.pd_name+"</li>";//遍历出每一条返回的数据  
+                        });  
+                        lists+="</ul>";  
+  
+                        $("#searchBox").html(lists).show();//将搜索到的结果展示出来  
+  
+                        $("li").click(function(){  
+                            $("#keyword").val($(this).text());//点击某个li就会获取当前的值  
+                            $("#searchBox").hide();  
+                        })  
+  
+                    } else {  
+                        $("#searchBox").hide();  
+                    }  
+  
+  
+                }  
+  
+            });  
+            }else{  
+                $("#searchBox").hide();//没有查询结果就隐藏搜索框  
+            }  
+        }).blur(function(){  
+            $("#searchBox").hide();//输入框失去焦点的时候就隐藏搜索框  
+        });  
+  
+    });  
+</script> 
+
+</div>
+<p><span>热搜：</span> <a href="#" >静音门</a>&ensp; 
+           <a href="#" >免漆门</a>&ensp; 
+           <a href="#" >防火门</a>&ensp;  
+          </p>
+</div> 
+<div class="TT_geren">
+<div class="TT_gr"> 
+<a href="#"><b></b><i>个人中心</i></a> </div>
+<div class="TT_gr TT_gwc">
+<a href="#"><b></b><i>购物车<strong>0</strong>件</i><span></span></a>
+</div>
+</div>
+</div>
+<div class="TT_nav">
+<div class="TT_nav01">
+<span>所有木门分类</span>
+<div class="TT_nav02">
+<ul>
+<li><a href="/" current>首页</a></li>
+<li><a href="#"   style="position:relative;">伯艺木门系列</a></li><li><a href="#"   style="position:relative;">实装案例</a></li><li><a href="#"   style="position:relative;">门店介绍</a></li><li><a href="#"   style="position:relative;">联系我们</a></li></ul>
+</div>
+</div>
+</div>
+ 
+<div class="sy_main">
+	<div class="sy_m01">
+		<div class="tt_nav04">
+		<ul>
+					<li  class="TT_nav_li01">
+			<h3><a href="#"><b>欧式奢华 ></b></a></h3>
+			<p>
+			<a target="_blank" href="#">怡然系列</a> 
+<a target="_blank" href="#">白宫系列</a> 
+<a target="_blank" href="#">皇室尊享</a> 
+<a target="_blank" style="width:80px;" href="#">锦上添花系列</a> 
+<a target="_blank" href="#">吉祥系列</a>  
+			</p>
+			</li>
+					<li >
+			<h3><a href="#"><b>简欧风格 ></b></a></h3>
+			<p>
+			 
+<a target="_blank" href="#">卡尔维庄园</a> 
+<a target="_blank" href="#">大中华</a> 
+<a target="_blank" href="#">经典传承</a> 
+
+			</p>
+			</li>
+					<li  class="TT_nav_li01">
+			<h3><a href="#"><b>现代简约 ></b></a></h3>
+			<p>
+			
+<a target="_blank" href="#">卡普利亚</a> 
+<a target="_blank" href="#">托斯卡纳</a> 
+<a target="_blank" href="#">伊斯基亚</a> 
+<a target="_blank" href="#">法波亚纳</a> 
+<a target="_blank" href="#">卡提尼亚</a> 
+<a target="_blank" href="#">克莱蒙娜</a> 
+<a target="_blank" href="#">普罗旺斯</a> 
+<a target="_blank" href="#">马提尼克</a> 
+<a target="_blank" href="#">马斯特尔</a> 
+			</p>
+			</li>
+					<li >
+			<h3><a href="#"><b>美式风格 ></b></a></h3>
+			<p>
+			<a target="_blank" href="#">白宫系列</a> 
+<a target="_blank" href="#">维罗纳系列</a> 
+<a target="_blank" href="#">荷兰风情</a> 
+<a target="_blank" href="#">罗马假日</a>
+			</p>
+			</li>
+            <li >
+			<h3><a href="#"><b>中式风情 ></b></a></h3>
+			<p>
+			<a target="_blank" href="#">步步高系列</a> 
+<a target="_blank" href="#">珊瑚系列</a> 
+<a target="_blank" href="#">八喜系列</a> 
+<a target="_blank" href="#">经典传承</a>
+<a target="_blank" href="#">韵系列</a>
+<a target="_blank" href="#">花语系列</a>
+			</p>
+			</li>
+				</ul>
+		</div>
+		<div class="sy_hd">
+		<div class="main_visual">
+			<div class="flicking_con">
+							<a href="#">1</a>
+							<a href="#">2</a>
+							<a href="#">3</a>
+						</div>
+			
+			<div class="main_image">
+				<ul>
+									<li><span><a href="#"><img src="images/image_03.jpg" width="950" height="457" /></a></span></li>
+									<li><span><a href="#"><img src="images/image_03.jpg" width="950" height="457" /></a></span></li>
+									<li><span><a href="#"><img src="images/image_03.jpg" width="950" height="457" /></a></span></li>
+								</ul>
+				  
+				<a href="#" id="btn_prev"></a>
+				<a href="#" id="btn_next"></a>
+			</div>
+		</div>
+		</div>
+		
+	</div>
+	
+	<div class="sy_height">
+    	<p class="rt">
+        	<a href="#">
+            	尚雅系列
+            </a>
+            <a href="#">
+            	白宫系列
+            </a>
+            <a href="#">
+            	皇室尊享
+            </a>
+            <span>
+            	<a href="#">
+                	更多＞
+                </a>
+            </span>
+        </p>
+    </div>
+	<div class="sy_m03" id="sy_m01">
+		<div class="sy_m03_z">
+			<h3 class="foxff">欧式奢华</h3>
+							<a href="#"><img src="images/images_14.jpg"  /></a>
+					</div>
+		<div class="sy_m03_r">
+			<ul>
+									<li>
+					<div class="sy_m03_img">
+					<a href="#"><img src="images/images_06.jpg" />
+										</a>
+					</div>
+					<h3><a href="#">欧式奢华 锦上添花系列</a></h3>
+					<p><span>联系电话:0551-65882088</span><br/><a href="#" class="sy_a01 lf">进店咨询</a></p>
+					</li>
+									<li>
+					<div class="sy_m03_img">
+					<a href="#"><img src="images/images_08.jpg" /></a>
+					</div>
+					<h3><a href="#">欧式奢华 皇室尊享系列</a></h3>
+					<p><span>联系电话:0551-65882088</span><br/><a href="#" class="sy_a01 lf">进店咨询</a></p>
+					</li>
+									<li>
+					<div class="sy_m03_img">
+					<a href="#"><img src="images/images_23.jpg" />
+										</a>
+					</div>
+					<h3><a href="#">欧式奢华 尊贵之家系列</a></h3>
+					<p><span>联系电话:0551-65882088</span><br/><a href="#" class="sy_a01 lf">进店咨询</a></p>
+					</li>
+				 
+			</ul>
+		</div>
+	</div>
+	<div class="sy_height">
+    	<p class="rt">
+        	<a href="#">
+            	卡尔维庄园
+            </a>
+            <a href="#">
+            	大中华
+            </a>
+            <a href="#">
+            	经典传承
+            </a>
+            <span>
+            	<a href="#">
+                	更多＞
+                </a>
+            </span>
+        </p>
+    </div>
+<div class="sy_m03" id="sy_m02">
+		<div class="sy_m03_z">
+			<h3 class="foxff">简欧风格</h3>
+							<a href="#"><img src="images/images_26.jpg" /></a>
+					</div>
+		<div class="sy_m03_r">
+			<ul>
+									<li>
+					<div class="sy_m03_img">
+					<a href="#"><img src="images/images_21.jpg" />
+										</a>
+					</div>
+					<h3><a href="#">简欧风格 尊雅系列</a></h3>
+					<p><span>联系电话:0551-65882088</span><br/><a href="#" class="sy_a01 lf">进店咨询</a></p>
+					</li>
+									<li>
+					<div class="sy_m03_img">
+					<a href="#"><img src="images/images_22.jpg" />
+										</a>
+					</div>
+					<h3><a href="#">简欧风格 经典传承系列</a></h3>
+					<p><span>联系电话:0551-65882088</span><br/><a href="#" class="sy_a01 lf">进店咨询</a></p>
+					</li>
+									<li>
+					<div class="sy_m03_img">
+					<a href="#"><img src="images/images_23.jpg"/>
+										</a>
+					</div>
+					<h3><a href="#">简欧风格 卡尔维庄园系列</a></h3>
+					<p><span>联系电话:0551-65882088</span><br/><a href="#" class="sy_a01 lf">进店咨询</a></p>
+					</li>
+				 
+			</ul>
+		</div>
+	</div>
+<div class="sy_height">
+    	<p class="rt">
+        	<a href="#">
+            	卡普里亚
+            </a>
+            <a href="#">
+            	托斯卡纳
+            </a>
+            <a href="#">
+            	伊斯基亚
+            </a>
+            <span>
+            	<a href="#">
+                	更多＞
+                </a>
+            </span>
+        </p>
+    </div>
+<div class="sy_m03" id="sy_m03">
+		<div class="sy_m03_z">
+			<h3 class="foxff">现代简约</h3>
+							<a href="#"><img src="images/images_39.jpg"/></a>
+					</div>
+		<div class="sy_m03_r">
+			<ul>
+									<li>
+					<div class="sy_m03_img">
+					<a href="#"><img src="images/images_33.jpg" />
+										</a>
+					</div>
+					<h3><a href="#">现代简约 新贵族系列</a></h3>
+					<p><span>联系电话:0551-65882088</span><br/><a href="#" class="sy_a01 lf">进店咨询</a></p>
+					</li>
+									<li>
+					<div class="sy_m03_img">
+					<a href="#"><img src="images/images_34.jpg"/>
+										</a>
+					</div>
+					<h3><a href="#">现代简约 忆江南系列</a></h3>
+					<p><span>联系电话:0551-65882088</span><br/><a href="#" class="sy_a01 lf">进店咨询</a></p>
+					</li>
+									<li>
+					<div class="sy_m03_img">
+					<a href="#"><img src="images/images_35.jpg" />
+										</a>
+					</div>
+					<h3><a href="#">现代简约 永恒系列</a></h3>
+					<p><span>联系电话:0551-65882088</span><br/><a href="#" class="sy_a01 lf">进店咨询</a></p>
+					</li>
+				 
+			</ul>
+		</div>
+	</div>
+     <div class="sy_height">
+    	<p class="rt">
+        	<a href="#">
+            	白宫系列
+            </a>
+            <a href="#">
+            	维罗纳
+            </a>
+            <a href="#">
+            	荷兰风情
+            </a>
+            <span>
+            	<a href="#">
+                	更多＞
+                </a>
+            </span>
+        </p>
+    </div>
+<div class="sy_m03" id="sy_m03">
+		<div class="sy_m03_z">
+			<h3 class="foxff">美式风格</h3>
+							<a href="#"><img src="images/images_39.jpg"/></a>
+					</div>
+		<div class="sy_m03_r">
+			<ul>
+									<li>
+					<div class="sy_m03_img">
+					<a href="#"><img src="images/images_52.jpg"/>
+										</a>
+					</div>
+					<h3><a href="#">美式风格 白宫系列</a></h3>
+					<p><span>联系电话:0551-65882088</span><br/><a href="#" class="sy_a01 lf">进店咨询</a></p>
+					</li>
+									<li>
+					<div class="sy_m03_img">
+					<a href="#"><img src="images/images_47.jpg"/>
+										</a>
+					</div>
+					<h3><a href="#">美式风格 维罗纳系列</a></h3>
+					<p><span>联系电话:0551-65882088</span><br/><a href="#" class="sy_a01 lf">进店咨询</a></p>
+					</li>
+									<li>
+					<div class="sy_m03_img">
+					<a href="#"><img src="images/images_49.jpg"/>
+										</a>
+					</div>
+					<h3><a href="#">美式风格 荷兰风情系列</a></h3>
+					<p><span>联系电话:0551-65882088</span><br/><a href="#" class="sy_a01 lf">进店咨询</a></p>
+					</li>
+				 
+			</ul>
+		</div>
+	</div>
+     <div class="sy_height">
+    	<p class="rt">
+        	<a href="#">
+            	珊瑚系列
+            </a>
+            <a href="#">
+            	八喜系列
+            </a>
+            <a href="#">
+            	经典传承
+            </a>
+            <span>
+            	<a href="#">
+                	更多＞
+                </a>
+            </span>
+        </p>
+    </div>
+<div class="sy_m03" id="sy_m03">
+		<div class="sy_m03_z">
+			<h3 class="foxff">中式风情</h3>
+							<a href="#"><img src="images/images_39.jpg"/></a>
+					</div>
+		<div class="sy_m03_r">
+			<ul>
+									<li>
+					<div class="sy_m03_img">
+					<a href="#"><img src="images/images_63.jpg"/>
+										</a>
+					</div>
+					<h3><a href="#">中式风情 步步高系列</a></h3>
+					<p><span>联系电话:0551-65882088</span><br/><a href="#" class="sy_a01 lf">进店咨询</a></p>
+					</li>
+									<li>
+					<div class="sy_m03_img">
+					<a href="#"><img src="images/images_64.jpg" />
+										</a>
+					</div>
+					<h3><a href="#">现代简约 小城故事系列</a></h3>
+					<p><span>联系电话:0551-65882088</span><br/><a href="#" class="sy_a01 lf">进店咨询</a></p>
+					</li>
+									<li>
+					<div class="sy_m03_img">
+					<a href="#"><img src="images/images_66.jpg" />
+										</a>
+					</div>
+					<h3><a href="#">现代简约 维罗纳系列</a></h3>
+					<p><span>联系电话:0551-65882088</span><br/><a href="#" class="sy_a01 lf">进店咨询</a></p>
+					</li>
+				 
+			</ul>
+		</div>
+	</div>
+    <div class="sy_height">
+    	<p class="lf">
+    		实装案例分享
+        </p>
+        <p class="rt">
+    		<span>
+            	<a href="#">
+                	更多＞
+                </a>
+            </span>
+        </p>
+    </div>
+    <div class="sy_m03" >
+   		<div class="sy_m03_z" style="width:1200px;">
+        	<a href="#">
+            	<img style="margin-top:0;" src="images/images_73.jpg" />
+            </a>
+            <a href="#">
+            	<img style="margin:0 39px;" src="images/images_75.jpg" />
+            </a>
+            <a href="#">
+            	<img  style="margin-top:0;" src="images/images_77.jpg" />
+            </a>
+        </div> 
+    </div>
+</div>	
+
+<div class="TT_footer">
+<div class="TT_foot1">
+<div class="TT_foot01">
+<ul>
+<li class="first">
+<h3>关于合肥伯艺</h3>
+<ol>
+<li><a href="#">合肥伯艺简介</a></li>
+<li><a href="#">企业文化</a></li>
+</ol>
+</li>
+<li class="second">
+<h3>合肥伯艺服务</h3>
+<ol>
+<li><a href="#">优质材料</a></li>
+<li><a href="#">售后政策</a></li>
+<li><a href="#">安装服务</a></li>
+</ol>
+</li>
+<li class="th">
+<h3>联系我们</h3>
+<ol>
+<li>电话：13866683887</li>
+<li>地址：合肥师政务区红星美凯龙<br/>负一层伯艺木门旗舰店</li>
+
+</ol>
+</li>
+</ul>
+</div>
+</div>
+<div class="TT_foot2">
+
+<p>京ICP备号888888888</p>
+</div>
+</div>
+<div id="r_aside">
+	<div id="content">
+    	<p onclick="this.parentNode.parentNode.style.display='none';"></p><img src="images/iamges_03.gif"/>
+    </div>
+</div>
+<div style="position:fixed;top:45%;right:0; z-index:5;">
+	<img src="images/images_01.gif"  onclick="document.getElementById('r_aside').style.display='block'"/>
+</div>
+</body>
+</html>

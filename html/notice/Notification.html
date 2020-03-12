@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>桌面通知 Notification </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script>
+    </script>
+</head>
+
+<body>
+    <input type="button" value="测试桌面通知" onclick="checkPermissionAndShow()" />
+    <script>
+        window.Notifications = window.Notification || window.webkitNotifications;
+
+        function checkPermissionAndShow(){
+            var perLel = window.Notifications.checkPermission();//Uncaught TypeError: window.Notifications.checkPermission is not a function
+            if(perLel == 0){
+                console.log('已授权...');
+                showNotification();
+            }else if(perLel ==1){
+                console.log('待授权...');
+                window.Notifications.requestPermission(checkPermissionAndShow);
+            }else{
+                console.log('已禁止...');
+            }
+
+            // console.log(Notifications.permission)
+        }
+
+        function showNotification(){
+             var newNotification = window.Notifications.createNotification(
+                    'http://avatar.csdn.net/4/5/3/1_qyf_5445.jpg',
+                    '桌面通知',
+                    '桌面通知 示例'
+                );
+            newNotification.show();
+        }
+    </script>
+</body>
+
+</html>

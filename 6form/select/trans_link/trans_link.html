@@ -1,0 +1,30 @@
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<select onchange="window.location=this.value;">
+    <option value="#">--请选择--</option>
+    <option value="http://www.baidu.com">百度</option>
+</select>
+
+<p></p>
+<select onchange="dgLink2('parent',this,0)">
+    <option value="#">－－－教学院系－－－</option>
+    <option value="http://kletor.yangtzeu.edu.cn">油气资源与勘探技术教育部重点实验室</option>
+    <option value="http://jjxy.yangtzeu.edu.cn">经济学院</option>
+    <option value="http://zf.yangtzeu.edu.cn">政治与法律学院</option>
+    <option value="http://tyxy.yangtzeu.edu.cn">体育学院</option>
+    <option value="http://zhongwen.yangtzeu.edu.cn">文学院（荆楚文化研究中心）</option>
+    <option value="http://yuwei.yangtzeu.edu.cn">文学院（语委、普通话测试站）</option>
+    <option value="http://fl.yangtzeu.edu.cn">外国语学院</option>
+    <option value="http://art.yangtzeu.edu.cn">艺术学院</option>
+    <option value="http://shuxue.yangtzeu.edu.cn">信息与数学学院</option>
+    <option value="http://psat.yangtzeu.edu.cn">物理科学与技术学院</option>
+    <option value="http://chem.yangtzeu.edu.cn">化学与环境工程学院</option>
+</select>
+<script type="text/JavaScript">
+function dgLink2(targ,selObj,restore) { //v3.0
+ eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+ if (restore) selObj.selectedIndex=0;
+}
+</script>

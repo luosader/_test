@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="name" content="content" charset="utf-8" />
+    <title>切片上传</title>
+    <script>
+		// LENGTH = 2*1024*1024;
+		LENGTH = 1;
+		var start = 0;
+		var end = start+LENGTH;
+
+		function sliceup(){
+			var f = document.getElementsByTagName('input')[0].files[0];
+			console.log(f);
+			var totalsize = f.size;
+			if(start>=totalsize) return;
+			blob = f.slice(start, end);
+			console.log(blob);
+			var fd = new FormData();
+			// fd.append('name','hello');
+			fd.append('part',blob);
+			fd.append('name',f.name);
+			console.log(fd);
+			var xhr = new XMLHttpRequest();
+			xhr.open('POST','slice.php',true);
+			xhr.upload.onprogress = function(ev){
+				var percent = (start+ev.loaded)/totalsize*100;
+				if(percent >= 100) percent = 100;
+				document.getElementById('bar').style.width = percent+'%';
+			}
+			xhr.onreadystatechange = function(){
+				// alert(this.readyState);
+				if(this.readyState===4 && this.status===200){
+					// 改变下一次截取的位置
+					start = end;
+					end = start + LENGTH;
+					if(end>totalsize){
+						end = totalsize;
+					}
+					document.getElementById('debug').innerHTML += this.responseText+'<br>';//调试用
+					sliceup();
+				}
+			}
+			// console.log(xhr);
+			xhr.send(fd);
+		}
+	</script>
+    <style type="text/css">
+		#progress{border:1px solid green;width:500px;height:30px}
+		#bar{background-color:green;height:30px;width:0px}
+    </style>
+</head>
+
+<body>
+    <input type="file" name="file" onchange="sliceup()" />
+    <div id="progress">
+        <div id="bar"></div>
+    </div>
+    <div id="debug"></div>
+</body>
+
+</html>

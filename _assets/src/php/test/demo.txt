@@ -1,0 +1,1 @@
+Web Services Addressing provides transport-neutral mechanisms to address Web services and messages. Web Services Addressing 1.0 - SOAP Binding (this document) defines the binding of the abstract properties defined in Web Services Addressing 1.0 - Core to SOAP Messages.

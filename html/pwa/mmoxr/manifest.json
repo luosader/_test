@@ -1,0 +1,26 @@
+{
+    "name": "Mmoxr",
+    "short_name": "Mmoxr",
+    "description": "The cheap purchase of Dofus&Touch Kamas, Runscape gold, Fifa Coins, Fortnite Items&Account&V-Bucks",
+    "start_url": "index.html",
+    "display": "standalone",
+    "theme_color": "#ffa722",
+    "background_color": "#ffa722",
+    "icons": [
+        {
+            "src": "images/icons/icon-72x72.png",
+            "sizes": "72x72",
+            "type": "image/png"
+        }, {
+            "src": "images/icons/icon-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        }
+    ],
+    "lang": "en",
+    "scope": "/",
+    "orientation": "any",
+    "related_applications": [],
+    "prefer_related_applications": false,
+    "permissions": { "desktop-notification": {} }
+}

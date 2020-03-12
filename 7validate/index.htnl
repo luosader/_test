@@ -1,0 +1,49 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <script language="javascript" type="text/javascript" src="../_assets/static/js/jquery-1.11.0.min.js"></script>
+  <title>验证码</title>
+</head>
+<body>
+  <span id="checkCode"></span>
+  <div onclick="createCode()">刷新</div>
+</body>
+</html>
+
+<script language="javascript" type="text/javascript"> 
+var code; //在全局 定义验证码  
+function createCode() {
+  alert("ok");
+  code = "";
+  var codeLength = 4;//验证码的长度  
+  // var checkCode = document.getElementById("checkCode");
+  var selectChar = new Array('0','1','2','3','4','5','6','7','8','9');//所有候选组成验证码的字符，当然也可以用中文的  
+  
+  for (var i = 0; i < codeLength; i++) {
+    var charIndex = Math.floor(Math.random() * 10);
+    code += selectChar[charIndex];
+  }
+
+  $("#checkCode").text(code);
+  alert(code);
+  // if (checkCode) {
+  //   checkCode.className = "code";
+  //   checkCode.value = code;
+  // }
+}
+  
+function validate() {
+  var inputCode = document.getElementById("input1").value;
+  if (inputCode.length <= 0) {
+    alert("请输入验证码！");
+  } else if (inputCode != code) {
+    alert("验证码输入错误！");
+  createCode();//刷新验证码  
+  } else {
+  alert("^-^ OK");
+  }
+}
+</script>

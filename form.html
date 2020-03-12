@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模拟测试</title>
+    <style type="text/css">
+        form div{margin-top: 10px;}
+    </style>
+</head>
+<body>
+    <div>
+        <p>测试结果：action里带的值无法被提交</p>
+        <p>fields[]数组形式有区分地传数据</p>
+    </div>
+
+    <form action="form.php&mod=user" method="post" accept-charset="utf-8" enctype="multipart/form-data" name="form_submit">
+        <div>
+            <label for="name">Text Input:</label>
+            <input type="text" name="fields[name]" id="name" value="" tabindex="1" />
+        </div>
+
+        <div>
+            <h4>Radio Button Choice</h4>
+            <label>Choice 1：<input type="radio" name="fields[radio]" tabindex="2" value="radio-1" /></label>
+            <label>Choice 2：<input checked type="radio" name="fields[radio]" tabindex="3" value="radio-2" /></label>
+            <label>Choice 3：<input type="radio" name="fields[radio]" /></label>
+        </div>
+
+        <div>
+            <label for="select-choice">Select Dropdown Choice:</label>
+            <select name="fields[select]" id="select-choice">
+                <option value="user">Choice 1</option>
+                <option selected value="article">Choice 2</option>
+                <option>Choice 3</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Textarea:<textarea cols="40" rows="8" name="fields[textarea]">请在这里填写内容：</textarea></label>
+        </div>
+
+        <div>
+            <label>Checkbox1:<input type="checkbox" name="fields[checkbox][]" value="1" /></label>
+            <label>Checkbox2:<input checked type="checkbox" name="fields[checkbox][]" value="2" /></label>
+            <label>Checkbox3:<input type="checkbox" name="fields[checkbox][]" /></label>
+        </div>
+
+        <div>
+            文件：<input type="file" name="img[]" multiple="multiple" />
+            <label>文件1:<input type="file" name="files[]" value="" /></label>
+            <label>文件2:<input type="file" name="files[]" value="" /></label>
+            <!-- <label>文件3:<input type="file" name="files_3" value="" /></label>
+            <label>文件4:<input type="file" name="files_4" value="" /></label> -->
+        </div>
+
+        <div>
+            <input disabled name="disabled">
+            <input readonly name="readonly">
+            <input required name="required">
+            <input pattern="" name="pattern">
+            <input placeholder="placeholder" name="placeholder">
+        </div>
+
+        <div>
+            <input type="hidden" name="formhash" value="1234" />
+            <!-- <input type="hidden" name="id" value="1"> -->
+            <input type="hidden" name="json" value="{"a":1,"b":2}">
+
+            <button type="button" onClick="form_submit.submit()">form_submit</button>
+
+            <input type="submit" name="btn_act" value="Submit" />
+            <!-- <input type="button" name="" value="提交"> -->
+            <!-- <button type="submit" name="btn_act" value="Submit">提交</button> -->
+            <!-- <button name="btn_act" value="input">提交</button> -->
+        </div>
+    </form>
+</body>
+</html>

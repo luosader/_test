@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>百度新闻快捷方式</title>
+</head>
+<body>
+    <input name="btn" type="button" id="btn" value="桌面创建快捷方式" onClick="createDesktop('https://news.baidu.com/','百度新闻快捷键')" />
+
+    <script type='text/javascript'>
+    // 两个方法后缀不一样
+    // 创建快捷方式一
+    function toDesktop(sUrl,sName){ 
+        try { 
+            var WshShell = new ActiveXObject("WScript.Shell"); 
+            //在指定的文件夹下创建名为sName的快捷方式
+            var oUrlLink = WshShell.CreateShortcut(WshShell.SpecialFolders("Desktop") + "\\" + sName + ".url");     
+            //快捷方式指向的链接 
+            oUrlLink.TargetPath = sUrl; 
+            oUrlLink.Save(); 
+        }catch(e){ 
+            alert(e.message);
+            //alert("当前IE安全级别不允许操作！");
+            //最简单解决方法：打开Internet Explorer “工具”菜单栏中的“选项”一栏，单击“安全”栏中的“自定义级别”选项卡，
+            //将第三项“对没有标记为安全的activex控件进行初始化和脚本运行”设置成启用       
+        } 
+    } 
+    // 创建快捷方式二
+
+    //IE的ActiveX控件实现。  火狐用的是xpcom组件。
+    function createDesktop(sUrl, sName) {
+        var xmlHttp;
+        console.log(window);//只有IE有ActiveXObject对象
+
+        //判断浏览器是否支持ActiveX控件
+        if(window.ActiveXObject){
+            //支持-通过ActiveXObject的一个新实例来创建XMLHttpRequest对象
+            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+            console.log('支持ActiveXObject')
+        } else if(window.XMLHttpRequest){
+            //不支持
+            xmlHttp = new XMLHttpRequest();
+            console.log('不支持ActiveXObject')
+        }
+
+        try {
+            var fso = new ActiveXObject("Scripting.FileSystemObject");
+            var shell = new ActiveXObject("WScript.Shell");
+
+            var folderPath = shell.SpecialFolders("Desktop"); //获取桌面本地桌面地址
+            if (!fso.FolderExists(folderPath)) {
+                fso.CreateFolder(folderPath);
+            }
+            if (!fso.FileExists(folderPath + "//" + sName + ".lnk")) {
+                var shortLink = shell.CreateShortcut(folderPath + "//" + sName + ".lnk"); //在指定的文件夹下创建名为sName的快捷方式
+                shortLink.Description = "shortcut for " + sName; //相应的描述信息
+                shortLink.TargetPath = sUrl; //快捷方式指向的链接
+                shortLink.WindowStyle = 3;//激活链接并且窗口最大化
+                shortLink.Save();
+                alert('桌面快捷方式创建成功！');
+            }
+        } catch (e) {
+            alert("当前IE安全级别不允许操作！");
+        }
+    }
+    </script>
+
+</body>
+</html>
+

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>iGVault</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="manifest" href="manifest.json">
+    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+    <meta name="theme-color" content="#ffa722">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="IGVAULT">
+    <link rel="apple-touch-icon" sizes="192x192" href="images/icons/icon-192x192.png">
+    <style type="text/css">
+        @media screen and (min-width:768px){
+            /* 2019-10-24 底部创建桌面快捷方式提示栏 */
+            .bot-tipsbar{position: fixed; z-index: 999; bottom: 0; left: 0; right: 0; background: rgba(50, 20, 12, 0.9);}
+            .bot-tipsbar .container{/*width:1200px; */margin: 0 auto;}
+            .bot-tipsbar .bar-left{color: #fddb08; font-size: 24px; font-weight: bold; float: left; height: 58px; line-height: 58px;}
+            .bot-tipsbar .bar-left>img{vertical-align: middle; margin-top: -5px; margin-right: 10px;}
+            .bot-tipsbar .bar-right{float:right; margin-top:11px;}
+            .bot-tipsbar .bar-right>a{float:left; font-size:14px; margin-right: 20px; padding: 0 23px; height: 36px; line-height: 36px; border-radius: 3px; background: #ffb300; color: #000;}
+            .bot-tipsbar .bar-right>a:nth-child(2){background: #8b8787; color: #fff;}
+            /* 2019-10-24 coupon券弹窗 */
+            .coupon-popup{position: fixed; left:0; right:0; top:0; bottom:0; background: rgba(0, 0, 0, 0.8); z-index: 999;}
+            .coupon-popup .con{width:371px; height: 392px; position: absolute; top: 50%; margin-top: -220px; left:50%; margin-left: -185px;}
+            .coupon-popup .con>img{width:371px; height: 392px;}
+            .coupon-popup .con>input{opacity: 0;}
+            .coupon-popup .coupon-close{position: absolute; width: 40px; height:40px; top: 5px; right: 27px; }
+            .coupon-popup .coupon-getit{position: absolute; width:170px; height:40px; bottom:37px; left:100px;}
+        }
+        @media screen and (max-width:768px){
+            /* 2019-10-24 底部创建桌面快捷方式提示栏 */
+            .bot-tipsbar{position: fixed; z-index: 9999; padding: 1rem 1rem 1.3rem; bottom: 0; left: 0; right: 0; background: rgba(50, 20, 12, 0.9);}
+            .bot-tipsbar .bar-tips{color: #fddb08; font-size: 0.8rem; font-weight: bold; display: flex; margin-bottom: 10px;}
+            .bot-tipsbar .bar-tips>img{ margin-right: 10px; margin-left: 10px; height: 2rem; width: 2.7rem;}
+            .bot-tipsbar .bar-btns{display: flex; justify-content: space-between;}
+            .bot-tipsbar .bar-btns>a{flex:1; text-align: center; height: 1.8rem; line-height: 1.8rem; font-size:0.7rem; margin-right: 1rem; border-radius: 3px; background: #ffb300; color: #000;}
+            .bot-tipsbar .bar-btns>a:nth-child(2){background: #8b8787; color: #fff; margin-right: 0;}
+            /* 2019-10-24 coupon券弹窗 */
+            .coupon-popup{position: fixed; left:0; right:0; top:0; bottom:0; background: rgba(0, 0, 0, 0.8); z-index: 9999;}
+            .coupon-popup .con{width:15.5rem; height: 16.4rem; position: absolute; top: 50%; left:50%; margin: -8.75rem 0 0 -7.75rem; }
+            .coupon-popup .con>img{width:15.5rem; height:16.4rem;}
+            .coupon-popup .con>input{opacity: 0;}
+            .coupon-popup .coupon-close{position: absolute; width: 1.7rem; height:1.7rem; top: 0.15rem; right: 0;}
+            .coupon-popup .coupon-getit{position: absolute; width:7.3rem; height:1.7rem; bottom:1.6rem; left:4.1rem;}
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>iGVault</h1>
+
+    <div class="bot-tipsbar">
+        <div class="container">
+            <p class="bar-left"><span>Create iGVault desktop Shortcuts <i class="clw">for</i> 3% discount!</span></p>
+            <p class="bar-right">
+                <a href="javascript:;">Get 3% Discount</a>
+                <a href="javascript:;">Leave ruthlessly</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- 圣诞霸屏广告 -->
+    <div class="coupon-popup" style="display:none;">
+        <p class="con"> 
+            <a class="coupon-join" href="http://localhost/_test/html/pwa/igvault/" target="_blank">
+                <img src="https://xstatic1.igvimg.com/static/images/activities/christmas19-en.png" alt="">
+            </a>
+            <a class="coupon-close" href="javascript:;"></a>
+            <a class="coupon-getit" href="javascript:;"></a>
+            <input type="hidden" value="IGVFAST">
+        </p>
+    </div>
+
+</body>
+
+<script src="js/jquery.js"></script>
+<script src="js/cookie.js"></script>
+<script src="app.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".coupon-popup .coupon-close").click(function(){
+            $.cookie('Hidden', true);
+            $(".coupon-popup").fadeOut(500);//淡出显示
+        });
+        //coupon GETIT 复制到剪贴板
+        $(".coupon-popup .coupon-getit").click(function(){
+            $(".coupon-popup .con>input").select();
+            document.execCommand("Copy"); //执行浏览器复制命令
+            HS.page.showSuccess("The coupon has been copied and can be used when buying products");
+            setTimeout(function(){
+                HS.page.closeDialog();
+            },3000);
+            $.cookie('Hidden', true);
+            $(".coupon-popup").fadeOut(500);//淡出显示
+        });
+    });
+</script>
+</html>

@@ -1,0 +1,1 @@
+window.onload=function close(){this.parentNode.parentNode.style.display='none';consloe.log(this)}

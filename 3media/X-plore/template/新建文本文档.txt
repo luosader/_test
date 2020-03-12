@@ -1,0 +1,14 @@
+实战：文件重命名
+文件夹：test
+文件：
+test/20160301
+test/20160401
+test/20160501
+重命名规则：规则文件rule.dat
+n@20160301@音乐1@luosa@1@1
+n@20160401@音乐2@luosa@1@2
+n@20160501@分类2@author@2@1
+参考结果：
+test/1/luosa - 音乐1.mp3
+test/1/luosa - 音乐2.mp3
+test/2/author - 分类2.mp3

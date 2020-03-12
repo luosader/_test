@@ -1,0 +1,37 @@
+
+
+file 类型的 <input> 除了调起系统的文件选择框外，还可通过指定 capture 属性来现场拍照或录制。配合 accept 属性，可实现更加便捷的文件获取。
+<input type="file" accept="video/*" capture />
+
+
+<form method="post" action="{:U('Home/RegisterInfo/uploadzippic')}">
+    <input type="hidden" value="{$applicantid}" name="applicantid" />
+    <div class="photolist">
+        <div class="itemphoteo">
+            <img src="__TMPL__/img/num.jpg" id="list2_1" />
+            <input type="file" class="filebtn" id="file_Id1" capture="camera" accept="image/*" name="fileimg[]" onchange="previewImage(this,'list2_1');piczip(this.id,event)" />
+            <input type="text" id="1" name="fileimg3_1" />
+        </div>
+        <div class="itemphoteo">
+            <img src="__TMPL__/img/num.jpg" id="list2_2" />
+            <input type="file" class="filebtn" id="file_Id2" capture="camera" accept="image/*" name="fileimg[]" onchange="previewImage(this,'list2_2');piczip(this.id,event)" />
+            <input type="text" id="2" name="fileimg3_2" />
+        </div>
+        <div class="itemphoteo">
+            <img src="__TMPL__/img/num.jpg" id="list2_3" />
+            <input type="file" class="filebtn" id="file_Id3" capture="camera" accept="image/*" name="fileimg[]" onchange="previewImage(this,'list2_3');piczip(this.id,event)" />
+            <input type="text" id="3" name="fileimg3_3" />
+        </div>
+        <div class="itemphoteo">
+            <img src="__TMPL__/img/num.jpg" id="list2_4" />
+            <input type="file" class="filebtn" id="file_Id4" capture="camera" accept="image/*" name="fileimg[]" onchange="previewImage(this,'list2_4');piczip(this.id,event)" />
+            <input type="text" id="4" name="fileimg3_4" />
+        </div>
+        <div class="itemphoteo">
+            <img src="__TMPL__/img/num.jpg" id="list2_5" />
+            <input type="file" class="filebtn" id="file_Id5" capture="camera" accept="image/*" name="fileimg[]" onchange="previewImage(this,'list2_5');piczip(this.id,event)" />
+            <input type="text" id="5" name="fileimg3_5" />
+        </div>
+    </div>
+    <input type="submit" value="提交" class="btnok" />
+</form>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>桌面通知 Notification </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script>
+    </script>
+</head>
+
+<body>
+    <script>
+        // status:granted,denied,default
+        function createNotify(title, options) {
+            if (Notification.permission === 'granted') {
+                notify(title, options);
+            } else {
+                Notification.requestPermission(function(res){
+                    if (res === 'granted') {
+                        notify(title, options);
+                    }
+                });
+            }
+        }
+
+        function notify($title, $options) {
+            var notice = new Notification($title, $options);
+            console.log(notice);
+            notice.onshow = function(event){ console.log('show : ', event); }
+            notice.onclose = function(event){ console.log('close : ', event); }
+            notice.onclick = function(event){ 
+                console.log('click : ', event);
+                notice.close();
+            }
+        }
+
+        createNotify('Notification 1 of 3', {body: 'With \'tag\' of \'message-group-1\'', tag: 'message-group-1'});
+        createNotify('Notification 2 of 3', {body: 'With \'tag\' of \'message-group-2\'', tag: 'message-group-2'});
+        createNotify('Notification 3 of 3', {body: 'With \'tag\' of \'message-group-1\'', tag: 'message-group-1'});
+        // createNotify('Notification 3 of 3', {tag: 'message-group-1', renotify: true});//重新通知(renotify)
+
+        /* 依次打印
+         * show:   Event Object(事件对象)，事件的type为"show"
+         * click:  Event Object(事件对象)，事件的type为"click"。点击消息后消息被关闭，跳到close事件。
+         * close:  Event Object(事件对象)，事件的type为"close"
+        */
+    </script>
+</body>
+
+</html>

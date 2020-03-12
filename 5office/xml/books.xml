@@ -1,0 +1,17 @@
+<library>
+  <book>
+   <title>A</title>
+   <author gender="female" pq="li">B</author>
+   <description>C</description>
+  </book>
+  <book>
+   <title>D</title>
+   <author gender="male" pq="ok">E</author>
+   <description des="2">F</description>
+  </book>
+  <book>
+   <title>G</title>
+   <author gender="male" pq="ouah">H</author>
+   <description>I</description>
+  </book>
+</library>

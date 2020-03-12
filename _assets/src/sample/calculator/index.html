@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>计算器</title>
+	<style type="text/css">
+		body { background-color: #1c1c1c; font-family: "微软雅黑";}
+		button { float: left; display: block; width: 160px; height: 75px; line-height: 75px; font-family: "微软雅黑"; text-align: center; color: #fff; font-size: 36px; margin-top: 5px; background-color: #3e3e3e; border: none; cursor: pointer;}
+		button:hover { background-color: #585858; }
+		.main{ margin: 0 auto; width: 655px; height: auto; overflow: hidden;}
+		.ping{ float: left; margin-bottom: 20px; width: 655px; height: 180px; background-color: #2e2e2e; border-top: 3px solid #008b00;}
+		.btn { float: left; width: 655px; height: auto; overflow: hidden;}
+		.m5 { margin-right: 5px;}
+		.p { float: left; width: 625px; padding: 0px 15px; color: #fff; font-family: "微软雅黑"; text-align: right;}
+		#p1 { height: 50px; font-size: 40px; line-height: 50px; margin: 10px 0px; }
+		#p2 { height: 90px; font-size: 70px; line-height: 90px; margin: 10px 0px; }
+	</style>
+</head>
+<body>
+	<div class="main">
+		<div class="ping">
+			<p class="p" id="p1"></p>
+			<p class="p" id="p2">0</p>
+		</div>
+		<div class="btn">
+			<button class="m5">M</button>
+			<button class="m5">±</button>
+			<button class="m5" onclick="$(this).cenum()">CE</button>
+			<button onclick="$(this).fuhao('+')">+</button>
+
+			<button class="m5" onclick="$(this).downbtn(7)">7</button>
+			<button class="m5" onclick="$(this).downbtn(8)">8</button>
+			<button class="m5" onclick="$(this).downbtn(9)">9</button>
+			<button onclick="$(this).fuhao('-')">-</button>
+
+			<button class="m5" onclick="$(this).downbtn(4)">4</button>
+			<button class="m5" onclick="$(this).downbtn(5)">5</button>
+			<button class="m5" onclick="$(this).downbtn(6)">6</button>
+			<button onclick="$(this).fuhao('×')">×</button>
+
+			<button class="m5" onclick="$(this).downbtn(1)">1</button>
+			<button class="m5" onclick="$(this).downbtn(2)">2</button>
+			<button class="m5" onclick="$(this).downbtn(3)">3</button>
+			<button onclick="$(this).fuhao('÷')">÷</button>
+
+			<button class="m5" onclick="$(this).downbtn(0)">0</button>
+			<button class="m5" onclick="$(this).downbtn(.)">.</button>
+			<button class="m5" onclick="$(this).downbtn('00')">00</button>
+			<button onclick="$(this).jisuan()">=</button>
+		</div>
+	</div>
+	
+	<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+	<script>
+	$(function(){
+		$("button").mousedown(function() {
+			$(this).css({"color":'#3e3e3e',"background-color":'#fff'});
+		});
+		$("button").mouseup(function() {
+			$(this).css({"color":'#fff',"background-color":'#3e3e3e'});
+		});
+		jQuery.fn.cenum = function () {
+			$("#p1").text("");
+			$("#p2").text("0");
+		}
+
+		jQuery.fn.downbtn = function (tag) {
+			var lastVal = $("#p1").text();
+			$("#p1").text(lastVal + tag);
+		}
+		jQuery.fn.fuhao = function (tag) {
+			var lastVal = $("#p1").text();
+			if (!lastVal.match(/\d(\+|\-|\×|\÷)+\d/)) {
+				if (lastVal.match(/(\+|\-|\×|\÷)$/)) {
+					lastVal = lastVal.replace(/(\+|\-|\×|\÷)$/,"")
+				}
+				$("#p1").text(lastVal + tag);
+			}
+		}
+		jQuery.fn.jisuan = function () {
+			var val = $("#p1").text();
+			var num1 = val.match(/^((-)?)(\d*)/g);
+			var num2 = val.match(/(\d*)$/g);
+			var fu = val.match(/\b(\+|\-|\×|\÷)\b/g);
+			var str = "num1="+num1+"&"+"num2="+num2+"&"+"fuhao="+fu;
+			$.ajax({
+				type:"POST",
+				url:"jisuan.php",
+				data:str,
+				success:function(msg){
+					$("#p2").text(msg);
+				}
+			});
+		}
+	});
+	</script>
+</body>
+</html>

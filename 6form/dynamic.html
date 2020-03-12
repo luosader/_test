@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jQuery/jquery-1.4.2.min.js"></script>
+</head>
+<body>
+    <table>
+        <tr>
+            <td align="right">
+                产品名称：
+            </td>
+            <td>
+                <input type="text" name="1" />
+            </td>
+        </tr>
+        <tbody id="tbodyAppend">
+        </tbody>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <input type="button" value="验证输入" id="btnCheck" name="btnCheck" />
+            </td>
+        </tr>
+    </table>
+    <script type="text/javascript">
+        //扩展属性定义(实际开发中通常从后台输出 或 利用ajax异步加载) 
+        var _data = { "Head": [
+            { "F_DisplayName": "品牌", "F_FieldName": "PinPai", "F_ValueType": "字符串", "F_ValueLength": "50", "F_InputType": "单选框", "F_DefaultValue": "康师傅|统一|其它,KangShiFu|TongYi|Others,TongYi", "F_IsRequired": "1" },
+            { "F_DisplayName": "保质期", "F_FieldName": "BaoZhiQi", "F_ValueType": "整数", "F_ValueLength": "4", "F_InputType": "文本框", "F_DefaultValue": "12", "F_IsRequired": "0" },
+            { "F_DisplayName": "产品描述", "F_FieldName": "MiaoShu", "F_ValueType": "字符串", "F_ValueLength": "20", "F_InputType": "文本域", "F_DefaultValue": "请输入详细描述", "F_IsRequired": "1" },
+            { "F_DisplayName": "食用方式", "F_FieldName": "ShiYong", "F_ValueType": "字符串", "F_ValueLength": "50", "F_InputType": "复选框", "F_DefaultValue": "开袋即食|加热|冰冻|其它,开袋即食|加热|冰冻|其它,加热|其它", "F_IsRequired": "1" },
+            { "F_DisplayName": "可选颜色", "F_FieldName": "Color", "F_ValueType": "字符串", "F_ValueLength": "50", "F_InputType": "下拉框", "F_DefaultValue": "红色|蓝色,Red|Blue,Blue", "F_IsRequired": "1" },
+            { "F_DisplayName": "是否包邮", "F_FieldName": "BaoYou", "F_ValueType": "逻辑型", "F_ValueLength": "1", "F_InputType": "文本框", "F_DefaultValue": "", "F_IsRequired": "1" },
+            { "F_DisplayName": "重量", "F_FieldName": "Weight", "F_ValueType": "浮点数", "F_ValueLength": "10", "F_InputType": "文本框", "F_DefaultValue": "", "F_IsRequired": "0" },
+            { "F_DisplayName": "出厂日期", "F_FieldName": "CreateDate", "F_ValueType": "日期", "F_ValueLength": "50", "F_InputType": "文本框", "F_DefaultValue": "", "F_IsRequired": "1" }
+            ]
+        }
+        var _append = $("#tbodyAppend");
+        var _html = "";
+        for (var i = 0; i < _data.Head.length; i++) {
+            var _displayName = _data.Head[i].F_DisplayName;
+            var _fieldName = _data.Head[i].F_FieldName;
+            var _valueType = _data.Head[i].F_ValueType;
+            var _valueLength = _data.Head[i].F_ValueLength;
+            var _inputType = _data.Head[i].F_InputType;
+            var _defaultValue = _data.Head[i].F_DefaultValue;
+            var _isRequire = _data.Head[i].F_IsRequired;
+            var _dvArr, _arrDisplay, _arrDisplay, j, _dv, _dvArr2, k;
+            _html += "<tr><td align='right'>" + (_isRequire == "1" ? "<span style='color:red'>(*)</span>" : "") + _displayName + "：</td><td align='left'>";
+            switch (_data.Head[i].F_InputType) {
+                case "单选框":
+                    _dvArr = _defaultValue.split(',');
+                    if (_dvArr.length < 2) {
+                        alert("单选框[" + _displayName + "]默认值设置有误，请联系管理员!");
+                        break;
+                    }
+                    _arrDisplay = _dvArr[0].split('|');
+                    _arrValue = _dvArr[1].split('|');
+                    if (_arrDisplay.length != _arrValue.length) {
+                        alert("单选框[" + _displayName + "]默认值设置有误，请联系管理员!");
+                        break;
+                    }
+                    if (_dvArr.length == 3) {
+                        _dv = _dvArr[2];
+                    }
+                    for (j = 0; j < _arrDisplay.length; j++) {
+                        _html += "<input type='radio' " + (_dv == _arrValue[j] ? "checked" : "") + " value='" + _arrValue[j] + "' name='" + _fieldName + "' id='" + _fieldName + "_" + j + "' dataType='" + _valueType + "' isRequired='" + _isRequire + "' maxLength='" + _valueLength + "' label='" + _displayName + "' /><label for='" + _fieldName + "_" + j + "'>" + _arrDisplay[j] + "</label>"
+                    }
+                    break;
+                case "复选框":
+                    _dvArr = _defaultValue.split(',');
+                    if (_dvArr.length < 2) {
+                        alert("复选框[" + _displayName + "]默认值设置有误，请联系管理员!");
+                        break;
+                    }
+                    _arrDisplay = _dvArr[0].split('|');
+                    _arrValue = _dvArr[1].split('|');
+                    if (_arrDisplay.length != _arrValue.length) {
+                        alert("复选框[" + _displayName + "]默认值设置有误，请联系管理员!");
+                        break;
+                    }
+                    if (_dvArr.length == 3) {
+                        _dv = _dvArr[2];
+                    }
+                    _dvArr2 = _dv.split('|');
+                    for (j = 0; j < _arrDisplay.length; j++) {
+                        var _checked = false;
+                        for (k = 0; k < _dvArr2.length; k++) {
+                            if (_dvArr2[k] == _arrValue[j]) {
+                                _checked = true;
+                            }
+                        }
+                        _html += "<input type='checkbox' " + (_checked ? "checked" : "") + " value='" + _arrValue[j] + "' name='" + _fieldName + "' id='" + _fieldName + "_" + j + "' dataType='" + _valueType + "' isRequired='" + _isRequire + "' maxLength='" + _valueLength + "' label='" + _displayName + "'/><label for='" + _fieldName + "_" + j + "'>" + _arrDisplay[j] + "</label>"
+                    }
+                    break;
+                case "文本框":
+                    _html += "<input type='text' id='" + _fieldName + "' name='" + _fieldName + "' value='" + _defaultValue + "' dataType='" + _valueType + "' isRequired='" + _isRequire + "' maxLength='" + _valueLength + "' label='" + _displayName + "'/>"
+                    break;
+                case "下拉框":
+                    _dvArr = _defaultValue.split(',');
+                    if (_dvArr.length < 2) {
+                        alert("下拉框[" + _displayName + "]默认值设置有误，请联系管理员!");
+                        break;
+                    }
+                    _arrDisplay = _dvArr[0].split('|');
+                    _arrValue = _dvArr[1].split('|');
+                    if (_arrDisplay.length != _arrValue.length) {
+                        alert("下拉框[" + _displayName + "]默认值设置有误，请联系管理员!");
+                        break;
+                    }
+                    if (_dvArr.length == 3) {
+                        _dv = _dvArr[2];
+                    }
+                    _html += "<select name='" + _fieldName + "' id='" + _fieldName + "' dataType='" + _valueType + "' isRequired='" + _isRequire + "' maxLength='" + _valueLength + "' label='" + _displayName + "'>"
+                    for (j = 0; j < _arrDisplay.length; j++) {
+                        _html += "<option " + (_dv == _arrValue[j] ? "selected" : "") + " value='" + _arrValue[j] + "'>" + _arrDisplay[j] + "</option>";
+                    }
+                    _html += "</select>"
+                    break;
+                case "文本域":
+                    _html += "<textarea rows='4' cols='60' id='" + _fieldName + "' name='" + _fieldName + "' dataType='" + _valueType + "' isRequired='" + _isRequire + "' maxLength='" + _valueLength + "' label='" + _displayName + "'>" + _defaultValue + "</textarea>"
+                    break;
+                default:
+                    break;
+            }
+            _html += "</td></tr>";
+        }
+        _append.html(_html);
+        //验证函数
+        $("#btnCheck").click(function () {
+            var nameArr = [];
+            var objArr = $("#tbodyAppend [isRequired]");
+            var i = 0;
+            objArr.each(function (i) {
+                var _o = { name: $(this).attr("name"), maxlength: parseInt($(this).attr("maxlength"), 10), label: $(this).attr("label"), type: this.type, tagName: this.tagName, dataType: $(this).attr("dataType"), isRequire: $(this).attr("isRequired") };
+                if (!indexOfNameArr(nameArr, _o)) {
+                    nameArr.push(_o);
+                }
+            })
+            for (i = 0; i < nameArr.length; i++) {
+                var obj = nameArr[i];
+                var _e = document.getElementsByName(obj.name)[0];
+                var v = _e.value; ;
+                //单选框,或复选框
+                if (obj.type == 'radio' || obj.type == 'checkbox') {
+                    if (obj.isRequire == "1") {
+                        v = getGroupValue(obj.name);
+                        if (v == "") {
+                            alert("请选择 [" + obj.label + "] ！");
+                            setGroupfocus(obj.name);
+                            return false;
+                        }
+                    }
+                }
+                else if (obj.isRequire == "1")//其它类型：比如文本框，下拉框，文本域
+                {
+                    if (v == "") {
+                        alert("请输入 [" + obj.label + "] ！");
+                        _e.focus();
+                        return false;
+                    }
+                }
+
+                //检测数据长度              
+                if (obj.maxlength > 0 && v.length > obj.maxlength) {
+                    alert("[" + obj.label + "]的有效数据长度不得超过[" + obj.maxlength + "]个字符");
+                    _e.focus();
+                    return false;
+                }
+                //检测数据类型
+                if (obj.dataType == "日期") {
+                    if (v.length > 0) {
+                        if (!(isDate(v) || isDateTime(v))) {
+                            alert("[" + obj.label + "]为日期/日期时间类型，必须输入有效的日期格式\n\n\t格式：“年-月-日”或“年-月-日 时:分:秒”");
+                            _e.focus();
+                            return false;
+                        }
+                    }
+                }
+                else if (obj.dataType == "整数") {
+                    var _intV = parseInt(v, 10);
+                    if (isNaN(_intV)) {
+                        alert("[" + obj.label + "]为整数类型，必须输入整数值");
+                        _e.focus();
+                        return false;
+                    }
+                    else {
+                        _e.value = _intV;
+                    }
+                }
+                else if (obj.dataType == "浮点数" || obj.dataType == "货币") {
+                    if (v.length > 0) {
+                        var _floatV = parseFloat(v);
+                        if (isNaN(_floatV)) {
+                            alert("[" + obj.label + "]为数字类型，必须输入有效的数字");
+                            _e.focus();
+                            return false;
+                        }
+                        else {
+                            _e.value = _floatV;
+                        }
+                    }
+                }
+                else if (obj.dataType == "逻辑型") {
+                    if (v.length > 0) {
+                        if (!(v == "1" || v == "0")) {
+                            alert("[" + obj.label + "]为逻辑型数据，其值只能为“1”或“0”");
+                            _e.focus();
+                            return false;
+                        }
+                    }
+                }
+            }
+            alert("验证通过!");
+            return true;
+        })
+
+        //获取某一单选/复选组的值
+        function getGroupValue(groupName) {
+            var g = document.getElementsByName(groupName);
+            var result = "";
+            for (var k = 0; k < g.length; k++) {
+                if (g[k].checked) {
+                    result = g[k].value;
+                    break;
+                }
+            }
+            return result;
+        }
+        //设置某一单选/复选组焦点
+        function setGroupfocus(groupName) {
+            document.getElementsByName(groupName)[0].focus();
+        }
+        //辅助函数，用于查找arr中有无o元素
+        function indexOfNameArr(arr, o) {
+            var result = false;
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i].name == o.name) {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+        //检测是否日期格式(格式: 年-月-日)
+        function isDate(str) {
+            var reg = /^((((1[6-9]|[2-9]\d)\d{2})-(0?[13578]|1[02])-(0?[1-9]|[12]\d|3[01]))|(((1[6-9]|[2-9]\d)\d{2})-(0?[13456789]|1[012])-(0?[1-9]|[12]\d|30))|(((1[6-9]|[2-9]\d)\d{2})-0?2-(0?[1-9]|1\d|2[0-8]))|(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))-0?2-29-))$/
+            if (reg.test(str)) return true;
+            return false;
+        }
+        //检测是否日期时间格式(格式:年-月-日 时:分:秒)
+        function isDateTime(str) {
+            var reg = /^((\d{2}(([02468][048])|([13579][26]))[\-\/\s]?((((0?[13578])|(1[02]))[\-\/\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\-\/\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\-\/\s]?((0?[1-9])|([1-2][0-9])))))|(\d{2}(([02468][1235679])|([13579][01345789]))[\-\/\s]?((((0?[13578])|(1[02]))[\-\/\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\-\/\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\-\/\s]?((0?[1-9])|(1[0-9])|(2[0-8]))))))(\s(((0?[0-9])|([1][0-9])|([2][0-4]))\:([0-5]?[0-9])((\s)|(\:([0-5]?[0-9])))))?$/
+            if (reg.test(str)) return true;
+            return false;
+        }
+        
+    </script>
+</body>
+</html>

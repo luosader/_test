@@ -1,0 +1,9 @@
+[ 2010-03-05T22:47:14+08:00 ] ERR: (ThinkException) 非法操作attachments
+[ 2010-03-05T22:48:02+08:00 ] ERR: (ThinkException) 非法操作attachments
+[ 2010-03-05T22:48:48+08:00 ] ERR: (ThinkException) 非法操作attachments
+[ 2010-03-05T22:48:52+08:00 ] ERR: (ThinkException) 模板不存在[./App/Tpl/default/Public/success.html]
+[ 2010-03-05T22:49:42+08:00 ] ERR: (ThinkException) 非法操作attachments
+[ 2010-03-05T22:50:26+08:00 ] ERR: (ThinkException) 非法操作attachments
+[ 2010-03-05T22:53:04+08:00 ] ERR: (ThinkException) 非法操作attachments
+[ 2010-03-05T22:55:25+08:00 ] ERR: (ThinkException) Action:time您所请求的方法不存在！
+[ 2010-03-05T23:10:13+08:00 ] ERR: (ThinkException) 非法操作attachments
