@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Push Notification</title>
+</head>
+<body>
+    <script type="text/javascript">
+        console.log(window.navigator)
+
+        if ('serviceWorker' in window.navigator) {
+            navigator.serviceWorker.register('./sw.js', {scope: './'})
+                .then(function(reg) {
+                    console.log('success', reg);
+                    // console.log('register sw success :', swReg.scope);
+
+                    // Message: 页面 => SW 
+                    // 使用 postMessage 方法可以进行 Service Worker 和页面之间的通讯
+                    navigator.serviceWorker.controller && navigator.serviceWorker.controller.postMessage("this message is from page");
+
+                    // // 使用 Message Channel 来通信
+                    // const messageChannel = new MessageChannel();
+                    // messageChannel.port1.onmessage = e => {
+                    //     console.log(e.data); // this message is from sw.js, to page
+                    // }
+                    // reg.active.postMessage("Channel is from page, to sw", [messageChannel.por2]);
+
+                    // // 推送
+                    // if ('PushManager' in window) {}
+                })
+                .catch(function(err) {
+                    console.log('fail', err);
+                });
+        }
+
+        // Message: SW => 页面 
+        navigator.serviceWorker.addEventListener('message', function(e) {
+            console.log(e.data); // this message is from sw.js, to page
+        });
+
+    </script>
+</body>
+</html>
+

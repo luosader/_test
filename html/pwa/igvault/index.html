@@ -1,123 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>iGVault</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="manifest" href="en.webmanifest" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="theme-color" content="#ffa722" />
 
-    <link rel="manifest" href="manifest.json">
-    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
-    <meta name="theme-color" content="#ffa722">
+    <link rel="apple-touch-icon" sizes="57x57" href="static/icon114x114.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="static/icon114x114.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="static/icon144x144.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="static/icon144x144.png" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="IGVAULT">
-    <link rel="apple-touch-icon" sizes="192x192" href="images/icons/icon-192x192.png">
-    <style type="text/css">
-        @media screen and (min-width:768px){
-            /* 2019-10-24 底部创建桌面快捷方式提示栏 */
-            .bot-tipsbar{position: fixed; z-index: 999; bottom: 0; left: 0; right: 0; background: rgba(50, 20, 12, 0.9);}
-            .bot-tipsbar .container{/*width:1200px; */margin: 0 auto;}
-            .bot-tipsbar .bar-left{color: #fddb08; font-size: 24px; font-weight: bold; float: left; height: 58px; line-height: 58px;}
-            .bot-tipsbar .bar-left>img{vertical-align: middle; margin-top: -5px; margin-right: 10px;}
-            .bot-tipsbar .bar-right{float:right; margin-top:11px;}
-            .bot-tipsbar .bar-right>a{float:left; font-size:14px; margin-right: 20px; padding: 0 23px; height: 36px; line-height: 36px; border-radius: 3px; background: #ffb300; color: #000;}
-            .bot-tipsbar .bar-right>a:nth-child(2){background: #8b8787; color: #fff;}
-            /* 2019-10-24 coupon券弹窗 */
-            .coupon-popup{position: fixed; left:0; right:0; top:0; bottom:0; background: rgba(0, 0, 0, 0.8); z-index: 999;}
-            .coupon-popup .con{width:371px; height: 392px; position: absolute; top: 50%; margin-top: -220px; left:50%; margin-left: -185px;}
-            .coupon-popup .con>img{width:371px; height: 392px;}
-            .coupon-popup .con>input{opacity: 0;}
-            .coupon-popup .coupon-close{position: absolute; width: 40px; height:40px; top: 5px; right: 27px; }
-            .coupon-popup .coupon-getit{position: absolute; width:170px; height:40px; bottom:37px; left:100px;}
-        }
-        @media screen and (max-width:768px){
-            /* 2019-10-24 底部创建桌面快捷方式提示栏 */
-            .bot-tipsbar{position: fixed; z-index: 9999; padding: 1rem 1rem 1.3rem; bottom: 0; left: 0; right: 0; background: rgba(50, 20, 12, 0.9);}
-            .bot-tipsbar .bar-tips{color: #fddb08; font-size: 0.8rem; font-weight: bold; display: flex; margin-bottom: 10px;}
-            .bot-tipsbar .bar-tips>img{ margin-right: 10px; margin-left: 10px; height: 2rem; width: 2.7rem;}
-            .bot-tipsbar .bar-btns{display: flex; justify-content: space-between;}
-            .bot-tipsbar .bar-btns>a{flex:1; text-align: center; height: 1.8rem; line-height: 1.8rem; font-size:0.7rem; margin-right: 1rem; border-radius: 3px; background: #ffb300; color: #000;}
-            .bot-tipsbar .bar-btns>a:nth-child(2){background: #8b8787; color: #fff; margin-right: 0;}
-            /* 2019-10-24 coupon券弹窗 */
-            .coupon-popup{position: fixed; left:0; right:0; top:0; bottom:0; background: rgba(0, 0, 0, 0.8); z-index: 9999;}
-            .coupon-popup .con{width:15.5rem; height: 16.4rem; position: absolute; top: 50%; left:50%; margin: -8.75rem 0 0 -7.75rem; }
-            .coupon-popup .con>img{width:15.5rem; height:16.4rem;}
-            .coupon-popup .con>input{opacity: 0;}
-            .coupon-popup .coupon-close{position: absolute; width: 1.7rem; height:1.7rem; top: 0.15rem; right: 0;}
-            .coupon-popup .coupon-getit{position: absolute; width:7.3rem; height:1.7rem; bottom:1.6rem; left:4.1rem;}
-        }
+    <!-- <meta name="csrf-param" content="_csrf">
+    <meta name="csrf-token" content="X1FTSjVHMGsGJz4AAjJ8LzQlAgJNAEMjMhAhDWMkXBxtZDAQdgwHIA==">
+    <meta name="renderer" content="webkit"> -->
 
+
+    <title>IGVault</title>
+    <script>
+        var  _fast_pay_register_item;
+        var  _sign_phone_checkout;
+        var _hs_page_fastlogin_login_url="/fastlogin/fast-login";
+        var _hs_page_fastlogin_register_url="/fastregister/fast-reg";
+        var _hs_page_fastlogin_headinfo_url="/fastlogin/islogin";
+        var _hs_page_fastlogin_replace_url ="/replacelogin/index";
+        var _hs_page_fasttoplogin_replace_url ="/replacelogin/topindex";
+        var _hs_ad_url ="/collect/process";
+        var _hs_page_fastlogin_login_languaue="Login";
+        var _hs_page_fastlogin_register_languaue="Register";
+        var _hs_page_url_to_steam = "";
+        var _hs_page_url_to_set_pwd = "";
+        var _hs_page_url_verify_code = "/login/captcha?v=1584077444";
+        var _hs_page_url_send_email = "https://member.igvault.com/login/verify-security";
+        var _hs_page_url_send_email_confirm ="https://member.igvault.com/login/verify-security-send-mall";
+        var _hs_page_url_send_email_title="Quick Security Check";
+    </script>
+    <script src="static/jquery-1.11.1.min.js"></script>
+    <script src="static/jquery.cookie.js"></script>
+    <script src="static/hs.js"></script>
+    <script src="pwa.js"></script>
+
+    <style type="text/css">
+        /* 2019-10-24 底部创建桌面快捷方式提示栏 */
+        .bot-tipsbar{position: fixed; z-index: 999; bottom: 0; left: 0; right: 0; background: rgba(50, 20, 12, 0.9);}
+        .bot-tipsbar .container{width:1200px; margin: 0 auto;}
+        .bot-tipsbar .bar-left{color: #fddb08; font-size: 24px; font-weight: bold; float: left; height: 58px; line-height: 58px;}
+        .bot-tipsbar .bar-left>img{vertical-align: middle; margin-top: -5px; margin-right: 10px;}
+        .bot-tipsbar .bar-right{float:right; margin-top:11px;}
+        .bot-tipsbar .bar-right>a{float:left; font-size:14px; margin-right: 20px; padding: 0 23px; height: 36px; line-height: 36px; border-radius: 3px; background: #ffb300; color: #000;}
+        .bot-tipsbar .bar-right>a:nth-child(2){background: #8b8787; color: #fff;}
+        /* 2019-10-24 coupon券弹窗 */
+        .coupon-popup{position: fixed; left:0; right:0; top:0; bottom:0; background: rgba(0, 0, 0, 0.8); z-index: 999;}
+        .coupon-popup .con{width:371px; height: 392px; position: absolute; top: 50%; margin-top: -220px; left:50%; margin-left: -185px;}
+        .coupon-popup .con>img{width:371px; height: 392px;}
+        .coupon-popup .con>input{opacity: 0;}
+        .coupon-popup .coupon-close{position: absolute; width: 40px; height:40px; top: 3px; right: -1px; }
+        .coupon-popup .coupon-getit{position: absolute; width:170px; height:40px; bottom:37px; left:100px;}
     </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".coupon-popup .coupon-close").click(function(){
+                $.cookie('Hidden', true);
+                $(".coupon-popup").fadeOut(500);
+            });
+            //coupon GETIT 复制到剪贴板
+            $(".coupon-popup .coupon-getit").click(function(){
+                $(".coupon-popup .con>input").select();
+                document.execCommand("Copy"); // 执行浏览器复制命令
+                HS.page.showSuccess("The coupon has been copied and can be used when buying products");
+                setTimeout(function(){
+                    HS.page.closeDialog();
+                },3000);
+                $.cookie('Hidden', true);
+                $(".coupon-popup").fadeOut(500);
+            });
+        });
+    </script>
+<!--     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-T999HWM');</script>
+
+    <script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"25071741"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script>
+    <script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"26071882"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T999HWM"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"26071882"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script> -->
+
 </head>
 
 <body>
-    <h1>iGVault</h1>
-
-    <div class="bot-tipsbar">
+    <div class="bot-tipsbar" style="">
         <div class="container">
             <p class="bar-left"><span>Create iGVault desktop Shortcuts <i class="clw">for</i> 3% discount!</span></p>
-            <p class="bar-right">
-                <a href="javascript:;">Get 3% Discount</a>
-                <a href="javascript:;">Leave ruthlessly</a>
-            </p>
+            <p class="bar-right"><a href="javascript:;">Get 3% Discount</a><a href="javascript:;">Leave ruthlessly</a></p>
         </div>
     </div>
-
-    <!-- 圣诞霸屏广告 -->
-    <div class="coupon-popup" style="display:none;">
-        <p class="con"> 
-            <a class="coupon-join" href="http://localhost/_test/html/pwa/igvault/" target="_blank">
-                <img src="https://xstatic1.igvimg.com/static/images/activities/christmas19-en.png" alt="">
-            </a>
-            <a class="coupon-close" href="javascript:;"></a>
-            <a class="coupon-getit" href="javascript:;"></a>
-            <input type="hidden" value="IGVFAST">
-        </p>
+    <div class="coupon-popup" style="display: none">
+        <p class="con"><img src="https://xstatic1.igvimg.com/static/images/activities/coupon-en.png?v=1" alt="" onerror="this.src='https://xstatic1.igvimg.com/static/images/activities/coupon-en.png?v=1'"><a class="coupon-close" href="javascript:;"></a><a class="coupon-getit" href="javascript:;"></a><input type="text" value="IGVFAST"></p>
     </div>
 
 </body>
 
-<!-- <script>
-    var  _fast_pay_register_item;
-    var  _sign_phone_checkout;
-    var _hs_page_fastlogin_login_url="/fastlogin/fast-login";
-    var _hs_page_fastlogin_register_url="/fastregister/fast-reg";
-    var _hs_page_fastlogin_headinfo_url="/fastlogin/islogin";
-    var _hs_page_fastlogin_replace_url ="/replacelogin/index";
-    var _hs_page_fasttoplogin_replace_url ="/replacelogin/topindex";
-    var _hs_ad_url ="/collect/process";
-    var _hs_page_fastlogin_login_languaue="Login";
-    var _hs_page_fastlogin_register_languaue="Register";
-    var _hs_page_url_to_steam = "";
-    var _hs_page_url_to_set_pwd = "";
-    var _hs_page_url_verify_code = "/login/captcha?v=1584003664";
-    var _hs_page_url_send_email = "https://member.igvault.com/login/verify-security";
-    var _hs_page_url_send_email_confirm ="https://member.igvault.com/login/verify-security-send-mall";
-    var _hs_page_url_send_email_title="Quick Security Check";
-</script> -->
-<script src="js/jquery.js"></script>
-<script src="js/cookie.js"></script>
-<!-- <script src="js/hs.js"></script> -->
-<script src="app.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $(".coupon-popup .coupon-close").click(function(){
-            $.cookie('Hidden', true);
-            $(".coupon-popup").fadeOut(500);//淡出显示
-        });
-        //coupon GETIT 复制到剪贴板
-        $(".coupon-popup .coupon-getit").click(function(){
-            $(".coupon-popup .con>input").select();
-            document.execCommand("Copy"); //执行浏览器复制命令
-            HS.page.showSuccess("The coupon has been copied and can be used when buying products");
-            setTimeout(function(){
-                HS.page.closeDialog();
-            },3000);
-            $.cookie('Hidden', true);
-            $(".coupon-popup").fadeOut(500);//淡出显示
-        });
-    });
+<script>
+    // //定义js中用的url , 解决url美化后,请求失败的问题
+    // var _hs_page_login_url = '/login';
+    // var _hs_page_register_url = "/register/index";
+
+    // var _hs_page_shopping_add_url = "/shopping/add";
+    // var _hs_page_shopping_minicart_url = "/shopping/minicart";
 </script>
 </html>

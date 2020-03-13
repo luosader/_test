@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <link rel="manifest" href="manifest.json">
+    <!-- <link rel="apple-touch-icon-precomposed" href="homescreen.png"> -->
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        console.log(window)
+
+        if ('serviceWorker' in window.navigator) {
+            navigator.serviceWorker.register('./sw.js', {scope: './'})
+                .then(function(reg) {
+                    console.log('success', reg);
+                    // console.log('register sw success :', swReg.scope);
+
+                    // Message: 页面 => SW 
+                    // 使用 postMessage 方法可以进行 Service Worker 和页面之间的通讯
+                    navigator.serviceWorker.controller && navigator.serviceWorker.controller.postMessage("this message is from page");
+
+                    // // 使用 Message Channel 来通信
+                    // const messageChannel = new MessageChannel();
+                    // messageChannel.port1.onmessage = e => {
+                    //     console.log(e.data); // this message is from sw.js, to page
+                    // }
+                    // reg.active.postMessage("Channel is from page, to sw", [messageChannel.por2]);
+
+                })
+                .catch(function(err) {
+                    console.log('fail', err);
+                });
+        }
+
+        // Message: SW => 页面 
+        navigator.serviceWorker.addEventListener('message', function(e) {
+            console.log(e.data); // this message is from sw.js, to page
+        });
+
+
+
+
+        // window.addEventListener('beforeinstallprompt', function(e) {
+        //     console.log(e)
+        //     e.userChoice.then(function(choiceResult) {
+        //         if (choiceResult.outcome === 'dismissed') {
+        //             console.log('用户取消安装应用');
+        //         } else {
+        //             console.log('用户安装了应用');
+        //         }
+        //     });
+        // });
+
+    </script>
+</body>
+</html>
+

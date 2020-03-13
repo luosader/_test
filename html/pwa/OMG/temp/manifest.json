@@ -1,0 +1,13 @@
+{
+  "name": "Fireworks App",
+  "short_name": "Fireworks",
+  "icons": [    {
+    "src":"logo-144x144.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  }],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#000",
+  "theme_color": "#536878"
+}

@@ -166,7 +166,8 @@ $(document).ready(function() {
         // 原因：1、deferredPrompt有值但不含prompt()属性； 2、程序有概率触发beforeinstallprompt事件； 3、由于程序开启了缓存，Ctrl+F5生效，F5永不生效；
         // 解决：1、清除浏览器缓存； 2、关闭sw缓存功能； 3、多刷新几次？
         $('.bot-tipsbar .bar-right a:first').click(function() {
-            if (deferredPrompt !== null) {
+            // if (deferredPrompt!==null) {
+            if (deferredPrompt && typeof(deferredPrompt.prompt)=="function") {
                 deferredPrompt.prompt();//异步触发横幅显示
                 deferredPrompt.userChoice.then((choiceResult) => {
                     if (choiceResult.outcome === 'dismissed') {
@@ -184,7 +185,7 @@ $(document).ready(function() {
             }
         });
 
-        // 隐藏状态框
+        // 隐藏触发框
         $('.bot-tipsbar .bar-right a:last').click(function() {
             $.cookie('Delayed', true);//使不再触发安装弹窗
             $('.bot-tipsbar').slideUp(500);//滑动隐藏
@@ -224,11 +225,13 @@ $(document).ready(function() {
         console.log('install stat end');
     }
 
+    // 检查到手机是否安装某个应用
     window.addEventListener('appinstalled', (evt) => {
         console.log('a2hs installed');
         install_stat('install', window.location.href);
     });
 
+    // 已添加到主屏快捷键
     if (isPwa) {
         let domain = new RegExp('^http[s]?:\/\/[^.]+\.([^/]+)', 'i');
         let main = window.location.href.match(domain)[1].toLowerCase();

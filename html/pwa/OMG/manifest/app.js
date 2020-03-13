@@ -1,10 +1,10 @@
 $(document).ready(function() {
 
-    let deferredPrompt;
+    let deferPrompt;
     let isPwa = (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches);//判断PWA是否安装
 
     // serviceWorker 功能
-    if (navigator.serviceWorker != null) {
+    if ('serviceWorker' in window.navigator) {
         navigator.serviceWorker.register('sw.js');
     }
 
@@ -16,14 +16,18 @@ $(document).ready(function() {
         window.addEventListener('beforeinstallprompt', function(event) {
             $('.jq-slide').slideDown(500);//滑动显示
             event.preventDefault();//取消默认事件
-            deferredPrompt = event;//为了实现延迟操作，存储事件的返回值，后续将异步地调用 prompt()。
+            deferPrompt = event;//为了实现延迟操作，存储事件的返回值，后续将异步地调用 prompt()。
+            if (!deferPrompt || typeof(deferPrompt.prompt)!="function") {
+                $('.jq-slide').hide();
+            }
         });
 
         // 点击触发安装弹窗
         $('.jq-prompt').click(function() {
-            if (deferredPrompt !== null) {
-                deferredPrompt.prompt();//异步触发横幅显示
-                deferredPrompt.userChoice.then((choiceResult) => {
+            // if (deferPrompt!==null) {
+            if (deferPrompt && typeof(deferPrompt.prompt)=="function") {
+                deferPrompt.prompt();//异步触发横幅显示
+                deferPrompt.userChoice.then((choiceResult) => {
                     if (choiceResult.outcome === 'dismissed') {
                         console.log('用户取消安装应用');
                     } else {
@@ -31,7 +35,7 @@ $(document).ready(function() {
                         $('.jq-slide').slideUp(500);//滑动隐藏
                         $('.jq-popup').fadeIn(500);//淡出显示
                     }
-                    deferredPrompt = null;
+                    deferPrompt = null;
                 })
                 .catch((error) => {
                     console.log('install sw failed: ', error.toString());
@@ -47,6 +51,16 @@ $(document).ready(function() {
     } else {
         $('.jq-slide').hide();
     }
+
+    // // 安装统计
+    // function install_stat() {
+    // }
+
+    // 检查到是否安装某个应用
+    // window.addEventListener('appinstalled', (evt) => {
+    //     console.log('a2hs installed');
+    //     install_stat('install', window.location.href);
+    // });
 
     // 已安装
     if (isPwa) {
