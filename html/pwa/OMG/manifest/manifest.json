@@ -1,6 +1,6 @@
 {
-    "name": "Purchase",
-    "short_name": "Purchase",
+    "name": "Manifest",
+    "short_name": "Manifest",
     "theme_color": "#2196f3",
     "background_color": "#2196f3",
     "display": "standalone",

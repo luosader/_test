@@ -16,7 +16,7 @@
         2、当sw服务激活
         出现安装引导。 -->
     </div>
-    <div class="jq-slide">
+    <div class="jq-slide" style="display:none;">
         <button type="button" class="jq-prompt">Prompt</button>
         <button type="button" class="jq-hide">Hidden</button>
     </div>
@@ -31,27 +31,8 @@
     
 </body>
 
-<script>
-    var  _fast_pay_register_item;
-    var  _sign_phone_checkout;
-    var _hs_page_fastlogin_login_url="/fastlogin/fast-login";
-    var _hs_page_fastlogin_register_url="/fastregister/fast-reg";
-    var _hs_page_fastlogin_headinfo_url="/fastlogin/islogin";
-    // var _hs_page_fastlogin_replace_url ="/replacelogin/index";
-    // var _hs_page_fasttoplogin_replace_url ="/replacelogin/topindex";
-    // var _hs_ad_url ="/collect/process";
-    // var _hs_page_fastlogin_login_languaue="Login";
-    // var _hs_page_fastlogin_register_languaue="Register";
-    // var _hs_page_url_to_steam = "";
-    // var _hs_page_url_to_set_pwd = "";
-    // var _hs_page_url_verify_code = "/login/captcha?v=1584003664";
-    // var _hs_page_url_send_email = "https://member.igvault.com/login/verify-security";
-    // var _hs_page_url_send_email_confirm ="https://member.igvault.com/login/verify-security-send-mall";
-    // var _hs_page_url_send_email_title="Quick Security Check";
-</script>
 <script src="asset/jquery.js"></script>
 <script src="asset/cookie.js"></script>
-<script src="asset/hs.js"></script>
 <script src="./app.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -63,10 +44,10 @@ $(document).ready(function() {
     $(".jq-popup .jq-popup-gift").click(function(){
         $(".jq-popup>input").select();
         document.execCommand("Copy"); //执行浏览器复制命令
-        HS.page.showSuccess("The coupon has been copied and can be used when buying products");
-        setTimeout(function(){
-            HS.page.closeDialog();
-        },3000);
+
+        // 弹窗提示
+        alert('The coupon has been copied and can be used when buying products');
+
         $.cookie('Hidden', true);
         $(".jq-popup").fadeOut(500);//淡出隐藏
     });

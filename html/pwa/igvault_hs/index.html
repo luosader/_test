@@ -7,7 +7,7 @@
     <title>iGVault</title>
     <link rel="stylesheet" href="css/style.css">
 
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="./manifest.json">
     <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
     <meta name="theme-color" content="#ffa722">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -55,7 +55,7 @@
 <body>
     <h1>iGVault</h1>
 
-    <div class="bot-tipsbar">
+    <div class="bot-tipsbar" style="display:none;">
         <div class="container">
             <p class="bar-left"><span>Create iGVault desktop Shortcuts <i class="clw">for</i> 3% discount!</span></p>
             <p class="bar-right">
@@ -102,22 +102,26 @@
 <!-- <script src="js/hs.js"></script> -->
 <script src="app.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $(".coupon-popup .coupon-close").click(function(){
-            $.cookie('Hidden', true);
-            $(".coupon-popup").fadeOut(500);//淡出显示
-        });
-        //coupon GETIT 复制到剪贴板
-        $(".coupon-popup .coupon-getit").click(function(){
-            $(".coupon-popup .con>input").select();
-            document.execCommand("Copy"); //执行浏览器复制命令
-            HS.page.showSuccess("The coupon has been copied and can be used when buying products");
-            setTimeout(function(){
-                HS.page.closeDialog();
-            },3000);
-            $.cookie('Hidden', true);
-            $(".coupon-popup").fadeOut(500);//淡出显示
-        });
+$(document).ready(function() {
+    $(".coupon-popup .coupon-close").click(function(){
+        $.cookie('Hidden', true);
+        $(".coupon-popup").fadeOut(500);//淡出显示
     });
+
+    //coupon GETIT 复制到剪贴板
+    $(".coupon-popup .coupon-getit").click(function(){
+        $(".coupon-popup .con>input").select();
+        document.execCommand("Copy"); //执行浏览器复制命令
+
+        // 弹窗提示
+        HS.page.showSuccess("The coupon has been copied and can be used when buying products");
+        setTimeout(function(){
+            HS.page.closeDialog();
+        },3000);
+
+        $.cookie('Hidden', true);
+        $(".coupon-popup").fadeOut(500);//淡出显示
+    });
+});
 </script>
 </html>

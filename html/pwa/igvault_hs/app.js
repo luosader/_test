@@ -1,9 +1,11 @@
 $(document).ready(function() {
     const publicKey = 'BPaFjgpGwBvYm0gHfwW9y49PQyG4TT8mAkq9DGIBCoP33CBHcul59wbf0DQcuitkNsuZV4ytv41rrvwvA5-iCU0';
+
+    // matchMedia() 一个MediaQueryList对象在一个document上维持着一系列的媒体查询，并负责处理当媒体查询在其document上发生变化时向监听器进行通知的发送。
     let deferredPrompt,
-    isPwa = (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches),
-    isPermission = ('Notification' in window && Notification.permission === 'granted'),
-    logDebug = (new RegExp('debug', 'i')).test(window.location.search);
+        isPwa = (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches),
+        isPermission = ('Notification' in window && Notification.permission === 'granted'),
+        logDebug = (new RegExp('debug', 'i')).test(window.location.search);
 
     // console.log 封装，方便后期上线的时候统一去掉
     // console.log = (function(oriLogFunc) {
@@ -28,7 +30,7 @@ $(document).ready(function() {
 
     // 订阅推送服务
     // https://lavas.baidu.com/pwa/engage-retain-users/how-push-works
-    // applicationServerKey:应用的唯一标识 别名VAPID
+    // applicationServerKey:应用的唯一标识，别名VAPID
     //    生成applicationServerKey的方法有两种：
     //      1.在服务端使用 web-push 生成； 
     //      2.访问https://web-push-codelab.appspot.com/快速生成
@@ -112,8 +114,8 @@ $(document).ready(function() {
     // 订阅推送服务
     window.subscribe = function() {
         try {
-            navigator.serviceWorker.ready.then(function(registartion) {
-                pushSubscription(registartion);
+            navigator.serviceWorker.ready.then(function(regSw) {
+                pushSubscription(regSw);
             })
             .catch(function(err) {
                 console.log(err.toString());
@@ -129,15 +131,17 @@ $(document).ready(function() {
     })();
 
     // serviceWorker 功能
+    // 代码执行完成之后，我们这就注册了一个 Service Worker，它工作在 worker context，所以没有访问 DOM 的权限。在正常的页面之外运行 Service Worker 的代码来控制它们的加载。
+    // 注意这里的sw作用域！！！
     if (navigator.serviceWorker != null) {
-        navigator.serviceWorker.register('sw.js', {
-            scope: './'
-        })//注册Service Worker
-        .then(function(registartion) {
-            console.log('register sw success :', registartion.scope);
-            pushSubscription(registartion);
+        navigator.serviceWorker.register('./sw.js', {scope: './'})//注册Service Worker
+        .then(function(regSw) {
+            //then() 函数链式调用我们的 promise，当 promise resolve 的时候，里面的代码就会执行。
+            console.log('register sw success :', regSw.scope);
+            pushSubscription(regSw);
         })
         .catch(function(err) {
+            //catch() 函数，当 promise rejected 才会执行
             console.log(err.toString());
         });
     }
@@ -145,14 +149,14 @@ $(document).ready(function() {
     // 页面的应用安装相关触发事件：未安装过和没有点击隐藏按钮
     if (!isPwa && !$.cookie('Delayed')) {
         // 应用安装横幅事件
-        window.addEventListener('beforeinstallprompt', function(event) {
+        window.addEventListener('beforeinstallprompt', function(e) {
             $('.bot-tipsbar').slideDown(500);//滑动显示
-            event.preventDefault();//取消默认事件
-            deferredPrompt = event;//为了实现延迟操作，存储事件的返回值，后续将异步地调用 prompt()。
+            deferredPrompt = e;//为了实现延迟操作，存储事件的返回值，后续将异步地调用 prompt()。
+            e.preventDefault();//取消默认事件
             // return false;
 
             // 判断用户是否安装此应用 beforeinstallprompt event fired
-            // event.userChoice.then(function(choiceResult) {
+            // e.userChoice.then(function(choiceResult) {
             //     if (choiceResult.outcome === 'dismissed') {
             //         console.log('用户取消安装应用');
             //     } else {
@@ -166,9 +170,11 @@ $(document).ready(function() {
         // 原因：1、deferredPrompt有值但不含prompt()属性； 2、程序有概率触发beforeinstallprompt事件； 3、由于程序开启了缓存，Ctrl+F5生效，F5永不生效；
         // 解决：1、清除浏览器缓存； 2、关闭sw缓存功能； 3、多刷新几次？
         $('.bot-tipsbar .bar-right a:first').click(function() {
-            // if (deferredPrompt!==null) {
+            // if (deferredPrompt!=null) {
             if (deferredPrompt && typeof(deferredPrompt.prompt)=="function") {
-                deferredPrompt.prompt();//异步触发横幅显示
+                // 异步触发横幅显示
+                deferredPrompt.prompt();
+                // 检测用户的安装行为
                 deferredPrompt.userChoice.then((choiceResult) => {
                     if (choiceResult.outcome === 'dismissed') {
                         console.log('用户取消安装应用');

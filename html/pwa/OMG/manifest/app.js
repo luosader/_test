@@ -4,6 +4,7 @@ $(document).ready(function() {
     let isPwa = (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches);//判断PWA是否安装
 
     // serviceWorker 功能
+    // 注意这里的sw作用域！！！
     if ('serviceWorker' in window.navigator) {
         navigator.serviceWorker.register('sw.js');
     }
@@ -17,9 +18,9 @@ $(document).ready(function() {
             $('.jq-slide').slideDown(500);//滑动显示
             event.preventDefault();//取消默认事件
             deferPrompt = event;//为了实现延迟操作，存储事件的返回值，后续将异步地调用 prompt()。
-            if (!deferPrompt || typeof(deferPrompt.prompt)!="function") {
-                $('.jq-slide').hide();
-            }
+            // if (!deferPrompt || typeof(deferPrompt.prompt)!="function") {
+            //     $('.jq-slide').hide();
+            // }
         });
 
         // 点击触发安装弹窗
