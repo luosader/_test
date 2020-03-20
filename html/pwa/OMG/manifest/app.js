@@ -18,9 +18,6 @@ $(document).ready(function() {
             $('.jq-slide').slideDown(500);//滑动显示
             event.preventDefault();//取消默认事件
             deferPrompt = event;//为了实现延迟操作，存储事件的返回值，后续将异步地调用 prompt()。
-            // if (!deferPrompt || typeof(deferPrompt.prompt)!="function") {
-            //     $('.jq-slide').hide();
-            // }
         });
 
         // 点击触发安装弹窗
@@ -65,6 +62,7 @@ $(document).ready(function() {
 
     // 已安装
     if (isPwa) {
+        // 热链接统计
         // let domain = new RegExp('^http[s]?:\/\/[^.]+\.([^/]+)', 'i');
         // let main = window.location.href.match(domain)[1].toLowerCase();
         // $(document).on('click', 'a', function(event) {
@@ -80,9 +78,9 @@ $(document).ready(function() {
         //         return true;
         //     }
         // });
+        // install_stat('open', window.location.href);
 
         // console.log($.cookie('Hidden'))
-        // install_stat('open', window.location.href);
         if (!$.cookie('Hidden')) $('.jq-popup').fadeIn(500);//淡出显示
     }
 

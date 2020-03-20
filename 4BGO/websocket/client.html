@@ -1,0 +1,15 @@
+<script type="text/javascript">
+// 客户端
+// WebSocket对象一共支持四个消息事件 onopen, onmessage, onclose和onerror，
+let socket = new WebSocket('ws://localhost:2000/');
+socket.onopen = function () {
+    console.log("connected");
+    socket.send('Hello Server~~');
+};
+socket.onmessage = function (event) {
+    $(".list-group").append(`<li class='list-group-item'>${event.data}</li>`);
+};
+socket.onerror = function () {
+    console.log("connect error");
+};
+</script>
