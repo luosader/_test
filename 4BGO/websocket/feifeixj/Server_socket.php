@@ -9,6 +9,7 @@ class Server_socket
     private $socket;
     private $accept = [];
     private $hands  = [];
+
     public function __construct($host, $port, $max)
     {
         $this->socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
@@ -22,7 +23,6 @@ class Server_socket
     {
         $i = 0;
         while (true) {
-
             $cycle   = $this->accept;
             $cycle[] = $this->socket;
             socket_select($cycle, $write, $except, null);
@@ -43,10 +43,10 @@ class Server_socket
                     } else {
                         //接收从客户端发送的内容 
                         $data = $this->decode($buffer);//解码
-                        print_r("\nThis is the data received from client," . $data);
+                        print_r("\r\nThis is the data received from client : " . $data);
 
                         //服务器端的内容  
-                        $data = "This is the data sent by server" . $i . ", so smart";
+                        $data = "This is the data sent by server{$i}, so smart";
                         $data = $this->encode($data);//编码
                         print_r($data);
                         //将信息传递给从机
@@ -59,7 +59,7 @@ class Server_socket
             }
             sleep(1);
         }
-    } /* end of start*/
+    }
 
     /**
      * 首次与客户端握手
@@ -75,7 +75,7 @@ class Server_socket
             socket_write($sock, $upgrade, strlen($upgrade));
             $this->hands[$key] = true;
         }
-    } /*dohandshake*/
+    }
 
     /**
      * 关闭一个客户端连接
@@ -127,9 +127,8 @@ class Server_socket
     }
 
 }
-/* end of class Server_socket*/
 
-$server_socket = new Server_socket('127.0.0.1', 2020, 20);
+$server_socket = new Server_socket('192.168.0.212', 2020, 20);
 $server_socket->start();
 sleep(2);
 ?>
