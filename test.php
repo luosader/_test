@@ -44,8 +44,8 @@ $b=strstr($a,',',true);
 
 // echo intval($a);
 
-$a=array ( '{"endpoint":"https://fcm_googleapis_com/fcm/send/eg8D1v_K7VI:APA91bHDbLrzoRi0f12JeVwVuyXWRTxEfgXUkLiB0VSf1DGGeJ9cl0-Hlu5yk1rIgks617BB70mleGMl0Bq8d5IGFxqKavgCD-lv6Tw_08MQeReaLAFlCX8OcKgz5GVWGpVI_UdlN1Ov","expirationTime":null,"keys":{"p256dh":"BJojRNJWGpmaYL0Tdl3ISTdGMAkSKgCXeOEimcK9hdOHKjf_S6UJupS2_kJXQSCMSFCLP4QkiF8dOF_5U6BRK-A","auth":"Q91i1CHAaXq86ejsTKCaYw"}}' => '', );
-debug(key($a));
+// $a=array ( '{"endpoint":"https://fcm_googleapis_com/fcm/send/eg8D1v_K7VI:APA91bHDbLrzoRi0f12JeVwVuyXWRTxEfgXUkLiB0VSf1DGGeJ9cl0-Hlu5yk1rIgks617BB70mleGMl0Bq8d5IGFxqKavgCD-lv6Tw_08MQeReaLAFlCX8OcKgz5GVWGpVI_UdlN1Ov","expirationTime":null,"keys":{"p256dh":"BJojRNJWGpmaYL0Tdl3ISTdGMAkSKgCXeOEimcK9hdOHKjf_S6UJupS2_kJXQSCMSFCLP4QkiF8dOF_5U6BRK-A","auth":"Q91i1CHAaXq86ejsTKCaYw"}}' => '', );
+// debug(key($a));
 
 
 
@@ -155,8 +155,9 @@ $arr = array(3, 45, 60, 9);
 // $dir = `ls`;// shell bash
 // $dir = `dir /-w`;// DOS
 $dir = `dir /b`; // DOS
+debug($dir);
 $dir = iconv('gb2312', 'utf-8', $dir);
-// echo $dir;
+echo $dir;
 // debug(explode(PHP_EOL,trim($dir)));
 // debug(explode("\n",trim($dir)));
 

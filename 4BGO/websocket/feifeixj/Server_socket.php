@@ -128,7 +128,7 @@ class Server_socket
 
 }
 
-$server_socket = new Server_socket('192.168.0.212', 2020, 20);
+$server_socket = new Server_socket('127.0.0.1', 2020, 20);//192.168.0.212
 $server_socket->start();
 sleep(2);
 ?>
