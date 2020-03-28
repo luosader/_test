@@ -1,16 +1,12 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>桌面通知 Notification </title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script>
-    </script>
+    <meta charset="UTF-8">
+    <title>桌面通知 Notification</title>
 </head>
-
 <body>
     <input type="button" value="测试桌面通知" onclick="checkPermissionAndShow()" />
-    <script>
+    <script type="text/javascript">
         window.Notification = window.Notification || window.webkitNotifications;
 
         function checkPermissionAndShow(){
@@ -38,5 +34,4 @@
         }
     </script>
 </body>
-
 </html>

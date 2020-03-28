@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Websocket 前台</title>
+</head>
+<body>
+    <div>
+        <button id="js-popup">响应</button>
+    </div>
+</body>
+<script type="text/javascript">
+socket = new WebSocket('ws://192.168.0.212:2020');
+// socket = new WebSocket('wss://192.168.0.212:2020');
+
+socket.addEventListener('open', function(evt) {
+    console.log('Connected');
+    console.log(evt);
+});
+
+socket.addEventListener('message', function(evt) {
+    console.log(evt.data);
+    if ('Notification' in window) {
+        console.log('1: ' + Notification.permission);
+        if(window.Notification && Notification.permission !== 'denied') {
+            //requestPermission 静态方法：让浏览器出现是否允许通知的提示
+            Notification.requestPermission(function(status) {
+                console.log('2: '+status);
+                if (status === 'granted') {
+                    var ini = new Notification('收到信息', {
+                        body: evt.data,
+                        icon: "../../../_assets/static/images/head/CatPortrait_x16.ico" //消息图片
+                    });
+                    ini.onclick = function(){
+                        //点击当前消息提示框后，跳转到当前页面
+                        window.focus();
+                    }
+                } else{
+                    alert(evt.data);
+                }
+            });
+        }
+
+    }
+});
+
+socket.addEventListener('close', function(evt) {
+    console.log('Connect closed!');
+});
+
+socket.addEventListener('error', function(evt) {
+    console.log('Connect error!');
+});
+
+/*其它*/
+// 点击事件
+var send = document.getElementById('js-popup');
+send.addEventListener('click', function() {
+    // var msg = {a:'a',b:'b'};
+    var msg = 'client';
+    socket.send(msg);
+    console.log(msg);
+});
+</script>
+</html>

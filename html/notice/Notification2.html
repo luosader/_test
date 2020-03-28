@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>桌面通知 Notification </title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script>
-    </script>
+    <meta charset="UTF-8">
+    <title>桌面通知 Notification2</title>
 </head>
-
 <body>
-    <script>
+    <script type="text/javascript">
+        // 仅支持 https 和 localhost(127.0.0.1)
+
         // status:granted,denied,default
         function createNotify(title, options) {
             if (Notification.permission === 'granted') {
@@ -26,10 +24,10 @@
         function notify($title, $options) {
             var notice = new Notification($title, $options);
             console.log(notice);
-            notice.onshow = function(event){ console.log('show : ', event); }
-            notice.onclose = function(event){ console.log('close : ', event); }
-            notice.onclick = function(event){ 
-                console.log('click : ', event);
+            notice.onshow = function(evt){ console.log('show : ', evt); }
+            notice.onclose = function(evt){ console.log('close : ', evt); }
+            notice.onclick = function(evt){ 
+                console.log('click : ', evt);
                 notice.close();
             }
         }
@@ -46,5 +44,4 @@
         */
     </script>
 </body>
-
 </html>

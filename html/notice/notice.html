@@ -5,9 +5,108 @@
     <title>Notification 示例</title>
 </head>
 <body>
-    <script type="text/javascript">
-        console.log(window.webkitNotifications)
-        console.log(window.Notification)
-    </script>
+<script type="text/javascript">
+// 仅支持 https 和 localhost(127.0.0.1)
+// status:granted,denied,default
+
+console.log(window.webkitNotifications);// (360系列)
+console.log(window.Notification);
+
+// 开启桌面通知需要检测当前浏览器是否支持并且有授权
+if (!("Notification" in window) && !window.webkitNotifications) {
+    // 不支持
+    alert("很遗憾，您当前浏览器不支持该功能！\n建议在360、谷歌、火狐等浏览器上使用此功能");
+} else if (Notification.permission != undefined && Notification.permission != null) {
+    if (Notification.permission != "granted") {
+        /*未授权(谷歌、火狐)  此处省略 300行*/
+    }
+    console.log(Notification.permission);
+} else if (Notification.permission == null || Notification.permission == undefined) {
+    if (window.webkitNotifications.checkPermission() != 0) {
+        /*未授权(360系列) 此处省略 300行*/
+        console.log('webkit 未授权');
+    }
+    console.log('webkit 已授权');
+}else {
+    /*支持并已授权(此处省略 300行) */
+    console.log('granted');
+}
+
+
+
+/*桌面通知调用方法*/
+windowsNotify('Hello friend');
+
+/*
+ * 桌面通知
+ * @param strNewsContent:通知的内容
+ */
+function windowsNotify(strNewsContent) {
+    if (!("Notification" in window) && !window.webkitNotifications && window.webkitNotifications.checkPermission() != 0)
+        return;
+ 
+    if (Notification.permission == null || Notification.permission == undefined)
+        windowsNotify360(strNewsContent);
+    else if (Notification.permission === "granted")
+        windowsNotifyFFAndGE(strNewsContent);
+    else if (Notification.permission !== 'denied') {
+        Notification.requestPermission(function(permission) {
+            if (!('permission' in Notification))
+                Notification.permission = permission;
+            if (permission === "granted")
+                windowsNotifyFFAndGE(strNewsContent);
+        });
+    }
+}
+
+//桌面通知(兼容360)
+function windowsNotify360(strNewsContent) {
+    if (window.webkitNotifications && window.webkitNotifications.checkPermission() == 0) {
+        var notify = window.webkitNotifications.createNotification(
+            "http://www.fx678.com/corp/images/aboutus/htw.jpg",
+                '汇通-新闻中心',
+            strNewsContent
+        );
+ 
+        //设置定时撤销机制，防止通知长时间显示不被关闭
+        notify.ondisplay = function(event) {
+            setTimeout(function() {
+                event.currentTarget.cancel();
+            }, 10000);
+        };
+        //下面是定义点击事件，类似地还可定义其它事件
+        notify.onclick = function() {
+            window.focus();
+            this.cancel();
+        };
+        //弹出
+        notify.show();
+    } else if (window.webkitNotifications) {
+        window.webkitNotifications.requestPermission(windowsNotify360);
+    }
+}
+
+//桌面通知(兼容火狐、谷歌)
+function windowsNotifyFFAndGE(strNewsContent) {
+    var notice = new Notification('汇通-新闻中心', {
+        body: strNewsContent,
+        icon: "http://www.fx678.com/corp/images/aboutus/htw.jpg"
+    });
+ 
+    //设置定时撤销机制，防止通知长时间显示不被关闭
+    notice.ondisplay = function(event) {
+        setTimeout(function() {
+            event.currentTarget.cancel();
+        }, 10000);
+    };
+ 
+    //下面是定义点击事件，类似地还可定义其它事件
+    notice.onclick = function() {
+        window.focus();//点击当前消息提示框后，跳转到当前页面
+        this.cancel();
+    };
+}
+
+</script>
 </body>
 </html>

@@ -1,10 +1,17 @@
-
 <?php
+/**
+ * cmd
+ *     php D:/WWW/_test/4BGO/websocket/feifeixj/Server_socket.php
+ * http://tx.socket/websocket.html
+ * @var serverSocket
+ */
+$ws = new serverSocket('127.0.0.1', 2020, 20); //192.168.0.212
+$ws->start();
 
 /**
  * 聊天室服务器  websocket 专用
  */
-class Server_socket
+class serverSocket
 {
     private $socket;
     private $accept = [];
@@ -41,13 +48,13 @@ class Server_socket
                     } else if ($length < 1) {
                         $this->close($sock);
                     } else {
-                        //接收从客户端发送的内容 
-                        $data = $this->decode($buffer);//解码
-                        print_r("\r\nThis is the data received from client : " . $data);
+                        //接收从客户端发送的内容
+                        $data = $this->decode($buffer); //解码
+                        print_r(PHP_EOL . 'This is the data received from client: ' . $data);
 
-                        //服务器端的内容  
+                        //服务器端的内容
                         $data = "This is the data sent by server{$i}, so smart";
-                        $data = $this->encode($data);//编码
+                        $data = $this->encode($data); //编码
                         print_r($data);
                         //将信息传递给从机
                         foreach ($this->accept as $client) {
@@ -120,15 +127,11 @@ class Server_socket
         if ($length <= 125) {
             return "\x81" . chr($length) . $buffer;
         } else if ($length <= 65535) {
-            return "\x81" . chr(126) . pack("n", $length) . $buffer;
+            return "\x81" . chr(126) . pack('n', $length) . $buffer;
         } else {
-            return "\x81" . char(127) . pack("xxxxN", $length) . $buffer;
+            return "\x81" . char(127) . pack('xxxxN', $length) . $buffer;
         }
     }
-
 }
 
-$server_socket = new Server_socket('127.0.0.1', 2020, 20);//192.168.0.212
-$server_socket->start();
 sleep(2);
-?>

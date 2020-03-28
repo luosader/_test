@@ -28,9 +28,55 @@
     <br>
     <progress value="1" max="5">
 </body>
+
+<script src="./_assets/static/js/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
     console.log(Math.random());
     //$.WebSite.getParameter();
+
+
+    /*判定无痕模式*/
+    // console.log(window)
+    // console.log('typeof window.history')
+    // console.log(window.history)
+    // console.log(typeof history)
+    // console.log(typeof localStorage === 'object');
+    // if(typeof history === 'object'){
+    //     try{
+    //         var stateObj = {foo: "TEST"};
+    //         history.pushState(stateObj, "page 1", "test.php");
+    //     }catch(e){
+    //         alert("请关闭无痕模式!");
+    //     };
+    // };
+
+    // if(typeof localStorage === 'object'){
+    //     try{
+    //         localStorage.setItem('test', 'Non-trace mode');
+    //         console.log(localStorage.test);
+    //         localStorage.removeItem('test');
+    //     }catch(e){
+    //         Storage.prototype._setItem = Storage.prototype.setItem;
+    //         Storage.prototype.setItem = function() {};
+    //         alert("请关闭无痕模式!");
+    //     };
+    // };
+
+    // // export function browserIsHide() {}
+    // function browserIsHide () {
+    //     let fs = window.RequestFileSystem || window.webkitRequestFileSystem;
+    //     if (!fs) {
+    //         console.log("check failed?");
+    //     } else {
+    //         fs(window.TEMPORARY,100,function(){
+    //             console.log('非无痕模式')
+    //         },function(){
+    //             alert('您已开启无痕模式，为了不影响正常功能使用，请立即关闭！');
+    //         });
+    //     }
+    // }
+    // browserIsHide();
+
 </script>
 </html>
 
