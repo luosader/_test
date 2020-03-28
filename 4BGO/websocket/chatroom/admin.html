@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WS Admin</title>
+</head>
+
+<body>
+<button id="js-send">推送</button>
+
+<script type="text/javascript">
+// http://192.168.0.212/_test/4BGO/websocket/chatroom/admin.html
+let ws = new WebSocket('ws://192.168.0.212:2020');
+
+// 握手成功监听函数
+ws.onopen = function(evt) {
+    console.log('Connected');
+}
+
+// 监听客户机的行为
+ws.onmessage = function(evt) {
+    console.log(JSON.parse(evt.data));
+}
+
+// WS 关闭连接
+ws.onclose = function(evt) {
+    console.log('WebSocket Closed!');
+};
+
+// WS 出错处理
+ws.onerror = function(evt) {
+    console.log('WebSocket Error!');
+};
+
+/*其它*/
+// 点击事件
+var send = document.getElementById('js-send');
+send.addEventListener('click', function() {
+    var msg = '{"code":"admin","event":"click","title":"系统消息","txt":"下单即优惠10%！"}';
+    ws.send(msg);
+    // console.log(msg);
+});
+</script>
+</body>
+</html>

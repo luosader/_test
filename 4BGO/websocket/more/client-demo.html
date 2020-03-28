@@ -1,0 +1,27 @@
+<script type="text/javascript">
+var ws = new WebSocket("ws://IP:端口");
+
+//握手监听函数
+ws.onopen=function(){
+    //状态为1证明握手成功，然后把client自定义的名字发送过去
+    if(so.readyState==1){
+        //握手成功后对服务器发送信息
+        so.send('type=add&ming='+n);
+    }
+}
+
+//错误返回信息函数
+ws.onerror = function(){
+    console.log("error");
+};
+
+//监听服务器端推送的消息
+ws.onmessage = function (msg){
+    console.log(msg);
+}
+
+//断开WebSocket连接
+ws.onclose = function(){
+    ws = false;
+}
+</script>

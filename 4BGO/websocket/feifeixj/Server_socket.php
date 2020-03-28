@@ -1,5 +1,6 @@
 <?php
 /**
+ * https://github.com/feifeixj/websocket
  * cmd
  *     php D:/WWW/_test/4BGO/websocket/feifeixj/Server_socket.php
  * http://tx.socket/websocket.html

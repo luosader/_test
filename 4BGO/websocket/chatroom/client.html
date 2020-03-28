@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Websocket Users</title>
+</head>
+
+<body>
+<script type="text/javascript">
+// http://192.168.0.212/_test/4BGO/websocket/chatroom/client.html
+
+// var ws = new WebSocket("ws://IP:端口");
+var ws = new WebSocket("ws://192.168.0.212:2020");
+
+// 握手监听函数
+ws.addEventListener('open', function(e) {
+    console.log('Connected');
+    // console.log(e);
+    console.log(e.type);
+    var msg = '{"code":"admin","event":"open","title":"系统提醒","txt":"有新的客户接入！"}';
+    ws.send(msg);
+    // ws.send('type=admin&event='+e.type);
+});
+
+// 监听服务端推送的消息
+ws.onmessage = function(e) {
+    var msg = JSON.parse(e.data);
+    console.log(msg);
+
+    if (msg && 'Notification' in window) {
+        console.log('1: ' + Notification.permission);
+        if(window.Notification && Notification.permission !== 'denied') {
+            //requestPermission 静态方法：让浏览器出现是否允许通知的提示
+            Notification.requestPermission(function(status) {
+                console.log('2: '+status);
+                if (status === 'granted') {
+                    var ini = new Notification(msg.title, {
+                        body: msg.txt,
+                        icon: "../../../_assets/static/images/head/CatPortrait_x16.ico" //消息图片
+                    });
+                    ini.onclick = function(){
+                        //点击当前消息提示框后，跳转到当前页面
+                        window.focus();
+                    }
+                } else{
+                    alert(msg.title+"\r\n "+msg.txt);
+                }
+            });
+        }
+
+    }
+}
+
+// 断开WebSocket连接
+ws.onclose = function() {
+    console.log('Connect closed!');
+    ws = false;
+}
+
+// 错误返回信息函数
+ws.onerror = function(e) {
+    console.log('Connect error!');
+    console.log(e);
+};
+
+</script>
+</body>
+</html>

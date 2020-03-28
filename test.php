@@ -35,12 +35,12 @@ $a = '140,342,408,370,282,231,271,269,406,418,300,132,134,178,159,181,180,183,13
 // debug($a);
 
 $a = ['a'=>'asas',1,'b'=>'123','aa'=>'aac'];
-$a = '140,333,1223';
-$a = 'abc';
+// $a = '140,333,1223';
 
 // debug(json_encode($a));
-$b=strstr($a,',',true);
-// echo $b;
+// $b=strstr($a,',',true);
+// // echo $b;
+echo json_encode($a);//{"a":"asas","0":1,"b":"123","aa":"aac"}
 
 // echo intval($a);
 
@@ -154,10 +154,10 @@ $arr = array(3, 45, 60, 9);
 /*执行其他命令*/
 // $dir = `ls`;// shell bash
 // $dir = `dir /-w`;// DOS
-$dir = `dir /b`; // DOS
-debug($dir);
-$dir = iconv('gb2312', 'utf-8', $dir);
-echo $dir;
+// $dir = `dir /b`; // DOS
+// debug($dir);
+// $dir = iconv('gb2312', 'utf-8', $dir);
+// echo $dir;
 // debug(explode(PHP_EOL,trim($dir)));
 // debug(explode("\n",trim($dir)));
 

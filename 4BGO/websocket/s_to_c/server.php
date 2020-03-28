@@ -1,12 +1,13 @@
 <?php
 /**
  * cmd
- *     php D:/WWW/_test/4BGO/websocket/server.php
+ *     php D:/WWW/_test/4BGO/s_to_c/server.php
  * http://tx.socket/admin.html
  * @var serverSocket
  */
-$ws = new serverSocket('192.168.0.212', 2020, 20); //192.168.0.212
-$ws->start();
+// ini_set('display_errors','1');
+// error_reporting(E_ALL ^ E_NOTICE);
+error_reporting(0);
 
 /**
  * 聊天室服务器  websocket 专用
@@ -28,14 +29,14 @@ class serverSocket
         print_r($this->socket);
     }
 
-    // 设计一个循环挂起WebSocket通道，进行数据的接收、处理和发送
+    // 设计一个循环挂起WebSocket的通道，进行数据的接收、处理和发送
     public function start()
     {
         $i = 0;
         // 死循环，直到socket断开
         while (true) {
-            $cycle   = $this->accept;
-            $cycle[] = $this->socket;
+            $cycle   = $this->accept; //已有
+            $cycle[] = $this->socket; //增加
 
             /**
              * socket_select($sockets, $write = NULL, $except = NULL, NULL);
@@ -46,20 +47,22 @@ class serverSocket
              * 最后一个参数是超时时间
              *     0:则立即结束;n>1:则最多在n秒后结束，如遇某一个连接有新动态，则提前返回;null:如遇某一个连接有新动态，则返回;
              */
-            socket_select($cycle, $write, $except, null);
+            socket_select($cycle, $write = null, $except = null, null);
 
             foreach ($cycle as $sock) {
                 if ($sock == $this->socket) {
                     //有新的client连接进来
 
-                    $this->accept[]    = socket_accept($sock); //接受一个socket连接
-                    $arr               = array_keys($this->accept);
-                    $key               = end($arr);
+                    $this->accept[] = socket_accept($sock); //接受一个socket连接
+
+                    $arr = array_keys($this->accept); //键名数组
+                    $key = end($arr); //输出最后一个元素的值
+                    // 将新加入的client标记为未握手状态
                     $this->hands[$key] = false;
                 } else {
                     // 1.首次与客户端握手; 2.为client断开socket连接; 3.消息处理;
 
-                    $length = socket_recv($sock, $buffer, 204800, null);//读取该socket的信息，注意：第二个参数是引用传参即接收数据，第三个参数是接收数据的长度
+                    $length = socket_recv($sock, $buffer, 204800, null); //读取该socket的信息，注意：第二个参数是引用传参即接收数据，第三个参数是接收数据的长度
                     $key    = array_search($sock, $this->accept);
                     if (!$this->hands[$key]) {
                         $this->dohandshake($sock, $buffer, $key);
@@ -104,12 +107,18 @@ class serverSocket
      */
     public function dohandshake($sock, $data, $key)
     {
-        if (preg_match("/Sec-WebSocket-Key: (.*)\r\n/", $data, $match)) {
+        if (preg_match("/Sec-WebSocket-Key: (.*)\r\n/i", $data, $match)) {
+            // 需要将 Sec-WebSocket-Key 值累加字符串，并依次进行 SHA-1 加密和 base64 加密
             $response = base64_encode(sha1($match[1] . '258EAFA5-E914-47DA-95CA-C5AB0DC85B11', true));
-            $upgrade  = "HTTP/1.1 101 Switching Protocol\r\n" .
-                "Upgrade: websocket\r\n" .
-                "Connection: Upgrade\r\n" .
-                "Sec-WebSocket-Accept: " . $response . "\r\n\r\n";
+            // 拼凑响应内容
+            // Upgrade: websocket => 是固定的，告诉客户端即将升级的是Websocket协议，而不是mozillasocket，lurnarsocket或者shitsocket
+            // Sec-WebSocket-Accept: 这个则是经过服务器确认，并且加密过后的 Sec-WebSocket-Key,也就是client要求建立WebSocket验证的凭证
+            // . 'WebSocket-Location: ws://127.0.0.1:9090' . PHP_EOL
+            $upgrade = 'HTTP/1.1 101 Switching Protocol' . PHP_EOL
+                . 'Upgrade: websocket' . PHP_EOL
+                . 'Connection: Upgrade' . PHP_EOL
+                . 'Sec-WebSocket-Accept: ' . $response . PHP_EOL . PHP_EOL; //这里两个换行
+            // 向客户端应答 Sec-WebSocket-Accept
             socket_write($sock, $upgrade, strlen($upgrade));
             $this->hands[$key] = true;
         }
@@ -166,4 +175,8 @@ class serverSocket
     }
 }
 
-// sleep(2);
+/*实例化*/
+$host = '192.168.0.212'; //192.168.0.212
+$ws   = new serverSocket($host, 2020, 20);
+$ws->start();
+sleep(2);
