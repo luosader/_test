@@ -106,6 +106,6 @@ self.addEventListener('notificationclick',function(e){
 });
 
 // 推送消息对话框关闭事件
-self.addEventListener('notificationclose',function(e){
+this.addEventListener('notificationclose', e => {
     console.log('Hi there! notification close!');
 });

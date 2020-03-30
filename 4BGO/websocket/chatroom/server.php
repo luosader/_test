@@ -13,7 +13,7 @@ class WS
 {
     private $master; // 连接 server 的 client
     private $sockets = []; //记录连接进来client的socket信息组
-    private $hands = []; //标志socket资源握手状态组
+    private $hands   = []; //标志socket资源握手状态组
 
     public function __construct($host, $port, $backlog = 2)
     {
@@ -30,18 +30,19 @@ class WS
         // 设计一个循环挂起WebSocket的通道，进行数据的接收、处理和发送
         while (true) {
             $cycle   = $this->sockets; //已有
-            $cycle[] = $this->master;
+            $cycle[] = $this->master; //当前
             // $write = null;$except = null;
             socket_select($cycle, $write, $except, null);
             foreach ($cycle as $sock) {
                 if ($sock == $this->master) {
+                    // print_r('opener');
                     // 处理新进来的client连接
                     // 接受一个socket连接
-                    $client = socket_accept($this->master);
+                    $new = socket_accept($this->master);
                     // 给新连接进来的socket一个唯一的ID
-                    $ukey = uniqid(); //如何区分Admin和User？
+                    $ukey = uniqid(); //如何区分Admin和User？ => 在open后可session或重新ukey
                     // 保存open记录：
-                    $this->sockets[$ukey] = $client; //将新连接进来的socket存进连接池
+                    $this->sockets[$ukey] = $new; //将新连接进来的socket存进连接池
                     $this->hands[$ukey]   = false; //将新加入的socket标记为未握手状态
                 } else {
                     // 1.首次与客户端握手; 2.为client断开socket连接; 3.消息处理;
@@ -70,25 +71,20 @@ class WS
                         if (!$from) {continue;}
                         $from = json_decode($from, true);
                         if ($from['code'] == 'admin') {
-                            print_r(PHP_EOL . 'From Admin Operation => ' . $from['title'] . '：' . $from['txt']);
+                            print_r(PHP_EOL . 'From Admin => ' . $from['title'] . '：' . $from['body']);
                             if ($from['event'] == 'click') {
-                                // 主动推送给相关客户机
-                                $to = ['title' => $from['title'], 'txt' => $from['txt']];
-                                $to = json_encode($to);
-                                $to = $this->encode($to); //编码
-                                // $this->sockets里不包括发起者
-                                foreach ($this->sockets as $client) {
-                                    socket_write($client, $to, strlen($to));
-                                }
+                                $to = ['title' => $from['title'], 'body' => $from['body'], 'tag' => $from['tag'], 'icon' => $from['icon']];
+                                $this->send('', $to);
                             }
                         } elseif ($from['code'] == 'client') {
-                            print_r(PHP_EOL . 'From Client_' . $ukey . ' Operation => ' . $from['title'] . '：' . $from['txt']);
+                            print_r(PHP_EOL . 'From Client_' . $ukey . ' => ' . $from['title'] . '：' . $from['body']);
                             if ($from['event'] == 'open') {
                                 // 消息推送给相关Admin
-                                // socket_write($client, $to, strlen($to));
+                                // $to = ['title' => $from['title'], 'body' => $from['body']];
+                                // $this->send('', $to);
                             }
                         } else {
-                            print_r(PHP_EOL . 'received');
+                            print_r(PHP_EOL . '意外断开！');
                         }
                     }
                 }
@@ -119,6 +115,20 @@ class WS
         }
     }
 
+    public function send($sock, $data = [], $to = '')
+    {
+        // 主动推送给相关客户机
+        $data   = $this->encode(json_encode($data)); //编码
+        $length = strlen($data); //mb_strlen()
+
+        // $this->sockets 中理应不包括发起者本身
+        foreach ($this->sockets as $client) {
+            if ($sock != $client) {
+                socket_write($client, $data, $length);
+            }
+        }
+    }
+
     /**
      * 关闭一个客户端连接
      */
@@ -133,7 +143,7 @@ class WS
     /**
      * 字符解码
      */
-    public function decode($buffer)
+    protected function decode($buffer)
     {
         $len = $masks = $data = $decoded = null;
         $len = ord($buffer[1]) & 127;
@@ -157,7 +167,7 @@ class WS
     /**
      * 字符编码
      */
-    public function encode($buffer)
+    protected function encode($buffer)
     {
         $length = strlen($buffer);
         if ($length <= 125) {

@@ -6,10 +6,13 @@
 </head>
 
 <body>
+
+<textarea id="js-content" placeholder="下单即优惠10%！">下单即优惠10%！</textarea>
 <button id="js-send">推送</button>
 
 <script type="text/javascript">
 // http://192.168.0.212/_test/4BGO/websocket/chatroom/admin.html
+
 let ws = new WebSocket('ws://192.168.0.212:2020');
 
 // 握手成功监听函数
@@ -36,7 +39,20 @@ ws.onerror = function(evt) {
 // 点击事件
 var send = document.getElementById('js-send');
 send.addEventListener('click', function() {
-    var msg = '{"code":"admin","event":"click","title":"系统消息","txt":"下单即优惠10%！"}';
+    var txt = document.getElementById('js-content').value;
+
+    // var msg = '{"code":"admin","event":"click","title":"System Message","body":"'+txt+'","tag":"message-group-1","icon":"favicon.ico"}';
+
+    var msg = {
+        "code":"admin",
+        "event":"click",
+        "title":"System Message",
+        "body":txt,
+        "tag":"message-group-1",
+        "icon":"favicon.ico"
+    };
+    msg = JSON.stringify(msg);
+
     ws.send(msg);
     // console.log(msg);
 });
