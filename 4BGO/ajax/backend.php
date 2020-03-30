@@ -16,20 +16,20 @@
 //b.php文件
 $file = 'file.txt';
 
-if ($_POST['cmd']=='send') {
-	for ($i=0;$i<10;$i++){
-	    $fp = fopen($file,'a+');
-	    fputs($fp, $i.'/r/n');
-	    fclose($fp);
-	    // sleep(1);
-	}
-	file_put_contents('file.txt',chr(10),FILE_APPEND);
-	echo "$_POST[callback]";
-} elseif ($_POST['cmd']=='clear') {
-	file_put_contents('file.txt','');
-	echo "$_POST[callback]";
+if ($_POST['cmd'] == 'send') {
+    for ($i = 0; $i < 10; $i++) {
+        $fp = fopen($file, 'a+');
+        fputs($fp, $i . '/r/n');
+        fclose($fp);
+        // sleep(1);
+    }
+    file_put_contents('file.txt', chr(10), FILE_APPEND);
+    echo "$_POST[callback]";
+} elseif ($_POST['cmd'] == 'clear') {
+    file_put_contents('file.txt', '');
+    echo "$_POST[callback]";
 } else {
-	echo "执行失败！";
+    echo "执行失败！";
 }
 
 ?>
