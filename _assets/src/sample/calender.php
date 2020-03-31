@@ -2,9 +2,9 @@
 header('Content-Type:text/html;charset=UTF-8');
 class Calendar
 {
-/*
- * www.jb51.net修正版
- */
+    /**
+     * www.jb51.net修正版
+     */
     public $YEAR, $MONTH, $DAY;
     public $WEEK   = array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六");
     public $_MONTH = array(
@@ -21,37 +21,44 @@ class Calendar
         "11" => "十一月",
         "12" => "十二月",
     );
-//设置年份
+
+    //设置年份
     public function setYear($year)
     {
         $this->YEAR = $year;
     }
-//获得年份
+
+    //获得年份
     public function getYear()
     {
         return $this->YEAR;
     }
-//设置月份
+
+    //设置月份
     public function setMonth($month)
     {
         $this->MONTH = $month;
     }
-//获得月份
+
+    //获得月份
     public function getMonth()
     {
         return $this->MONTH;
     }
-//设置日期
+    
+    //设置日期
     public function setDay($day)
     {
         $this->DAY = $day;
     }
-//获得日期
+    
+    //获得日期
     public function getDay()
     {
         return $this->DAY;
     }
-//打印日历
+    
+    //打印日历
     public function OUT()
     {
         $this->_env();
@@ -59,7 +66,7 @@ class Calendar
         $fweek = $this->getWeek($this->YEAR, $this->MONTH, 1); //获得此月第一天为星期几
         echo "<div style=\"margin:0;border:1 solid black;width:300;font:9pt\"><form action=$_SERVER[PHP_SELF] method=\"post\" style=\"margin:0\"><select name=\"month\" onchange=\"this.form.submit();\">";
         for ($ttmpa = 1; $ttmpa < 13; $ttmpa++) {
-//打印12个月
+            //打印12个月
             $ttmpb = sprintf("%02d", $ttmpa);
             if (strcmp($ttmpb, $this->MONTH) == 0) {
                 $select = "selected style=\"background-color:#c0c0c0\"";
@@ -85,11 +92,11 @@ class Calendar
         }
         echo "</select></form><table border=0 align=center>";
         for ($Tmpa = 0; $Tmpa < count($this->WEEK); $Tmpa++) {
-//打印星期标头
+            //打印星期标头
             echo "<td>" . $this->WEEK[$Tmpa];
         }
         for ($Tmpb = 1; $Tmpb <= date("t", mktime(0, 0, 0, $this->MONTH, $this->DAY, $this->YEAR)); $Tmpb++) {
-//打印所有日期
+            //打印所有日期
             if (strcmp($Tmpb, $this->DAY) == 0) {
                 //获得当前日期，做标记
                 $flag = " bgcolor='#ff0000'";
@@ -110,12 +117,14 @@ class Calendar
         }
         echo "</table></div>";
     }
-//获得方法内指定的日期的星期数
+
+    //获得方法内指定的日期的星期数
     public function getWeek($year, $month, $day)
     {
         $week = date("w", mktime(0, 0, 0, $month, $day, $year)); //获得星期
         return $week; //获得星期
     }
+
     public function _env()
     {
         if (isset($_POST["month"])) {
@@ -135,5 +144,6 @@ class Calendar
         $this->setDay(date("d"));
     }
 }
+
 $D = new Calendar;
 $D->OUT();

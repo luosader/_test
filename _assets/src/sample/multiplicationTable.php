@@ -1,25 +1,43 @@
 <?php
+/**
+ * 九九乘法表
+ */
 header('Content-Type:text/html;charset=UTF-8');
-echo "<table border=1>";for ($i = 1; $i < 10; $i++) {echo "<tr>";for ($j = 1; $j <= $i; $j++) {echo "<td>$j*$i=" . $j * $i . "</td>";}
-    echo "</tr>";}
+
+echo "<table border=1>";
+for ($i = 1; $i < 10; $i++) {
+    echo "<tr>";for ($j = 1; $j <= $i; $j++) {echo "<td>$j*$i=" . $j * $i . "</td>";}
+    echo "</tr>";
+}
 echo "</table>";
+
 echo "<br>";
-echo "<table border=1>";for ($i = 9; $i >= 1; $i--) {echo "<tr>";for ($j = $i; $j >= 1; $j--) {echo "<td>$i x $j=" . $j * $i . "</td>";}
-    echo "</tr>";}
+echo "<table border=1>";
+for ($i = 9; $i >= 1; $i--) {
+    echo "<tr>";
+    for ($j = $i; $j >= 1; $j--) {echo "<td>$i x $j=" . $j * $i . "</td>";}
+    echo "</tr>";
+}
 echo "</table>";
+
 echo "<br>";
-$i = 1;while ($i <= 9) {
-    $j = 1;while ($j <= $i) {echo "$i x $j=" . $j * $i . "&nbsp;&nbsp;";
-        $j++;}
+$i = 1;
+while ($i <= 9) {
+    $j = 1;while ($j <= $i) {
+        echo "$i x $j=" . $j * $i . "&nbsp;&nbsp;";
+        $j++;
+    }
     $i++;
-    echo "<br>";}
-;
+    echo "<br>";
+}
+
 for ($j = 1; $j <= 9; $j++) {
     for ($i = 1; $i <= $j; $i++) {
         echo "{$i}x{$j}=" . ($i * $j) . " ";
     }
     echo "<br />";
 }
+
 $j = 1;
 while ($j <= 9) {
     $i = 1;
@@ -30,6 +48,7 @@ while ($j <= 9) {
     echo "<br />";
     $j++;
 }
+
 $j = 1;
 do {
     $i = 1;
@@ -40,6 +59,7 @@ do {
     echo "<br />";
     $j++;
 } while ($j <= 9);
+
 echo "<table width='600' border='1'>";
 for ($j = 1; $j <= 9; $j++) {
     echo "<tr>";
@@ -49,6 +69,7 @@ for ($j = 1; $j <= 9; $j++) {
     echo "</tr>";
 }
 echo "</table>";
+
 echo "<table width='600' border='1'>";
 for ($j = 9; $j >= 1; $j--) {
     echo "<tr>";
@@ -58,6 +79,7 @@ for ($j = 9; $j >= 1; $j--) {
     echo "</tr>";
 }
 echo "</table>";
+
 echo "<table width='600' border='1'>";
 for ($j = 9; $j >= 1; $j--) {
     echo "<tr>";
@@ -70,6 +92,7 @@ for ($j = 9; $j >= 1; $j--) {
     echo "</tr>";
 }
 echo "</table>";
+
 echo "<table width='600' border='1'>";
 for ($j = 1; $j <= 9; $j++) {
     echo "<tr>";
@@ -97,84 +120,84 @@ echo "</table>";
 
 /*// 一、使用for循环打印九九乘法表：
 for ($j = 1; $j <= 9; $j++) {
-    for ($i = 1; $i <= $j; $i++) {
-        echo "{$i}x{$j}=" . ($i * $j) . " ";
-    }
-    echo "<br />";
+for ($i = 1; $i <= $j; $i++) {
+echo "{$i}x{$j}=" . ($i * $j) . " ";
+}
+echo "<br />";
 }
 
 // 二、使用while循环打印九九乘法表:
 $j = 1;
 while ($j <= 9) {
-    $i = 1;
-    while ($i <= $j) {
-        echo "{$i}x{$j}=" . ($i * $j) . " ";
-        $i++;
-    }
-    echo "<br />";
-    $j++;
+$i = 1;
+while ($i <= $j) {
+echo "{$i}x{$j}=" . ($i * $j) . " ";
+$i++;
+}
+echo "<br />";
+$j++;
 }
 
 // 三、使用do while循环打印九九乘法表:
 $j = 1;
 do {
-    $i = 1;
-    do {
-        echo "{$i}x{$j}=" . ($i * $j) . " ";
-        $i++;
-    } while ($i <= $j);
-    echo "<br />";
-    $j++;
+$i = 1;
+do {
+echo "{$i}x{$j}=" . ($i * $j) . " ";
+$i++;
+} while ($i <= $j);
+echo "<br />";
+$j++;
 } while ($j <= 9);
 
 // 下面使用for循环以表格形式输出九九乘法表
 // 角度一：（最普通的常规写法）
 echo "<table width='600' border='1'>";
 for ($j = 1; $j <= 9; $j++) {
-    echo "<tr>";
-    for ($i = 1; $i <= $j; $i++) {
-        echo "<td>{$i}*{$j}=" . ($i * $j) . "</td>";
-    }
-    echo "</tr>";
+echo "<tr>";
+for ($i = 1; $i <= $j; $i++) {
+echo "<td>{$i}*{$j}=" . ($i * $j) . "</td>";
+}
+echo "</tr>";
 }
 echo "</table>";
 
 // 角度二：（与常规写法成X轴对称）
 echo "<table width='600' border='1'>";
 for ($j = 9; $j >= 1; $j--) {
-    echo "<tr>";
-    for ($i = 1; $i <= $j; $i++) {
-        echo "<td>{$i}*{$j}=" . ($i * $j) . "</td>";
-    }
-    echo "</tr>";
+echo "<tr>";
+for ($i = 1; $i <= $j; $i++) {
+echo "<td>{$i}*{$j}=" . ($i * $j) . "</td>";
+}
+echo "</tr>";
 }
 echo "</table>";
 
 // 角度三：（与角度二成Y轴对称）
 echo "<table width='600' border='1'>";
 for ($j = 9; $j >= 1; $j--) {
-    echo "<tr>";
-    for ($z = 0; $z < 9 - $j; $z++) {
-        echo "<td> </td>";
-    }
-    for ($i = 1; $i <= $j; $i++) {
-        echo "<td>{$i}*{$j}=" . ($i * $j) . "</td>";
-    }
-    echo "</tr>";
+echo "<tr>";
+for ($z = 0; $z < 9 - $j; $z++) {
+echo "<td> </td>";
+}
+for ($i = 1; $i <= $j; $i++) {
+echo "<td>{$i}*{$j}=" . ($i * $j) . "</td>";
+}
+echo "</tr>";
 }
 echo "</table>";
 
 // 角度四：（与常规写法成Y轴对称）
 echo "<table width='600' border='1'>";
 for ($j = 1; $j <= 9; $j++) {
-    echo "<tr>";
-    for ($z = 0; $z < 9 - $j; $z++) {
-        echo "<td> </td>";
-    }
-    for ($i = $j; $i >= 1; $i--) {
-        echo "<td>{$i}*{$j}=" . ($i * $j) . "</td>";
-    }
-    echo "</tr>";
+echo "<tr>";
+for ($z = 0; $z < 9 - $j; $z++) {
+echo "<td> </td>";
+}
+for ($i = $j; $i >= 1; $i--) {
+echo "<td>{$i}*{$j}=" . ($i * $j) . "</td>";
+}
+echo "</tr>";
 }
 echo "</table>";*/
 
