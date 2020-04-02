@@ -15,8 +15,8 @@ echo '**************** Client *****************' . PHP_EOL;
 set_time_limit(0);
 
 // 设置 IP 和 端口
-$host = '127.0.0.1';
-$port = 1935;
+// $host = '127.0.0.1';
+// $port = 1935;
 $host = '192.168.0.212';
 $port = 2020;
 
@@ -27,7 +27,16 @@ $result = socket_connect($socket, $host, $port);
 echo '连接成功' . PHP_EOL;
 
 // 向服务端发送消息
-$in = '创建一个sokcet客服端成功，随机编号=' . rand(1000, 9999);
+// $in = '创建一个sokcet客服端成功，随机编号=' . rand(1000, 9999);
+$data = [
+    'code'  => 'admin',
+    'event' => 'push',
+    'title' => 'System Message',
+    'body'  => 'body',
+    'tag'   => '',
+    'icon'  => 'favicon.ico',
+];
+$in = json_encode($data);
 if (socket_write($socket, $in, strlen($in))) {
     echo '发送成功，发送信息为' . $in . PHP_EOL;
 } else {

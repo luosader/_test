@@ -75,14 +75,14 @@ class WS
                             print_r(PHP_EOL . 'From Admin => ' . $from['title'] . '：' . $from['body']);
                             if ($from['event'] == 'push') {
                                 $to = ['title' => $from['title'], 'body' => $from['body'], 'tag' => $from['tag'], 'icon' => $from['icon']];
-                                $this->send('', $to);
+                                $this->send($to);
                             }
                         } elseif ($from['code'] == 'client') {
                             print_r(PHP_EOL . 'From Client_' . $ukey . ' => ' . $from['title'] . '：' . $from['body']);
                             if ($from['event'] == 'open') {
                                 // 消息推送给相关Admin
                                 // $to = ['title' => $from['title'], 'body' => $from['body']];
-                                // $this->send('', $to);
+                                // $this->send($to);
                             }
                         } else {
                             print_r(PHP_EOL . '意外断开！');
@@ -115,7 +115,7 @@ class WS
     }
 
     // 主动推送给相关客户机
-    public function send($sock, $data = [], $to = '')
+    public function send($data = [], $sock = '')
     {
         $data   = $this->encode(json_encode($data)); //编码
         $length = strlen($data); //mb_strlen()
