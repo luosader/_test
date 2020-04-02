@@ -31,11 +31,13 @@ socket.addEventListener('message', function(evt) {
                 if (status === 'granted') {
                     var ini = new Notification('收到信息', {
                         body: evt.data,
+                        // tag: "msg-tag-1",
+                        // renotify: true,
                         icon: "../../../_assets/static/images/head/CatPortrait_x16.ico" //消息图片
                     });
                     ini.onclick = function(){
-                        //点击当前消息提示框后，跳转到当前页面
-                        window.focus();
+                        window.focus();//可直接打开或跳转到通知相关联的tab窗口
+                        // ini.close();//关闭通知
                     }
                 } else{
                     alert(evt.data);

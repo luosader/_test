@@ -24,6 +24,7 @@ class WS
         socket_listen($this->master, $backlog) or die('socket_listen() failed'); //$backlog queue队列限制长度
     }
 
+    // 启动服务
     public function run()
     {
         print_r('start:' . PHP_EOL);
@@ -72,7 +73,7 @@ class WS
                         $from = json_decode($from, true);
                         if ($from['code'] == 'admin') {
                             print_r(PHP_EOL . 'From Admin => ' . $from['title'] . '：' . $from['body']);
-                            if ($from['event'] == 'click') {
+                            if ($from['event'] == 'push') {
                                 $to = ['title' => $from['title'], 'body' => $from['body'], 'tag' => $from['tag'], 'icon' => $from['icon']];
                                 $this->send('', $to);
                             }
@@ -93,9 +94,7 @@ class WS
         }
     }
 
-    /**
-     * 首次与客户端握手
-     */
+    // 首次与客户端握手
     public function dohandshake($sock, $data, $key)
     {
         if (preg_match("/Sec-WebSocket-Key: (.*)\r\n/i", $data, $match)) {
@@ -115,9 +114,9 @@ class WS
         }
     }
 
+    // 主动推送给相关客户机
     public function send($sock, $data = [], $to = '')
     {
-        // 主动推送给相关客户机
         $data   = $this->encode(json_encode($data)); //编码
         $length = strlen($data); //mb_strlen()
 
@@ -129,9 +128,7 @@ class WS
         }
     }
 
-    /**
-     * 关闭一个客户端连接
-     */
+    // 关闭一个客户端连接
     public function close($sock, $key = null)
     {
         $key = $key ?: array_search($sock, $this->sockets);
@@ -140,9 +137,7 @@ class WS
         unset($this->hands[$key]);
     }
 
-    /**
-     * 字符解码
-     */
+    // 字符解码
     protected function decode($buffer)
     {
         $len = $masks = $data = $decoded = null;
@@ -164,9 +159,7 @@ class WS
         return $decoded;
     }
 
-    /**
-     * 字符编码
-     */
+    // 字符编码
     protected function encode($buffer)
     {
         $length = strlen($buffer);

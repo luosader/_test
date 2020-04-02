@@ -38,11 +38,13 @@ ws.onmessage = function(e) {
                 if (status === 'granted') {
                     var ini = new Notification(msg.title, {
                         body: msg.body,
+                        tag: msg.tag,
+                        // renotify: true,
                         icon: "../../../_assets/static/images/head/CatPortrait_x16.ico" //消息图标
                     });
                     ini.onclick = function(){
-                        //点击当前消息提示框后，跳转到当前页面
-                        window.focus();
+                        window.focus();//可直接打开或跳转到通知相关联的tab窗口
+                        // ini.close();//关闭通知
                     }
                 } else {
                     alert(msg.title+"\r\n "+msg.body);

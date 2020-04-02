@@ -9,28 +9,36 @@ socket_write 传输数据
 socket_read 接收数据
 关闭socket资源
  */
-echo '****************client*****************<br/>';
-//设置 IP 和 端口
-$port = 1935;
-$ip   = '127.0.0.1';
-//超时设计
-set_time_limit(0);
-//创建TCP协议的socket资源
-$socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP) or die('socket_create 失败：' . socket_strerror($socket));
-echo '创建成功<br/>';
-$restult = socket_connect($socket, $ip, $port);
-echo '连接成功<br/>';
+echo '**************** Client *****************' . PHP_EOL;
 
+// 超时设置 0不限制
+set_time_limit(0);
+
+// 设置 IP 和 端口
+$host = '127.0.0.1';
+$port = 1935;
+$host = '192.168.0.212';
+$port = 2020;
+
+// 创建TCP协议的socket资源
+$socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP) or die('socket_create 失败：' . socket_strerror($socket));
+echo '创建成功' . PHP_EOL;
+$result = socket_connect($socket, $host, $port);
+echo '连接成功' . PHP_EOL;
+
+// 向服务端发送消息
 $in = '创建一个sokcet客服端成功，随机编号=' . rand(1000, 9999);
 if (socket_write($socket, $in, strlen($in))) {
-    echo '发送成功，发送信息为' . $in . '<br/>';
+    echo '发送成功，发送信息为' . $in . PHP_EOL;
 } else {
-    echo '发送失败，原因为' . socket_strerror($socket) . '<br/>';
-}
-while ($out = socket_read($socket, 8192)) {
-    echo '接收信息成功，信息为' . $out . '<br/>';
+    echo '发送失败，原因为' . socket_strerror($socket) . PHP_EOL;
 }
 
-echo 'socket关闭<br/>';
+// 接收服务端回应的信息 socket_recv()
+while ($out = socket_read($socket, 8192)) {
+    echo '接收信息成功，信息为' . $out . PHP_EOL;
+}
+
+echo '关闭socket' . PHP_EOL;
 socket_close($socket);
-echo '关闭完成<br/>';
+echo '关闭完成' . PHP_EOL;

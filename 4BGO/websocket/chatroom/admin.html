@@ -41,11 +41,11 @@ var send = document.getElementById('js-send');
 send.addEventListener('click', function() {
     var txt = document.getElementById('js-content').value;
 
-    // var msg = '{"code":"admin","event":"click","title":"System Message","body":"'+txt+'","tag":"message-group-1","icon":"favicon.ico"}';
+    // var msg = '{"code":"admin","event":"push","title":"System Message","body":"'+txt+'","tag":"message-group-1","icon":"favicon.ico"}';
 
     var msg = {
         "code":"admin",
-        "event":"click",
+        "event":"push",
         "title":"System Message",
         "body":txt,
         "tag":"message-group-1",
