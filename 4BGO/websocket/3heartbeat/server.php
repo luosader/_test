@@ -2,12 +2,20 @@
 /**
  * WebSocket 服务端
  * 业务目标：
- *     服务端指定推送、点对点交流
- *     长连接必须加心跳
  *     防阻塞：非阻塞模式
  *     安全验证
- * Workerman 基于 socket
+ *     服务端指定推送
+ *     长连接必须加心跳
+ *     client在线统计
+ *     分组、点对点交流
+ * Workerman 基于 socket，
  */
+// error_reporting(E_ALL ^ E_NOTICE);
+// ob_implicit_flush();
+
+/*实例化*/
+$ws = new WS('192.168.0.212', 2020, 5);
+$ws->run();
 
 class WS
 {
@@ -70,18 +78,32 @@ class WS
                         // 处理从机发来的内容 slave
                         $from = $this->decode($buffer); //解码
                         if (!$from) {continue;}
+                        if ($from == 'ping') {
+                            // $this->send('pong');
+                            $this->send('pong', $sock);
+                            // socket_write($sock, 'pong', 4);
+                            continue;
+                        }
                         $from = json_decode($from, true);
                         if ($from['code'] == 'admin') {
                             print_r(PHP_EOL . 'From Admin => ' . $from['title'] . '：' . $from['body']);
                             if ($from['event'] == 'push') {
-                                $to = ['title' => $from['title'], 'body' => $from['body'], 'tag' => $from['tag'], 'icon' => $from['icon']];
+                                $to = [
+                                    'code'  => 'client',
+                                    'title' => $from['title'],
+                                    'body'  => $from['body'],
+                                    'tag'   => $from['tag'],
+                                    'icon'  => $from['icon'],
+                                ];
+                                // $this->send($to, '' , [$sock]);
                                 $this->send($to);
                             }
                         } elseif ($from['code'] == 'client') {
                             print_r(PHP_EOL . 'From Client_' . $ukey . ' => ' . $from['title'] . '：' . $from['body']);
                             if ($from['event'] == 'open') {
-                                // 消息推送给相关Admin
-                                // $to = ['title' => $from['title'], 'body' => $from['body']];
+                                // 消息推送给相关Admin 在线人数更新
+                                // $total = count($this->sockets);
+                                // $to    = ['code' => 'admin', 'title' => $from['title'], 'body' => $from['body'], 'total' => $total];
                                 // $this->send($to);
                             }
                         } else {
@@ -90,7 +112,7 @@ class WS
                     }
                 }
             }
-            sleep(1);
+            // sleep(1); // 降低cpu使用率
         }
     }
 
@@ -113,17 +135,29 @@ class WS
             $this->hands[$key] = true;
         }
     }
-
-    // 主动推送给相关客户机
-    public function send($data = [], $sock = '')
+    /**
+     * 主动推送给相关客户机
+     * @param  array  $data    待发送的数据
+     * @param  string/array $group 指定发送对象 resource
+     * @param  array  $exclude 排除的对象
+     */
+    public function send($data = [], $group = '', $exclude = [])
     {
         $data   = $this->encode(json_encode($data)); //编码
         $length = strlen($data); //mb_strlen()
+        // $group  = $group ?: $this->sockets;
+        // $exclude = $exclude ?: [$this->master];
 
-        // $this->sockets 中理应不包括发起者本身
-        foreach ($this->sockets as $client) {
-            if ($sock != $client) {
-                socket_write($client, $data, $length);
+        if ($group && !is_array($group)) {
+            socket_write($group, $data, $length);
+        } else {
+            // $this->sockets 中理应不包括发起者本身
+            foreach ($this->sockets as $client) {
+                if ($exclude && !in_array($client, $exclude)) {
+                    socket_write($client, $data, $length);
+                } else {
+                    socket_write($client, $data, $length);
+                }
             }
         }
     }
@@ -172,8 +206,3 @@ class WS
         }
     }
 }
-
-/*实例化*/
-$ws = new WS('192.168.0.212', 2020, 5);
-$ws->run();
-sleep(2);

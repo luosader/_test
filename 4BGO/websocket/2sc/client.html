@@ -13,7 +13,7 @@
 // var ws = new WebSocket("ws://IP:端口");
 var ws = new WebSocket("ws://192.168.0.212:2020");
 
-// 握手监听函数
+// 握手监听
 ws.addEventListener('open', function(e) {
     console.log('Connected');
     // console.log(e);
@@ -51,25 +51,21 @@ ws.onmessage = function(e) {
                 }
             });
         }
-
     }
 }
 
 // 断开WebSocket连接
 ws.onclose = function(e) {
     console.log('Connect closed!');
-    var msg = '{"code":"client","event":'+e.type+',"title":"系统提醒","body":"客户端关闭连接！"}';
-    ws.send(msg);
     // ws = false;
 }
 
-// 错误返回信息函数
+// 错误返回信息
 ws.onerror = function(e) {
     console.log('Connect error!');
-    // console.log(e);
-    var msg = '{"code":"client","event":'+e.type+',"title":"系统提醒","body":"客户端连接异常！"}';
-    ws.send(msg);
 };
+
+//心跳检测
 
 </script>
 </body>

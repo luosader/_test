@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Websocket Users heartbeat</title>
+</head>
+
+<body>
+<script type="text/javascript">
+// http://192.168.0.212/_test/4BGO/websocket/chatroom/client.html
+// http://127.0.0.1/_test/4BGO/websocket/chatroom/client.html
+
+var lockReconnect = false; // 避免ws重复连接
+var ws = null; // 判断当前浏览器是否支持WebSocket
+var wsUrl = 'ws://192.168.0.212:2020';
+var maxConnect = 10;//断开重连最大次数
+var beatGap = 5000;//心跳检测间隔
+
+createWebSocket(wsUrl); // 连接ws
+function createWebSocket(url) {
+    if('WebSocket' in window){
+        try{
+            ws = new WebSocket(url);
+            initEventHandle();
+        }catch(e){
+            reconnect(url);
+            console.log(e);
+        }
+    }
+}
+
+// WebSocket四大方法封装
+function initEventHandle() {
+    // 握手监听
+    ws.onopen = function(e) {
+        heartCheck.reset().start(); // 心跳检测重置
+        console.log('ws Connected! '+ new Date().toLocaleString());
+        // console.log(e.type);
+        var msg = '{"code":"client","event":"open","title":"系统提醒","body":"有新的客户接入！"}';
+        ws.send(msg);
+        // ws.send('type=client&event='+e.type);
+    };
+
+    // 监听服务端推送的消息。如果获取到消息，心跳检测重置
+    ws.addEventListener('message', function(e) {
+        // if (e.data=='"pong"') {console.log('aaa');}
+        heartCheck.reset().start(); // 拿到任何消息都说明当前连接是正常的
+        let msg = JSON.parse(e.data);
+        // console.log('ws Message received: ' +e.data);
+        if(msg && msg.code=='client' && msg!='pong'){
+            // 消息推送 - 原生写法
+            if ('Notification' in window) {
+                console.log('1: ' + Notification.permission);
+                if(window.Notification && Notification.permission !== 'denied') {
+                    // requestPermission 静态方法：让浏览器出现是否允许通知的提示
+                    Notification.requestPermission(function(status) {
+                        console.log('2: '+status);
+                        if (status === 'granted') {
+                            var ini = new Notification(msg.title, {
+                                body: msg.body,
+                                tag: msg.tag,
+                                // renotify: true,
+                                icon: "../../../_assets/static/images/head/CatPortrait_x16.ico" // 消息图标
+                            });
+                            ini.onclick = function(){
+                                window.focus(); // 可直接打开或跳转到通知相关联的tab窗口
+                                // ini.close(); // 关闭通知
+                            }
+                        } else {
+                            alert(msg.title+"\r\n "+msg.body);
+                        }
+                    });
+                }
+            }
+        }
+    });
+
+    // 断开WebSocket连接
+    ws.onclose = function() {
+        reconnect(wsUrl);
+        console.log('ws Connect closed! '+ new Date().toLocaleString());
+    };
+
+    // 错误返回信息
+    ws.onerror = function() {
+        reconnect(wsUrl);
+        console.log('ws Connect error!');
+    };
+}
+
+// 监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+window.onbeforeunload = function() {
+    ws.close();
+}
+
+// 重连机制
+function reconnect(url) {
+    if(lockReconnect) return;
+    lockReconnect = true;
+    setTimeout(function() {
+        // 没连接上会一直重连，设置延迟避免请求过多
+        createWebSocket(url);
+        lockReconnect = false;
+    }, 2000);
+}
+
+// 心跳检测
+var heartCheck = {
+    timeout: beatGap, // 4.5分钟发一次心跳 4.5*60=270000
+    timeoutObj: null,
+    serverTimeoutObj: null,
+    reset: function(){
+        clearTimeout(this.timeoutObj);
+        clearTimeout(this.serverTimeoutObj);
+        return this;
+    },
+    start: function(){
+        var self = this;
+        this.timeoutObj = setTimeout(function(){
+            // 这里发送一个心跳，后端收到后，返回一个心跳消息，
+            // onmessage拿到返回的心跳就说明连接正常
+            ws.send('ping');
+            console.log('ping!');
+            // 如果超过一定时间还没重置，说明后端主动断开了
+            self.serverTimeoutObj = setTimeout(function(){
+                ws.close(); // 如果onclose会执行reconnect()，我们执行ws.close()就行了.如果直接执行 reconnect()会触发onclose导致重连两次
+            }, self.timeout);
+        }, this.timeout);
+    }
+}
+
+</script>
+</body>
+</html>

@@ -6,8 +6,6 @@
  * http://tx.socket/websocket.html
  * @var serverSocket
  */
-$ws = new serverSocket('127.0.0.1', 2020, 20); //192.168.0.212
-$ws->start();
 
 /**
  * 聊天室服务器  websocket 专用
@@ -65,7 +63,7 @@ class serverSocket
                     }
                 }
             }
-            sleep(1);
+            sleep(1); //降低cpu使用率
         }
     }
 
@@ -135,4 +133,6 @@ class serverSocket
     }
 }
 
-sleep(2);
+$ws = new serverSocket('127.0.0.1', 2020, 20); //192.168.0.212
+$ws->start();
+// sleep(2);
