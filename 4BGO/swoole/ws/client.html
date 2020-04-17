@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Swoole - websocket - client</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var url = 'ws://127.0.0.1:9503';
+        var ws = new WebSocket(url);
+        ws.onopen = function(evt) {
+            console.log('Connected to WebSocket server.')
+        };
+        ws.onmessage = function(evt) {
+            console.log('Retrieved data from server: ' + evt.data);
+        };
+        ws.onclose = function(evt) {
+            console.log('Disconnected');
+        };
+        ws.onerror = function (evt, e) {
+            console.log('Error occured: ' + evt.data);
+        };
+    </script>
+</body>
+</html>

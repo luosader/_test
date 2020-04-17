@@ -7,13 +7,13 @@ php读取大文件可以使用file函数和fseek函数，但是二者之间效�
 下面是一段用file来取出这具文件最后一行的代码：
 复制代码
 
-<?php
-   ini_set('memory_limit', '-1');
-   $file = 'access.log';
-   $data = file($file);
-   $line = $data[count($data) - 1];
-   echo $line;
-   ?>
+```php
+    ini_set('memory_limit', '-1');
+    $file = 'access.log';
+    $data = file($file);
+    $line = $data[count($data) - 1];
+    echo $line;
+```
 
 复制代码
 
@@ -34,42 +34,40 @@ php读取大文件可以使用file函数和fseek函数，但是二者之间效�
 #实现代码如下
 复制代码
 
-<?php
-   $fp = fopen($file, "r");
-   $line = 10;
-   $pos = -2;
-   $t = " ";
-   $data = "";
-   while ($line > 0)
-   {
-       while ($t != "\n")
-       {
-           fseek($fp, $pos, SEEK_END);
-           $t = fgetc($fp);
-           $pos--;
-       }//  http://www.manongjc.com
-       $t = " ";
-       $data .= fgets($fp);
-       $line--;
-   }
-   fclose($fp);
-   echo $data
-   ?>
+```php
+$fp = fopen($file, "r");
+$line = 10;
+$pos = -2;
+$t = " ";
+$data = "";
+while ($line > 0)
+{
+    while ($t != "\n")
+    {
+        fseek($fp, $pos, SEEK_END);
+        $t = fgetc($fp);
+        $pos--;
+    }//  http://www.manongjc.com
+    $t = " ";
+    $data .= fgets($fp);
+    $line--;
+}
+fclose($fp);
+echo $data
+```
 
 复制代码
 
 整个代码执行完成耗时 0.0095 (s)
 
  
-
 方法二
-
 还是采用fseek的方式从文件最后开始读，但这时不是一位一位的读，而是一块一块的读，每读一块数据时，就将读取后的数据放在一个buf里，然后通过换 行符(\n)的个数来判断是否已经读完最后$num行数据。
 
 #实现代码如下
 复制代码
 
-<?php
+```php
    $fp = fopen($file, "r");
    $num = 10;
    $chunk = 4096;
@@ -90,7 +88,7 @@ php读取大文件可以使用file函数和fseek函数，但是二者之间效�
    }
    fclose($fp);
    echo $data;
-   ?>
+```
 
 复制代码
 
@@ -101,7 +99,7 @@ php读取大文件可以使用file函数和fseek函数，但是二者之间效�
 方法三
 复制代码
 
-<?php
+```php
    function tail($fp, $n, $base = 5)
    {
        assert($n > 0);
@@ -129,7 +127,7 @@ php读取大文件可以使用file函数和fseek函数，但是二者之间效�
    }
     
    var_dump(tail(fopen("access.log", "r+"), 10));
-   ?>
+```
 
 复制代码
 

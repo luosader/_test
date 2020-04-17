@@ -9,9 +9,9 @@ define('PATH', '');
 
 // echo "<pre>";
 
-// $file = 'data.txt';
+$file = 'data.md';
 // $file = PATH.'temp/old.txt';
-$file = PATH.'db_icyun_20170110.sql';
+// $file = PATH.'db_icyun_20170110.sql';
 
 
 
