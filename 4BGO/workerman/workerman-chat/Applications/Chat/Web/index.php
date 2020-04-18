@@ -168,6 +168,7 @@
                     </div>
                </form>
                <div>
+                    <!-- 本地无法切换房间 http://127.0.0.1:55151?/room_id=2 -->
                    &emsp;<b>房间列表:</b>（当前在&nbsp;房间<?php echo isset($_GET['room_id'])&&intval($_GET['room_id'])>0 ? intval($_GET['room_id']):1; ?>）<br>
                    &emsp;<a href="/?room_id=1">房间1</a>&emsp;<a href="/?room_id=2">房间2</a>&emsp;<a href="/?room_id=3">房间3</a>&emsp;<a href="/?room_id=4">房间4</a>
                    <br><br>
