@@ -1,0 +1,59 @@
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <style type="text/css">
+        .all span {font:bold 18px/20px '宋体';color:red;}
+    </style>
+    <title>天气预报</title>
+</head>
+
+<body>
+<div class="all">
+    这里是：<span class="place">城市</span>，
+    <p>气温：<span class="temp">气温</span>，风向：<span class="windD">风向</span>，风力：<span class="windS">风力</span></p>
+    <p>相对湿度：<span class="sd">相对湿度</span></p>
+    <p>气压：<span class="airPressure">气压</span></p>
+    <p>状况：<span class="njd">状况</span></p>
+    <p>WSE：<span class="WSE">WSE</span></p>
+    <p>更新时间：<span class="time">time</span></p>
+    <p>sm：<span class="sm">sm</span></p>
+    <!-- 空气质量指数（AQI） -->
+</div>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+$(function () {
+    $.ajax({
+        url: 'weather.php',
+        // type: 'POST',
+        dataType: 'json',//指明返回的数据类型
+        // data: {param1: 'value1'},
+        success: function(back) {
+            // {"weatherinfo":{"city":"合肥","cityid":"101220101","temp":"20.5","WD":"东北风","WS":"小于3级","SD":"98%","AP":"1001.8hPa","njd":"暂无实况","WSE":"<3","time":"17:50","sm":"3.6","isRadar":"1","Radar":"JC_RADAR_AZ9551_JB"}}
+            // console.log(back);
+
+            // 未指明json格式时用eval()解析返回来的数据，将字符串转成JSON格式
+            // var oD = eval('('+back+')');
+            // var back = oD.weatherinfo;
+            // console.log(oD);
+
+            //用jquery-1.8.2处理
+            //将返回来的数据放到相应的位置
+            $('.place').html(back['city']);
+            $('.temp').html(back.temp + '℃');
+            $('.windD').html(back.WD);
+            $('.windS').html(back.WS);
+            $('.sd').html(back.SD);
+            $('.airPressure').html(back.AP);
+            $('.njd').html(back.njd);
+            $('.WSE').html(back.WSE);
+            $('.time').html(back.time);
+            $('.sm').html(back.sm);
+        }
+    });
+
+})
+</script>
+</body>
+</html>

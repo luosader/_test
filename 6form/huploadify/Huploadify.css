@@ -33,10 +33,14 @@
 	padding:0 18px;
     font-size:12px;
 	color:#666;
-	cursor:pointer;
-	background:url(images/btnbg.png) repeat-x 0 0;
 	text-decoration:none;
 	}
+.uploadbtn{
+	display: none;/*默认不显示上传按钮，非自动上传时用js控制显示*/
+}
+.disabledbtn{
+
+}
 .up_filename,.progressnum,.delfilebtn,.uploadbtn,.up_percent{
 	font-size:12px;
 	color:#666;

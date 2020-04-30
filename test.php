@@ -34,20 +34,11 @@ $a = '276,231,271,223,269,261,221,233,217,239,181,180,183,132,178,159,144,157,24
 // $a = implode(',', $a);
 // debug($a);
 
-$a = ['a'=>'asas',1,'b'=>'123','aa'=>'aac'];
-$a = '140,333,1223';
-
-// debug(json_encode($a));
-// $b=strstr($a,',',true);
-// echo $a;
-echo json_encode($a);//{"a":"asas","0":1,"b":"123","aa":"aac"}
-
-// echo intval($a);
-
-// $a=array ( '{"endpoint":"https://fcm_googleapis_com/fcm/send/eg8D1v_K7VI:APA91bHDbLrzoRi0f12JeVwVuyXWRTxEfgXUkLiB0VSf1DGGeJ9cl0-Hlu5yk1rIgks617BB70mleGMl0Bq8d5IGFxqKavgCD-lv6Tw_08MQeReaLAFlCX8OcKgz5GVWGpVI_UdlN1Ov","expirationTime":null,"keys":{"p256dh":"BJojRNJWGpmaYL0Tdl3ISTdGMAkSKgCXeOEimcK9hdOHKjf_S6UJupS2_kJXQSCMSFCLP4QkiF8dOF_5U6BRK-A","auth":"Q91i1CHAaXq86ejsTKCaYw"}}' => '', );
-// debug(key($a));
+$a = ['a'=>['bbb','asas'],1,'b'=>'123','aa'=>'aac'];
+// $a = '140,333,1223';
 
 
+debug(json_decode('{"saleprop":{"147":{"price":"3","stock":"100","icon":"","pic":""},"148":{"price":"3","stock":"100","icon":"","pic":""},"props":{"propids":"22","propnames":"Colors"}}}',true));
 
 
 
