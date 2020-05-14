@@ -35,10 +35,12 @@ $a = '276,231,271,223,269,261,221,233,217,239,181,180,183,132,178,159,144,157,24
 // debug($a);
 
 $a = ['a'=>['bbb','asas'],1,'b'=>'123','aa'=>'aac'];
+$a = [1=>10,22=>4145];
 // $a = '140,333,1223';
+// $a = '{"saleprop":{"147":{"price":"3","stock":"100","icon":"","pic":""},"148":{"price":"3","stock":"100","icon":"","pic":""},"props":{"propids":"22","propnames":"Colors"}}}';
 
-
-debug(json_decode('{"saleprop":{"147":{"price":"3","stock":"100","icon":"","pic":""},"148":{"price":"3","stock":"100","icon":"","pic":""},"props":{"propids":"22","propnames":"Colors"}}}',true));
+// debug(json_encode($a));
+// debug(json_decode($a,true));
 
 
 
