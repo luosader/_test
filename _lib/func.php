@@ -1,11 +1,15 @@
 <?php
-header('Content-Type:text/html;charset=UTF-8');//GBK
+header('Content-Type:text/html;charset=UTF-8'); //GBK
 error_reporting(E_ALL);
 // error_reporting(E_ERROR);
 define('DS', DIRECTORY_SEPARATOR);
 define('EOL', PHP_EOL);
 define('BR', '<br>');
 define('ROOT', dirname(__DIR__));
+
+// 环境常量
+define('IS_CLI', PHP_SAPI == 'cli' ? true : false);
+define('IS_WIN', strpos(PHP_OS, 'WIN') !== false);
 
 /**
  * 日期时间
@@ -19,7 +23,7 @@ define('ROOT', dirname(__DIR__));
  *     date('m/d/Y H:i:s')   => 01/01/1970 13:00:00
  * microtime()返回当前unix时间戳和微秒数
  * mktime()返回一个日期的 UNIX 时间戳。
- * 
+ *
  * 更多内容详见： ...\op\opcore\lib\func\TimeFunc.php
  */
 define('STARTTIME', mktime(0, 0, 0, date('m'), date('d'), date('Y')));
@@ -30,46 +34,75 @@ echo 'C: ' . CURTIME . ',' . str_repeat('&nbsp', 6) . date('Y-m-d h:i:s A', CURT
 echo 'E: ' . ENDTIME . ',' . str_repeat('&nbsp', 6) . date(DATE_ATOM, ENDTIME) . BR;
 echo "<hr>";
 
+/**
+ * think\Debug
+ * 浏览器友好的变量输出
+ * @access public
+ * @param  mixed       $var   变量
+ * @param  boolean     $echo  是否输出(默认为 true，为 false 则返回输出字符串)
+ * @param  string|null $label 标签(默认为空)
+ * @param  integer     $flags htmlspecialchars 的标志
+ * @return null|string
+ */
+function dump($var, $echo = true, $label = null, $flags = ENT_SUBSTITUTE)
+{
+    $label = (null === $label) ? '' : rtrim($label) . ':';
 
+    ob_start();
+    var_dump($var);
+    $output = preg_replace('/\]\=\>\n(\s+)/m', '] => ', ob_get_clean());
 
+    if (IS_CLI) {
+        $output = PHP_EOL . $label . $output . PHP_EOL;
+    } else {
+        if (!extension_loaded('xdebug')) {
+            $output = htmlspecialchars($output, $flags);
+        }
+        $output = '<pre>' . $label . $output . '</pre>';
+    }
+
+    if ($echo) {
+        echo ($output);
+        return;
+    }
+
+    return $output;
+}
 
 /**
- * 自定义调试方法
- * 调试专用
+ * 自定义终极调试……
  * @param  [type]  $var  数据
  * @param  boolean $die  是否终止
  * @param  [type]  $dump 强制打印方式
  * @param  string  $html HTML显示样式
  */
-function debug($var, $die = false, $dump = false, $html = '<hr>')
+function debugging($msg = 0, ...$php)
 {
-    $type = gettype($var);
-    switch ($type) {
-        case 'integer':
-        case 'double': //float
-        case 'string': $dp = 'echo'; break;
-        case 'array': $dp = 'var_export'; break;
-        case 'NULL':
-        case 'boolean':
-        case 'object':
-        case 'resource':
-        default: $dp = 'var_dump'; break;
-    }
-    $dp = is_string($dump) ? $dump : $dp;
-
-    if (!$dump && $dp == 'echo') {
-        echo $var,BR;
-    } else {
+    if (count($php) > 1) {
+        $output = null;
         echo '<pre>';
-        call_user_func($dp, $var);
+        // 模拟实现 var_dump('a',['b'],(object)'c');
+        // $chars = 'abcdefghijklmnopqrstuvwxyz';
+        foreach ($php as $vo) {var_dump($vo);}
         echo '</pre>';
-
-        /*object*/
-        // $std = new stdClass();
-        // var_export($std,false);//返回合法的PHP代码。true有返回
-        // print_r($std);
-        // var_dump($std);
+        $echo = $msg;
+    } else {
+        if (empty($php)) {
+            $var  = $msg;
+            $echo = true;
+        } elseif (is_bool($php[0])) {
+            $var  = $msg;
+            $echo = $php[0];
+        } else {
+            $var  = $php[0];
+            $echo = $msg;
+        }
+        $output = dump($var, $echo);
     }
-
-    if ($die) {exit(); }
+    // var_export(expression);
+    if ($echo) {
+        is_string($echo) and exit($echo);
+        $echo !== true and die;
+    }
+    return $output;
 }

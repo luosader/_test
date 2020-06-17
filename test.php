@@ -4,10 +4,10 @@ require '_lib/func.php';
 // $k='a';$v='1';$a = "{$k}={$v}$&";echo $a;//变量解析
 // echo 8/2*(2+2);//16
 // echo 1|2|4|8;//位运算符
-// echo 1 <=> 2;//PHP7太空船操作符
+// echo 1 <=> 2;//PHP7+太空船操作符
 // $id = [1]; var_dump($id>1);//比较判断
 // echo sprintf('%04d', rand(0,999));//生成4位数，不足前面补0
-// $cool='A'; $cool++; echo $cool;//字母亦可以递增
+// $cool='A'; $cool++; echo $cool;//字母亦可以递增，“A”的ASCII码为65
 // $c = 'z'; echo ++$c . "\n";//aa的字典顺序是小于z的
 // $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#'; echo $chars[0],$chars{1},PHP_EOL;//连着写，dump也可以; 字符串当作数组取值;
 /*$arr = array(['name'=>'张三'], ['name'=>'李四','age'=>1]);
@@ -20,35 +20,21 @@ array_walk($arr,function(&$v,$k,$p){$v=array_merge($v,$p);},array('sex'=>'男','
 EOF;*/
 // goto a; echo 'Foo'; a:echo 'Bar';//断点语句
 
+### Git探索 E:\WXS\Tools\3安装软件\8版本控制器\Git\Git探索.md
+### Redis缓存 _test\8dev\redis.php
+
 ### 测试区
 // echo ROOT;
 // switch (false) 与 if 哪个效率高
-#Redis缓存 _test\8dev\redis.php
 
-### Git探索 E:\WXS\Tools\3安装软件\8版本控制器\Git\Git探索.md
 
 // 排个序
 $a = '276,231,271,223,269,261,221,233,217,239,181,180,183,132,178,159,144,157,241,164,140,193,154,203,249,267,133,134,137,146,156,177,136,257,162,170,172,243,211';
 // $a = explode(',', $a);
 // sort($a);
 // $a = implode(',', $a);
-// debug($a);
-
-$a = ['a'=>['bbb','asas'],1,'b'=>'123','aa'=>'aac'];
-$a = [1=>10,22=>4145];
-// $a = '140,333,1223';
-// $a = '{"saleprop":{"147":{"price":"3","stock":"100","icon":"","pic":""},"148":{"price":"3","stock":"100","icon":"","pic":""},"props":{"propids":"22","propnames":"Colors"}}}';
-
-// debug(json_encode($a));
-// debug(json_decode($a,true));
-
-
-
-
-
-
-
-
+// debugging($a);
+// 
 
 
 
@@ -87,7 +73,7 @@ $a = [1=>10,22=>4145];
  *
  */
 http://wenshu.court.gov.cn/website/wenshu/181217BMTKHNT2W0/index.html?s7=最高法执监167号
-### 调试用debug()
+### 调试用debugging()
 // $a = 'b'; $b = 'a'; echo ${$a};//类中也一样 __set(),__get()
 // $a['k'] = 'key';
 // echo "'%$a[k]%'",BR;
@@ -113,7 +99,7 @@ http://wenshu.court.gov.cn/website/wenshu/181217BMTKHNT2W0/index.html?s7=最高�
 $arr = array(3, 45, 60, 9);
 // sort($arr);
 // natsort($arr);
-// debug($arr);
+// debugging($arr);
 
 // 交换
 // list($a, $b) = array($b, $a);
@@ -121,7 +107,7 @@ $arr = array(3, 45, 60, 9);
 // $u = [1,2,3,'a'=>4,5,9,'1'=>8];$r = 3;$c = count($u);
 // $u1 = array_slice($u,1,$r,true);
 // $c = $c-$r;$uu = array_slice($u,$r+1,$c,true);
-// debug($u);debug($u1);debug($uu);
+// debugging($u);debugging($u1);debugging($uu);
 //
 // $a = array('a','b');$b=array_pop($a);print_r($a);echo $b;
 // $path = substr($path,0,strrpos($path,'-'));echo $path;
@@ -148,11 +134,11 @@ $arr = array(3, 45, 60, 9);
 // $dir = `ls`;// shell bash
 // $dir = `dir /-w`;// DOS
 // $dir = `dir /b`; // DOS
-// debug($dir);
+// debugging($dir);
 // $dir = iconv('gb2312', 'utf-8', $dir);
 // echo $dir;
-// debug(explode(PHP_EOL,trim($dir)));
-// debug(explode("\n",trim($dir)));
+// debugging(explode(PHP_EOL,trim($dir)));
+// debugging(explode("\n",trim($dir)));
 
 ### 交换数值
 // $a='a';
@@ -232,7 +218,7 @@ function exam(&$var1)
 // exam($var1); echo $var1 . "<br />";
 // 指针操作
 // $data = ['a','b','c'];
-// foreach ($data as $key => $val) { $val = &$data[$key]; debug($data); }
+// foreach ($data as $key => $val) { $val = &$data[$key]; debugging($data); }
 // $符的复用
 $a = 'b';
 $b = 'c';
@@ -268,16 +254,16 @@ $url = 'http://tx.ext1/medium_category.php?id=5&page=1&a=4&';
 // $url = preg_replace('/?/', '', $url, 1);
 // $url = explode('?', $url)[1];
 // parse_str($url);
-// debug($id);
-// debug($page);
-// debug($a);
+// debugging($id);
+// debugging($page);
+// debugging($a);
 
 $url = 'http://wiki.ubuntu.org.cn/Netbeans#.E5.AE.98.E7.BD.91.E4.B8.8B.E8.BD.BD.E5.AE.89.E8.A3.85';
 // $param = explode('#', $url)[1];
 // $parameters = explode('.', $param);
-// debug($parameters);
+// debugging($parameters);
 // $split = str_split($param,3);
-// debug($split);
+// debugging($split);
 ?>
 
 
@@ -302,7 +288,7 @@ $string   = strstr($jumpext, '|');
 $string = preg_replace('/~/', '@', $jumpext2);
 // $string = preg_replace('/^\|/','',$string);
 // $string = preg_replace('/\|/','',$string,1);//同上面效果
-// debug($string);
+// debugging($string);
 #多次替换 拿pattern里的每一个模式依次去匹配subject里的每一个元素，匹配到了就用与pattern对应的那个replace对换，如上例，可能不止一次替换
 $subject = array('1', 'a', '2', 'b', '3', 'A', 'B', '4'); //array('A:C:1','B:C:a','A:2','B:b','A:3','A','B','A:4')
 $subject = array('1', 'a', '2', 'b', '3', 'A', 'B', '4'); //'A:C:1', 'B:C:a', 'A:2', 'B:b', 'A:3', 'A', 'B', 'A:4'
@@ -312,9 +298,9 @@ $replace = array('A:$0', 'B:$0', 'C:$0');
 // print_r(preg_replace($pattern, $replace, $subject));
 
 // $stringArr = explode('|',$string);
-// debug($numeric);
-// debug($string);
-// debug($stringArr);
+// debugging($numeric);
+// debugging($string);
+// debugging($stringArr);
 
 ### 字符打散成数组
 // $letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -522,9 +508,9 @@ $sign6 = array(1, 2);
 //合并数组
 $combine = array_merge($sign2, $sign3, $sign5, $sign6); // 合并键名，生成二位数组
 // 合并
-// debug($sign+$sign2);
-// debug(array_merge($sign,$sign2));
-// debug(array_push($sign,$sign2));
+// debugging($sign+$sign2);
+// debugging(array_merge($sign,$sign2));
+// debugging(array_push($sign,$sign2));
 
 /*差集比较处理*/
 // 差集 一维数组
@@ -540,8 +526,8 @@ $combine = array_merge($sign2, $sign3, $sign5, $sign6); // 合并键名，生成
 // $attr = array_keys($attr);
 // $diff1 = array_diff($attr_old,$attr);
 // $diff2 = array_diff($attr,$attr_old);
-// debug($diff1);
-// debug($diff2);
+// debugging($diff1);
+// debugging($diff2);
 
 /*交换*/
 // $arraykey = array_diff_key($sign, $sign2);// 找出键名差集
@@ -927,7 +913,7 @@ http://zhanzhang.baidu.com/linksubmit/index?site=http://discuz.wowlothar.cn/
 // $m = new Memcache;
 // $m->connect("http://hielec.wincomtech.cn", 11211);
 // $val = $m->get('9*nwod');
-// debug($val);
+// debugging($val);
 // memcache本身没有限制IP的功能，可能被外网利用
 // $mem= new Memcache;
 // // $mem->connect('192.168.0.178');

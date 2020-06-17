@@ -32,8 +32,15 @@
 <script src="./_assets/static/js/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
     console.log(Math.random());
-    //$.WebSite.getParameter();
+    var wait = $('.input-range').data('wait');
+    console.log(wait)
+    // wait = wait ? wait : (data.wait?data.wait:1000);
+    // wait = wait || 1000;
+    wait = wait ?wait: 1000;
+    console.log(wait)
 
+
+    //$.WebSite.getParameter();
 
     /*判定无痕模式*/
     // console.log(window)
