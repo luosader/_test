@@ -6,78 +6,95 @@
     <style type="text/css">
         form div{margin-top: 10px;}
     </style>
+    <script src="_assets/static/js/jquery-1.12.1.min.js"></script>
 </head>
+
 <body>
     <div>
         <p>测试结果：action里带的值无法被提交</p>
-        <p>fields[]数组形式有区分地传数据</p>
+        <!-- <p>input[]数组形式有区分地传数据</p> -->
     </div>
 
     <form action="form.php&mod=user" method="post" accept-charset="utf-8" enctype="multipart/form-data" name="form_submit">
+        <label for="name">Text Input:</label>
+        <input type="text" name="input[name]" id="name" value="" tabindex="1" />
+
+        <h6>Radio & Checkbox Button Choice</h6>
         <div>
-            <label for="name">Text Input:</label>
-            <input type="text" name="fields[name]" id="name" value="" tabindex="1" />
+            <label>Choice1: <input type="radio" name="input[radio]" tabindex="2" value="radio-1" /></label>&emsp;
+            <label>Choice2: <input checked type="radio" name="input[radio]" tabindex="3" value="radio-2" /></label>&emsp;
+            <label>Choice3: <input type="radio" name="input[radio]" /></label>
+        </div>
+        <div>
+            <label>Checkbox1:<input type="checkbox" name="input[checkbox][]" value="1" /></label>&emsp;
+            <label>Checkbox2:<input checked type="checkbox" name="input[checkbox][]" value="2" /></label>&emsp;
+            <label>Checkbox3:<input type="checkbox" name="input[checkbox][]" /></label>
         </div>
 
-        <div>
-            <h4>Radio Button Choice</h4>
-            <label>Choice 1：<input type="radio" name="fields[radio]" tabindex="2" value="radio-1" /></label>
-            <label>Choice 2：<input checked type="radio" name="fields[radio]" tabindex="3" value="radio-2" /></label>
-            <label>Choice 3：<input type="radio" name="fields[radio]" /></label>
-        </div>
+        <h6>文件上传</h6>
+        <input type="file" name="file[multiple][]" multiple="multiple" />&emsp;
+        <label>文件1:<input type="file" name="files[]" value="" /></label>&emsp;
+        <label>文件2:<input type="file" name="files[]" value="" /></label>
+
+        <h6>特殊属性</h6>
+        <input required name="required" value="required" />
+        <input disabled name="disabled" value="disabled" />
+        <input readonly name="readonly" value="readonly" />
+        <input pattern="[A-Za-z]{2}" name="pattern" value="CN" title="Three letter country code" />
+
+        <h6>Select </h6>
+        <label for="select-choice">Select Dropdown Choice:</label>
+        <select name="select[field]" id="select-choice">
+            <option value="user">Choice 1</option>
+            <option selected value="article">Choice 2</option>
+            <option>Choice 3</option>
+        </select>
+        <select name="select[field2][]" id="select-choice">
+            <option value="user">Choice 1</option>
+            <option selected value="article">Choice 2</option>
+            <option>Choice 3</option>
+        </select>
+        <br>
+        Ctrl多选
+        <select name="select[multiple]" multiple="multiple" size="2">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+        </select>
+        <select name="select[multiple2][]" multiple="multiple" size="2">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+        </select>
+
+        <h6>Textarea </h6>
+        <label for="jq-textarea"></label>
+        <textarea id="jq-textarea" cols="40" rows="8" name="textarea[field]">请在这里填写内容：</textarea>
 
         <div>
-            <label for="select-choice">Select Dropdown Choice:</label>
-            <select name="fields[select]" id="select-choice">
-                <option value="user">Choice 1</option>
-                <option selected value="article">Choice 2</option>
-                <option>Choice 3</option>
-            </select>
-        </div>
-
-        <div>
-            <label>Textarea:<textarea cols="40" rows="8" name="fields[textarea]">请在这里填写内容：</textarea></label>
-        </div>
-
-        <div>
-            <label>Checkbox1:<input type="checkbox" name="fields[checkbox][]" value="1" /></label>
-            <label>Checkbox2:<input checked type="checkbox" name="fields[checkbox][]" value="2" /></label>
-            <label>Checkbox3:<input type="checkbox" name="fields[checkbox][]" /></label>
-        </div>
-
-        <div>
-            文件：<input type="file" name="img[]" multiple="multiple" />
-            <label>文件1:<input type="file" name="files[]" value="" /></label>
-            <label>文件2:<input type="file" name="files[]" value="" /></label>
-            <!-- <label>文件3:<input type="file" name="files_3" value="" /></label>
-            <label>文件4:<input type="file" name="files_4" value="" /></label> -->
-        </div>
-
-        <div>
-            <input disabled name="disabled">
-            <input readonly name="readonly">
-            <input required name="required">
-            <input pattern="" name="pattern">
-            <input placeholder="placeholder" name="placeholder">
-        </div>
-
-        <div>
+            <input type="hidden" name="id" value="1">
             <input type="hidden" name="formhash" value="1234" />
-            <!-- <input type="hidden" name="id" value="1"> -->
             <input type="hidden" name="json" value="{"a":1,"b":2}">
 
-            <button type="button" onClick="form_submit.submit()">form_submit</button>
-
-            <input type="submit" name="btn_act" value="Submit" />
+            <button type="submit">提交</button>
+            <!-- <input type="submit" name="btn_act" value="Submit" /> -->
+            <!-- <button>提交</button> -->
             <!-- <input type="button" name="" value="提交"> -->
-            <!-- <button type="submit" name="btn_act" value="Submit">提交</button> -->
-            <!-- <button name="btn_act" value="input">提交</button> -->
+            <button type="button" onClick="form_submit.submit()">Ajax提交</button>
+            <button type="button" id="jq-submit">Ajax提交2</button>
         </div>
     </form>
 </body>
+
 <script type="text/javascript">
     if ('Notification' in window) {
         console.log('Notification')
     }
+    $('#jq-submit').click(function() {
+        var select = $("select[name='select[multiple2][]']").val();
+        console.log(select);
+    });
 </script>
 </html>

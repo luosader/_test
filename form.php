@@ -1,9 +1,11 @@
 <?php
+include_once '_lib/func.php';
+
 // echo '<pre>';
-// print_r($_REQUEST);
-// print_r($_GET);
-print_r($_POST);
-// print_r($_FILES);
+// dump($_REQUEST);
+// dump($_GET);
+dump($_POST);
+// dump($_FILES);
 die;
 
 

@@ -13,8 +13,9 @@ require '_lib/func.php';
 /*$arr = array(['name'=>'张三'], ['name'=>'李四','age'=>1]);
 array_walk($arr,function(&$v,$k,$p){$v=array_merge($v,$p);},array('sex'=>'男','age'=>19));//遍历*/
 // $otk = function($data,$msg='Empty!'){if(!$data)echo $msg;};//匿名函数，结尾有分号
-// $a=null; print_r(is_null($a)?:'b');//三目运算。is_null($a)作为值返回
 // $a = 'ABC';$pose = 'strtolower';echo $pose($a);//函数赋值到变量里
+// $a=null; print_r(is_null($a)?:'b');//三目运算。is_null($a)作为值返回
+// $a = null; dump($a>-1);//false dump($a==0);//true
 /*$d = <<<EOF
 特殊语言结构：定界符
 EOF;*/
@@ -35,6 +36,32 @@ $a = '276,231,271,223,269,261,221,233,217,239,181,180,183,132,178,159,144,157,24
 // $a = implode(',', $a);
 // debugging($a);
 // 
+
+
+
+// dump(serialize(array('' => 'Item Classes and Jobs(裝備職業)', 'Archer(弓箭手)' => 'Archer(弓箭手)', 'Magician(法師)' => 'Magician(法師)', 'Pirate(海盜)' => 'Pirate(海盜)', 'Thief(盜賊)' =>'Thief(盜賊)', 'Warrior(劍士)' => 'Warrior(劍士)')));
+dump(json_encode( array('--Please Select--' => '--Please Select--','Facebook Login' => 'Facebook Login','Google Login' => 'Google Login', 'Twitter Login' => 'Twitter Login') ));
+
+// dump(json_decode('1',true));
+
+// dump(array_diff([1,2,3],[1,2,3,4]));
+// dump(array_diff([1,2,3,4],[1,2,3]));
+
+// dump(strpos(' (func) intval($a)', '(func)'));
+// dump(substr('(func)aaa', 6));
+
+dump(json_decode('[]'));
+
+$a = null;
+dump($a>-1);
+dump($a==0);
+//false
+
+
+
+
+
+
 
 
 
