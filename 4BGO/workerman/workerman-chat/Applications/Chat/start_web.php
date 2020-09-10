@@ -19,17 +19,17 @@ use Workerman\Worker;
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 // WebServer
-$web        = new Worker('http://0.0.0.0:55151');
-$web->count = 2; // WebServer进程数量
-$web->name  = 'ChatClient'; //
+$web = new Worker("http://0.0.0.0:55151");
+// WebServer进程数量
+$web->count = 2;
 
 define('WEBROOT', __DIR__ . DIRECTORY_SEPARATOR . 'Web');
 
 $web->onMessage = function (TcpConnection $connection, Request $request) {
-    // 载入前台页面
+    $_GET = $request->get();
     $path = $request->path();
     if ($path === '/') {
-        $connection->send(exec_php_file(WEBROOT . '/index.php')); // 未指定时的默认
+        $connection->send(exec_php_file(WEBROOT . '/index.php')); //未指定时的默认
         return;
     }
     $file = realpath(WEBROOT . $path);
@@ -47,7 +47,8 @@ $web->onMessage = function (TcpConnection $connection, Request $request) {
         return;
     }
 
-    if (!empty($if_modified_since = $request->header('if-modified-since'))) {
+    $if_modified_since = $request->header('if-modified-since');
+    if (!empty($if_modified_since)) {
         // Check 304.
         $info          = \stat($file);
         $modified_time = $info ? \date('D, d M Y H:i:s', $info['mtime']) . ' ' . \date_default_timezone_get() : '';

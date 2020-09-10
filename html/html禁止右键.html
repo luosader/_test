@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <style>
+    #demo1 {
+        display: block;
+        background-color: turquoise;
+        color: #fff;
+        font-size: 100px;
+        text-align: center;
+        width: 100%;
+        height: 500px;
+    }
+
+    #click-pos {
+        display: block;
+        background-color: bisque;
+        color: #000;
+        margin: 20px;
+        float: left;
+        min-width: 200px;
+        font-size: 20px;
+        text-align: center;
+    }
+    </style>
+</head>
+<label id="click-pos">
+    显示内容
+</label>
+<div id="demo1">
+    <p>此区域(带颜色)被禁用了右键菜单</p>
+</div>
+
+<body>
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script>
+    //禁用掉区域的默认右键事件
+    $('#demo1').on('contextmenu', function() {
+        return false;
+    })
+
+    $('#demo1').on('mousedown', function(event) {
+        var code = event.which;
+        var x = event.pageX; //相对于页面左上角X的坐标
+        var y = event.pageY; //相对于页面左上角Y的坐标
+        var mouse = ""; //点击类型
+        switch (code) {
+            case 1:
+                mouse = "左键";
+                break;
+            case 2:
+                mouse = "中键(滚轮)";
+                break;
+            case 3:
+                mouse = "右键";
+                break;
+            default:
+                break;
+        }
+        $('#click-pos').html("点击类型:" + mouse + "--位置-X:" + x + '-Y:' + y); //显示到页面上
+    })
+    </script>
+</body>
+
+</html>

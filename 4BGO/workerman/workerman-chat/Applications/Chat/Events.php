@@ -20,16 +20,27 @@
 //declare(ticks=1);
 
 /**
- * 聊天主逻辑
- * 主要是处理 onMessage onClose
+ * 聊天 业务主逻辑
+ * 业务开发只需要关注 Applications/项目/Events.php 一个文件即可。
  */
 use \GatewayWorker\Lib\Gateway;
 
 class Events
 {
+    /**
+     * 进程启动事件(进程事件，一般用不到)
+     */
+    // public function onWorkerStart()
+    // {}
 
     /**
-     * 有消息时
+     * 连接事件(客户端事件，比较少用到) 当客户端连接时触发
+     */
+    // public static function onConnect()
+    // {}
+
+    /**
+     * 消息事件(客户端事件，必用) 当客户端发来消息时触发
      * @param int $client_id
      * @param mixed $message
      */
@@ -47,8 +58,8 @@ class Events
         // 根据类型执行不同的业务
         switch ($message_data['type']) {
             // 客户端回应服务端的心跳
-            case 'pong':return;
-                break;
+            case 'pong':
+                return;
             // 客户端登录 message格式: {type:login, name:xx, room_id:1} ，添加到客户端，广播给所有客户端xx进入聊天室
             case 'login':
                 // 判断是否有房间号
@@ -78,7 +89,6 @@ class Events
                 $new_message['client_list'] = $clients_list;
                 Gateway::sendToCurrentClient(json_encode($new_message));
                 return;
-                break;
 
             // 客户端发言 message: {type:say, to_client_id:xx, content:xx}
             case 'say':
@@ -113,12 +123,11 @@ class Events
                     'time'             => date('Y-m-d H:i:s'),
                 );
                 return Gateway::sendToGroup($room_id, json_encode($new_message));
-                break;
         }
     }
 
     /**
-     * 当客户端断开连接时
+     * 连接关闭事件（客户端事件，比较常用到） 当用户断开连接时触发
      * @param integer $client_id 客户端id
      */
     public static function onClose($client_id)
@@ -133,5 +142,11 @@ class Events
             Gateway::sendToGroup($room_id, json_encode($new_message));
         }
     }
+
+    /**
+     * 进程退出事件（进程事件，几乎用不到）
+     */
+    // public function onWorkerStop()
+    // {}
 
 }

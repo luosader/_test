@@ -1,25 +1,26 @@
 <?php
+// error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+// error_reporting(0);
 require '_lib/func.php';
 ### 荣誉室
-// $k='a';$v='1';$a = "{$k}={$v}$&";echo $a;//变量解析
-// echo 8/2*(2+2);//16
-// echo 1|2|4|8;//位运算符
-// echo 1 <=> 2;//PHP7+太空船操作符
-// $id = [1]; var_dump($id>1);//比较判断
-// echo sprintf('%04d', rand(0,999));//生成4位数，不足前面补0
-// $cool='A'; $cool++; echo $cool;//字母亦可以递增，“A”的ASCII码为65
-// $c = 'z'; echo ++$c . "\n";//aa的字典顺序是小于z的
-// $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#'; echo $chars[0],$chars{1},PHP_EOL;//连着写，dump也可以; 字符串当作数组取值;
-/*$arr = array(['name'=>'张三'], ['name'=>'李四','age'=>1]);
-array_walk($arr,function(&$v,$k,$p){$v=array_merge($v,$p);},array('sex'=>'男','age'=>19));//遍历*/
-// $otk = function($data,$msg='Empty!'){if(!$data)echo $msg;};//匿名函数，结尾有分号
-// $a = 'ABC';$pose = 'strtolower';echo $pose($a);//函数赋值到变量里
-// $a=null; print_r(is_null($a)?:'b');//三目运算。is_null($a)作为值返回
-// $a = null; dump($a>-1);//false dump($a==0);//true
+// $k='a';$v='1';$a = "{$k}={$v}$&";echo $a; //变量解析
+// echo 8/2*(2+2); //16
+// echo 1|2|4|8; //位运算符
+// echo 1 <=> 2; //PHP7+太空船操作符
+// $id = [1]; var_dump($id>1); //比较判断
+// echo sprintf('%04d', rand(0,999)); //生成4位数，不足前面补0
+// $cool='A'; $cool++; echo $cool; //字母亦可以递增，“A”的ASCII码为65
+// $c = 'z'; echo ++$c . "\n"; //aa的字典顺序是小于z的
+// $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#'; echo $chars[0],$chars{1},PHP_EOL; //连着写，dump也可以; 字符串当作数组取值;
+// $a=['name'=>'张三'],['name'=>'李四','age'=>1];array_walk($a,function(&$v,$k,$p){$v=array_merge($v,$p);},array('age'=>19)); //遍历
+// $otk = function($data,$msg='Empty!'){if(!$data)echo $msg;}; //匿名函数赋值给变量，结尾有分号； eval(code_str)字符串最后必须是分号； 
+// $a = 'ABC';$pose = 'strtolower';echo $pose($a); //函数赋值到变量里
+// $a=null; print_r(is_null($a)?:'b'); //三目运算。is_null($a)作为值返回
+// $a = null; dump($a>-1); //false dump($a==0); //true
 /*$d = <<<EOF
-特殊语言结构：定界符
+    特殊语言结构：定界符
 EOF;*/
-// goto a; echo 'Foo'; a:echo 'Bar';//断点语句
+// goto a; echo 'Foo'; a:echo 'Bar'; //断点语句
 
 ### Git探索 E:\WXS\Tools\3安装软件\8版本控制器\Git\Git探索.md
 ### Redis缓存 _test\8dev\redis.php
@@ -35,27 +36,9 @@ $a = '276,231,271,223,269,261,221,233,217,239,181,180,183,132,178,159,144,157,24
 // sort($a);
 // $a = implode(',', $a);
 // debugging($a);
-// 
 
 
-
-// dump(serialize(array('' => 'Item Classes and Jobs(裝備職業)', 'Archer(弓箭手)' => 'Archer(弓箭手)', 'Magician(法師)' => 'Magician(法師)', 'Pirate(海盜)' => 'Pirate(海盜)', 'Thief(盜賊)' =>'Thief(盜賊)', 'Warrior(劍士)' => 'Warrior(劍士)')));
-dump(json_encode( array('--Please Select--' => '--Please Select--','Facebook Login' => 'Facebook Login','Google Login' => 'Google Login', 'Twitter Login' => 'Twitter Login') ));
-
-// dump(json_decode('1',true));
-
-// dump(array_diff([1,2,3],[1,2,3,4]));
-// dump(array_diff([1,2,3,4],[1,2,3]));
-
-// dump(strpos(' (func) intval($a)', '(func)'));
-// dump(substr('(func)aaa', 6));
-
-dump(json_decode('[]'));
-
-$a = null;
-dump($a>-1);
-dump($a==0);
-//false
+echo date('Y-m-d',1599530605);
 
 
 
@@ -66,22 +49,12 @@ dump($a==0);
 
 
 
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 ;;;
 /**
  * 特征索引 - 常用
- *
  * &$
  * };
  * bcscale bcdiv
@@ -99,7 +72,7 @@ dump($a==0);
  * Memcache Redis
  *
  */
-http://wenshu.court.gov.cn/website/wenshu/181217BMTKHNT2W0/index.html?s7=最高法执监167号
+
 ### 调试用debugging()
 // $a = 'b'; $b = 'a'; echo ${$a};//类中也一样 __set(),__get()
 // $a['k'] = 'key';

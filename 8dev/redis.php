@@ -20,5 +20,5 @@ echo '<hr>';
 // $redis->append('key','string');
 // $g = $redis->get('key');
 
-$redis->flushAll();//清空整个redis[总true]
-$redis->flushDB();//清空当前redis库[总true]
+// $redis->flushAll();//清空整个redis[总true]
+// $redis->flushDB();//清空当前redis库[总true]

@@ -1,11 +1,9 @@
-<?php
+<?php 
 /**
  * This file is part of workerman.
- *
  * Licensed under The MIT License
  * For full copyright and license information, please see the MIT-LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
- *
  * @author walkor<walkor@workerman.net>
  * @copyright walkor<walkor@workerman.net>
  * @link http://www.workerman.net/
@@ -26,12 +24,19 @@ $gateway->count = 4;
 // 分布式部署时请设置成内网ip（非127.0.0.1）
 $gateway->lanIp = '127.0.0.1';
 // 内部通讯起始端口。假如$gateway->count=4，起始端口为2300
-// 则一般会使用2300 2301 2302 2303 4个端口作为内部通讯端口
+// 则一般会使用2300 2301 2302 2303 4个端口作为内部通讯端口 
 $gateway->startPort = 2300;
+
 // 心跳间隔
-$gateway->pingInterval = 10;
+$gateway->pingInterval = 55; //10
+// 服务端主动发送心跳(不推荐)
+$gateway->pingNotResponseLimit = 0;
 // 心跳数据
 $gateway->pingData = '{"type":"ping"}';
+
+// $gateway->pingNotResponseLimit = 1; //客户端定时发送心跳(推荐)
+// $gateway->pingData = ''; //心跳数据
+
 // 服务注册地址
 $gateway->registerAddress = '127.0.0.1:1236';
 
@@ -54,6 +59,7 @@ $gateway->onConnect = function($connection)
 */
 
 // 如果不是在根目录启动，则运行runAll方法
-if (!defined('GLOBAL_START')) {
+if(!defined('GLOBAL_START')) {
     Worker::runAll();
 }
+

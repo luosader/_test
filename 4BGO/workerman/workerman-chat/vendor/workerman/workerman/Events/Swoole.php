@@ -28,7 +28,7 @@ class Swoole implements EventInterface
     protected $_fd = array();
 
     // milisecond
-    public static $signalDispatchInterval = 200;
+    public static $signalDispatchInterval = 500;
 
     protected $_hasSignal = false;
 
@@ -205,7 +205,8 @@ class Swoole implements EventInterface
      */
     public function destroy()
     {
-        //Event::exit();
+        Event::exit();
+        posix_kill(posix_getpid(), SIGINT);
     }
 
     /**

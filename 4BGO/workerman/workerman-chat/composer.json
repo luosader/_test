@@ -6,6 +6,7 @@
     "license" : "MIT",
     "require": {
         "workerman/gateway-worker" : ">=3.0.0",
-        "workerman/workerman" : "~4.0.0"
+        "workerman/workerman" : "~4.0.0",
+        "workerman/gatewayclient": "^3.0"
     }
 }

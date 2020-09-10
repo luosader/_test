@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit19c6d44913eac99e6705918220a5b1c3
+class ComposerStaticInit7fdb19ff4c127e4878d7f541cf610677
 {
     public static $prefixLengthsPsr4 = array (
         'W' => 
@@ -14,6 +14,7 @@ class ComposerStaticInit19c6d44913eac99e6705918220a5b1c3
         'G' => 
         array (
             'GatewayWorker\\' => 14,
+            'GatewayClient\\' => 14,
         ),
     );
 
@@ -26,13 +27,17 @@ class ComposerStaticInit19c6d44913eac99e6705918220a5b1c3
         array (
             0 => __DIR__ . '/..' . '/workerman/gateway-worker/src',
         ),
+        'GatewayClient\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/workerman/gatewayclient',
+        ),
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit19c6d44913eac99e6705918220a5b1c3::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit19c6d44913eac99e6705918220a5b1c3::$prefixDirsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit7fdb19ff4c127e4878d7f541cf610677::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit7fdb19ff4c127e4878d7f541cf610677::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }

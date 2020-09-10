@@ -10,11 +10,17 @@
 (function($) {
 
 	var $target;
+
 	var options;
+
 	var emotions;
+
 	var categories;
+
 	var emotionsMap;
+
 	var parsingArray = [];
+
 	var defCategory = '默认';
 
 	var initEvents = function() {
@@ -63,6 +69,7 @@
 	};
 
 	var loadEmotions = function(callback) {
+
 		if(emotions){
 			callback && callback();
 			return;
@@ -115,6 +122,7 @@
 	};
 
 	var showCatPage = function(page) {
+
 		var html = '';
 		var length = categories.length;
 		var maxPage = Math.ceil(length / 5);
@@ -122,6 +130,7 @@
 		var category = $categories.data('category') || defCategory;
 
 		page = (page + maxPage) % maxPage;
+
 		for (var i = page * 5; i < length && i < (page + 1) * 5; ++i) {
 			html += '<li class="item"><a href="#" class="category' + (category == categories[i] ? ' current' : '') + '">' + categories[i] + '</a></li>';
 		}
@@ -136,6 +145,7 @@
 	};
 
 	var showFacePage = function(page) {
+
 		var face;
 		var html = '';
 		var pageHtml = '';
@@ -153,6 +163,7 @@
 	};
 
 	var showPages = function() {
+
 		var html = '';
 		var rows = options.rows;
 		var category = $('#sinaEmotion .categories').data('category');
@@ -175,6 +186,7 @@
 	 * @return {[type]}        [description]
 	 */
 	$.fn.sinaEmotion = function(target) {
+
 		target = target || function(){
 			return $(this).parents('form').find('textarea,input[type=text]').eq(0);
 		};
@@ -203,6 +215,7 @@
 	};
 
 	$.fn.parseEmotion = function() {
+
 		if(! categories){
 			parsingArray = $(this);
 			loadEmotions();
@@ -234,7 +247,9 @@
 	};
 
 	$.fn.insertText = function(text) {
+
 		this.each(function() {
+
 			if (this.tagName !== 'INPUT' && this.tagName !== 'TEXTAREA') {
 				return;
 			}

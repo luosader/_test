@@ -1,7 +1,11 @@
 <?php
 header('Content-Type:text/html;charset=UTF-8'); //GBK
-error_reporting(E_ALL);
-// error_reporting(E_ERROR);
+// ini_set('display_errors','Off'); //关闭报错功能
+// error_reporting(E_ALL ^ E_NOTICE); //只报告错误,忽略通知
+// error_reporting(E_ALL ^ (E_NOTICE | E_WARNING)); //显示除了E_NOTICE(提示)和E_WARNING(警告)外的所有错误
+// error_reporting(E_ERROR); //只报错
+// error_reporting(0); //错误级别：不报错
+
 define('DS', DIRECTORY_SEPARATOR);
 define('EOL', PHP_EOL);
 define('BR', '<br>');
