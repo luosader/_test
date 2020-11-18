@@ -38,40 +38,88 @@ $a = '276,231,271,223,269,261,221,233,217,239,181,180,183,132,178,159,144,157,24
 
 // echo date('Y-m-d',1599530605);
 
-// echo strlen('DON’T return the in-game items under any circumsta...');
-$url = "http://www.baidu.com/abc/ab/1.php?id=1#aa";
-$path = parse_url($url);
-// dump($path);
-// dump(substr('a,b,',0, -1));
-
-// echo floor(bcmod(7, 3)/3);
-$num = '2g. 33f';
-$num = preg_replace('/[^\d\.]/', '', $num);
-// dump($num);
-
-$point = 135000;
-echo bcmod($point, 50000);
+$act = [0=>'offer',1=>'create'];
+$first['bar'] = 'offer';
+$current = '';
+// if (!$current && $act[0]==$first['bar']):
+//     $current = 'current';
+// endif;
+$current = (!$current && $act[0]==$first['bar']) ? 'current' : '';
+dump($current);die;
 
 
+dump(json_decode('{"topic":"message","msg":{"uid":"10020","tmp":0,"chat_type":0,"to_id":10021,"msg_type":0,"msg":"\u8fd9\u662f\u4e00\u4e2a\u65e0\u52a9\u7684\u6211\u548c\u4e00\u4e2a\u65e0\u6240\u8c13\u7684\u7ed3\u5c40","ctime":1600068970,"head_img":"\/online_chat_client\/static\/img\/head_img\/0.jpg","name":"seller"}}',true));die;
 
+$gid = 466;
 
+// -10通用 -1打包品 0物品 5代练包 3账号 1货币 2代练
+// $cids[$gid][$val['cid']] = 1;
+$cids[$gid] = [
+    -10 => 1,
+    -1  => 1,
+    0   => 1,
+    1   => 1,
+    2   => 1,
+    3   => 1,
+    5   => 1,
+];
 
+// 0金币 1银币;
+// $childCids[$val['aid']][$val['cid']][$val['child_cid']] = 1;
+$childCids = [
+    11983 => [
+        1 => [0 => 1, 1 => 1],
+    ],
+    11985 => [
+        1 => [0 => 1, 1 => 1],
+        0 => [0 => 1],
+        3 => [0 => 1],
+    ],
+    11987 => [
+        1 => [0 => 1],
+    ],
+];
 
+// 区
+// $aids[$gid][$val['aid']] = $val['game_area_format'];
+$aids[$gid] = [
+    11983 => 'game_area_format',
+    11985 => 'area2',
+    11987 => 'area2',
+];
 
+// 类目
+// $cateIds[] = $products['cid'];
+$cateIds = [555, 666];
 
+// $buyNowPrice[$val['aid']][$val['child_cid']] += $price+$free_price;
+$buyNowPrice = [
+    11983 => [0 => 99.99, 1 => 120],
+    11985 => [0 => 98],
+    11987 => [0 => 9.8],
+];
 
+// 筛选数据
+$data = [
+    ['gid' => $gid, 'cid' => 1, 'child_cid' => 0, 'sp_aid' => '', 'sp_cate' => '', 'sign' => 'explain'],
+    ['gid' => $gid, 'cid' => 1, 'child_cid' => 0, 'sp_aid' => '', 'sp_cate' => '', 'sign' => 'form'],
+    ['gid' => $gid, 'cid' => 1, 'child_cid' => 1, 'sp_aid' => '11981', 'sp_cate' => '', 'sign' => ''],
+    ['gid' => $gid, 'cid' => 1, 'child_cid' => 1, 'sp_aid' => '11981', 'sp_cate' => '', 'sign' => ''],
+    ['gid' => $gid, 'cid' => 1, 'child_cid' => 1, 'sp_aid' => '11983', 'sp_cate' => '', 'sign' => 'explain'],
+    ['gid' => $gid, 'cid' => 1, 'child_cid' => 1, 'sp_aid' => '11983', 'sp_cate' => '', 'sign' => 'form'],
+    ['gid' => $gid, 'cid' => 1, 'child_cid' => 1, 'sp_aid' => '11985', 'sp_cate' => '', 'sign' => 'explain'],
+    ['gid' => $gid, 'cid' => 1, 'child_cid' => 1, 'sp_aid' => '11985', 'sp_cate' => '', 'sign' => 'form'],
+    ['gid' => $gid, 'cid' => 1, 'child_cid' => 1, 'sp_aid' => '11987', 'sp_cate' => '555', 'sign' => 'explain'],
+    ['gid' => $gid, 'cid' => 1, 'child_cid' => 1, 'sp_aid' => '11987', 'sp_cate' => '555', 'sign' => 'form'],
+    ['gid' => $gid, 'cid' => 1, 'child_cid' => 1, 'sp_aid' => '', 'sp_cate' => '666', 'sign' => 'explain'],
+    ['gid' => $gid, 'cid' => 1, 'child_cid' => 1, 'sp_aid' => '', 'sp_cate' => '666', 'sign' => 'form'],
+];
 
-
-
-
-
-
-
-
-
-
-
-
+// 策略一：1、按绝对条件找； 2、通用条件
+// 策略二：去数据库递减条件找 gid,cid,child_cid,sign,sp_aid,sp_cate 都是条件
+foreach ($data as $r) {
+    
+}
 
 
 

@@ -19,8 +19,8 @@ define('IS_WIN', strpos(PHP_OS, 'WIN') !== false);
  * 日期时间
  * time()返回当前的unix时间戳
  * date()格式化一个本地时间/日期
- *     date('n-j-Y G:i:s')   => 1-1-1970 13:00:00
- *     date('n-j-Y G:i A')   => 1-1-1970 13:00 PM
+ *     date('Y-n-j G:i:s')   => 1970-1-1 13:00:00
+ *     date('Y-n-j G:i A')   => 1970-1-1 13:00 PM
  *     date('n-j-Y g:i A')   => 1-1-1970 1:00 PM
  *     date('F-d-Y')         => January-01-1970 01:00:00 PM
  *     date('M-d-Y')         => Jan-01-1970
