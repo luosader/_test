@@ -50,7 +50,12 @@ $num = preg_replace('/[^\d\.]/', '', $num);
 // dump($num);
 
 $point = 135000;
-echo bcmod($point, 50000);
+// echo bcmod($point, 50000);
+
+// echo bcdiv(1,7,5);
+// echo getcwd();
+
+
 
 
 

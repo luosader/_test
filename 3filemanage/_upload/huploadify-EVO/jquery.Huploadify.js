@@ -8,38 +8,35 @@
  * 2、不能自定义文件命名
  * 3、断点续传
  * 4、[DOM] Found 2 elements with non-unique id #select_btn_1: 在同一个html文件中两个id都相同
- * 5、更新配置： onUploadStart: function(file) {var data={}; this.formData = data;}
+ * 5、动态更新配置： onUploadStart: function(file) {var data={}; this.formData = data;}
  * 
- *//**
- * CSS Document 原始文件
- * 2020/4/29
  */
 (function($){
 	$.fn.Huploadify = function(opts){
 		var itemTemp = '<div id="${fileID}" class="uploadify-queue-item"><div class="uploadify-progress"><div class="uploadify-progress-bar"></div></div><span class="up_filename">${fileName}</span><a href="javascript:void(0);" class="uploadbtn">上传</a><a href="javascript:void(0);" class="delfilebtn">删除</a></div>';
 		var defaults = {
-			fileTypeExts:'*.*',//允许上传的文件类型，格式'*.jpg;*.doc'
-			uploader:'',//文件提交的地址
-			auto:false,//是否开启自动上传
-			method:'post',//发送请求的方式，get或post
-			multi:true,//是否允许选择多个文件
-			formData:null,//发送给服务端的参数，格式：{key1:value1,key2:value2}
-			fileObjName:'file',//在后端接受文件的参数名称，如PHP中的$_FILES['file']
-			fileSizeLimit:2048,//允许上传的文件大小，单位KB
-			showUploadedPercent:true,//是否实时显示上传的百分比，如20%
-			showUploadedSize:false,//是否实时显示已上传的文件大小，如1M/2M
-			buttonText:'选择文件',//上传按钮上的文字
-			removeTimeout: 1000,//上传完成后进度条的消失时间，单位毫秒
-			itemTemplate:itemTemp,//上传队列显示的模板
-			onUploadStart:null,//上传开始时的动作
-			onUploadSuccess:null,//上传成功的动作
-			onUploadComplete:null,//上传完成的动作
+			fileTypeExts:'*.*', //允许上传的文件类型，格式'*.jpg;*.doc'
+			uploader:'', //文件提交的地址
+			auto:false, //是否开启自动上传
+			method:'post', //发送请求的方式，get或post
+			multi:true, //是否允许选择多个文件
+			formData:null, //发送给服务端的参数，格式：{key1:value1,key2:value2}
+			fileObjName:'file', //在后端接受文件的参数名称，如PHP中的$_FILES['file']
+			fileSizeLimit:2048, //允许上传的文件大小，单位KB
+			showUploadedPercent:true, //是否实时显示上传的百分比，如20%
+			showUploadedSize:false, //是否实时显示已上传的文件大小，如1M/2M
+			buttonText:'选择文件', //上传按钮上的文字
+			removeTimeout: 1000, //上传完成后进度条的消失时间，单位毫秒
+			itemTemplate:itemTemp, //上传队列显示的模板
+			onUploadStart:null, //上传开始时的动作
+			onUploadSuccess:null, //上传成功的动作
+			onUploadComplete:null, //上传完成的动作
 			onUploadError:null, //上传失败的动作
-			onInit:null,//初始化时的动作
-			onCancel:null,//删除掉某个文件后的回调函数，可传入参数file
-			onClearQueue:null,//清空上传队列后的回调函数，在调用cancel并传入参数*时触发
-			onDestroy:null,//在调用destroy方法时触发
-			onSelect:null,//选择文件后的回调函数，可传入参数file
+			onInit:null, //初始化时的动作
+			onCancel:null, //删除掉某个文件后的回调函数，可传入参数file
+			onClearQueue:null, //清空上传队列后的回调函数，在调用cancel并传入参数*时触发
+			onDestroy:null, //在调用destroy方法时触发
+			onSelect:null, //选择文件后的回调函数，可传入参数file
 			onQueueComplete:null//队列中的所有文件上传完成后触发
 		}
 			
@@ -83,7 +80,7 @@
 			var instanceNumber = $('.uploadify').length+1;
 			var uploadManager = {
 				container : _this,
-				filteredFiles : [],//过滤后的文件数组
+				filteredFiles : [], //过滤后的文件数组
 				init: function(){
 					var inputStr = '<input id="select_btn_'+instanceNumber+'" class="selectbtn" style="display:none;" type="file" name="fileselect[]"';
 					inputStr += option.multi ? ' multiple' : '';
@@ -126,7 +123,7 @@
 							parent.find('.uploadify-button').css('background-color','#888').off('click');
 						},
 						ennable: function(instanceID){
-							//点击上传按钮时触发file的click事件
+							// 点击上传按钮时触发file的click事件
 							var parent = instanceID ? $('file_upload_'+instanceID+'-button') : $('body');
 						  	parent.find('.uploadify-button').css('background-color','#707070').on('click',function(){
 								parent.find('.selectbtn').trigger('click');
@@ -157,7 +154,7 @@
 						}
 					};
 
-					//文件选择控件选择
+					// 文件选择控件选择
 					var fileInput = this._getInputBtn();
 				  	if (fileInput.length>0) {
 						fileInput.change(function(e) { 
@@ -165,14 +162,14 @@
 					 	});	
 				 	}
 				  
-					//点击选择文件按钮时触发file的click事件
+					// 点击选择文件按钮时触发file的click事件
 					_this.find('.uploadify-button').on('click',function(){
 						_this.find('.selectbtn').trigger('click');
 					});
 				  
 					option.onInit && option.onInit(returnObj);
 				},
-				//选择文件组的过滤方法
+				// 选择文件组的过滤方法
 				_filter: function(files) { 
 					var arr = [];
 					var typeArray = F.getFileTypes(option.fileTypeExts);
@@ -199,7 +196,7 @@
 				_getFileList: function(){
 					return _this.find('.uploadify-queue');
 				},
-				//根据选择的文件，渲染DOM节点
+				// 根据选择的文件，渲染DOM节点
 				_renderFile: function(file){
 					var $html = $(option.itemTemplate.replace(/\${fileID}/g,'fileupload_'+instanceNumber+'_'+file.index).replace(/\${fileName}/g,file.name).replace(/\${fileSize}/g,F.formatFileSize(file.size)).replace(/\${instanceID}/g,_this.attr('id')));
 					//如果是非自动上传，显示上传按钮
@@ -208,22 +205,22 @@
 					}
 					uploadManager._getFileList().append($html);
 
-					//判断是否显示已上传文件大小
+					// 判断是否显示已上传文件大小
 					if(option.showUploadedSize){
 						var num = '<span class="progressnum"><span class="uploadedsize">0KB</span>/<span class="totalsize">${fileSize}</span></span>'.replace(/\${fileSize}/g,F.formatFileSize(file.size));
 						$html.find('.uploadify-progress').after(num);
 					}
 					
-					//判断是否显示上传百分比	
+					// 判断是否显示上传百分比	
 					if(option.showUploadedPercent){
 						var percentText = '<span class="up_percent">0%</span>';
 						$html.find('.uploadify-progress').after(percentText);
 					}
 
-					//触发select动作
+					// 触发select动作
 					option.onSelect && option.onSelect(file);
 
-					//判断是否是自动上传
+					// 判断是否是自动上传
 					if(option.auto){
 						uploadManager._uploadFile(file);
 					} else {
@@ -236,7 +233,7 @@
 				 		});
 					}
 
-					//为删除文件按钮绑定删除文件事件
+					// 为删除文件按钮绑定删除文件事件
 			 		$html.find('.delfilebtn').on('click',function(){
 			 			if(!$(this).hasClass('.disabledbtn')){
 					 		$(this).addClass('.disabledbtn');
@@ -244,20 +241,20 @@
 			 			}
 			 		});
 				},
-				//获取选择后的文件
+				// 获取选择后的文件
 				_getFiles: function(e){
 			  		var files = e.target.files;
 			  		files = uploadManager._filter(files);
-			  		var fileCount = _this.find('.uploadify-queue .uploadify-queue-item').length;//队列中已经有的文件个数
+			  		var fileCount = _this.find('.uploadify-queue .uploadify-queue-item').length; //队列中已经有的文件个数
 		  			for(var i=0,len=files.length;i<len;i++){
 		  				files[i].index = ++fileCount;
-		  				files[i].status = 0;//标记为未开始上传
+		  				files[i].status = 0; //标记为未开始上传
 		  				uploadManager.filteredFiles.push(files[i]);
 		  				var l = uploadManager.filteredFiles.length;
 		  				uploadManager._renderFile(uploadManager.filteredFiles[l-1]);
 		  			}
 				},
-				//删除文件
+				// 删除文件
 				_deleteFile: function(file){
 					for (var i = 0,len=uploadManager.filteredFiles.length; i<len; i++) {
 						var f = uploadManager.filteredFiles[i];
@@ -269,7 +266,7 @@
 						}
 			  		}
 				},
-				//校正上传完成后的进度条误差
+				// 校正上传完成后的进度条误差
 				_regulateView: function(file){
 					var thisfile = _this.find('#fileupload_'+instanceNumber+'_'+file.index);
 					thisfile.find('.uploadify-progress-bar').css('width','100%');
@@ -308,13 +305,13 @@
 			  		}
 			  		return queueData;
 			  	},
-				//上传文件
+				// 上传文件
 				_uploadFile: function(file){
 					var xhr = null;
 					try{
-						xhr = new XMLHttpRequest();//尝试创建 XMLHttpRequest 对象，除 IE 外的浏览器都支持这个方法。
+						xhr = new XMLHttpRequest(); //尝试创建 XMLHttpRequest 对象，除 IE 外的浏览器都支持这个方法。
 					}catch(e){	  
-						xhr = ActiveXobject('Msxml12.XMLHTTP');//使用较新版本的 IE 创建 IE 兼容的对象（Msxml2.XMLHTTP）。
+						xhr = ActiveXobject('Msxml12.XMLHTTP'); //使用较新版本的 IE 创建 IE 兼容的对象（Msxml2.XMLHTTP）。
 				  	}
 				  	if(xhr.upload){
 				  		// 上传中 监听事件会在 send() 之后执行
@@ -326,7 +323,7 @@
 							if(xhr.readyState == 4){
 								if(xhr.status == 200){
 									uploadManager._regulateView(file);
-									file.status = 2;//标记为上传成功
+									file.status = 2; //标记为上传成功
 									option.onUploadSuccess && option.onUploadSuccess(file, xhr.responseText);
 									//在指定的间隔时间后删掉进度条
 									setTimeout(function(){
@@ -334,24 +331,24 @@
 									},option.removeTimeout);
 								}
 								else {
-									file.status = 3;//标记为上传失败
+									file.status = 3; //标记为上传失败
 									option.onUploadError && option.onUploadError(file, xhr.responseText);		
 								}
 								option.onUploadComplete && option.onUploadComplete(file,xhr.responseText);
 								
-								//检测队列中的文件是否全部上传完成，执行onQueueComplete
+								// 检测队列中的文件是否全部上传完成，执行onQueueComplete
 								if(option.onQueueComplete){
 									var queueData = uploadManager._allFilesUploaded();
 									queueData && option.onQueueComplete(queueData);
 								}
 
-								//清除文件选择框中的已有值
+								// 清除文件选择框中的已有值
 								uploadManager._getInputBtn().val('');
 							}
 						}
 
 						if(file.status===0){
-							file.status = 1;//标记为正在上传
+							file.status = 1; //标记为正在上传
 							option.onUploadStart && option.onUploadStart(file);
 							// 开始上传
 							xhr.open(option.method, option.uploader, true);

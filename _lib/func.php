@@ -17,6 +17,7 @@ define('IS_WIN', strpos(PHP_OS, 'WIN') !== false);
 
 /**
  * 日期时间
+ * ...\op\opcore\lib\func\TimeFunc.php
  * time()返回当前的unix时间戳
  * date()格式化一个本地时间/日期
  *     date('Y-n-j G:i:s')   => 1970-1-1 13:00:00
@@ -27,8 +28,6 @@ define('IS_WIN', strpos(PHP_OS, 'WIN') !== false);
  *     date('m/d/Y H:i:s')   => 01/01/1970 13:00:00
  * microtime()返回当前unix时间戳和微秒数
  * mktime()返回一个日期的 UNIX 时间戳。
- *
- * 更多内容详见： ...\op\opcore\lib\func\TimeFunc.php
  */
 define('STARTTIME', mktime(0, 0, 0, date('m'), date('d'), date('Y')));
 define('CURTIME', time()); //echo strtotime("now"), PHP_EOL;
