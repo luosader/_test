@@ -8,7 +8,7 @@ require '_lib/func.php';
 // echo 1|2|4|8; //位运算符
 // echo 1 <=> 2; //PHP7+太空船操作符
 // $id = [1]; var_dump($id>1); //比较判断
-// echo sprintf('%04d', rand(0,999)); //生成4位数，不足前面补0
+// echo sprintf('sn_%04d', rand(0,999)); //生成4位数，不足前面补0
 // $cool='A'; $cool++; echo $cool; //字母亦可以递增，“A”的ASCII码为65
 // $c = 'z'; echo ++$c . "\n"; //aa的字典顺序是小于z的
 // $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#'; echo $chars[0],$chars{1},PHP_EOL; //连着写，dump也可以; 字符串当作数组取值;
@@ -28,6 +28,7 @@ EOF;*/
 ### 测试区
 // echo ROOT;
 // switch (false) 与 if 哪个效率高
+// echo date('Y-m-d H:i:s',1617086787);
 
 // 排个序
 $a = '276,231,271,223,269,261,221,233,217,239,181,180,183,132,178,159,144,157,241,164,140,193,154,203,249,267,133,134,137,146,156,177,136,257,162,170,172,243,211';
@@ -36,48 +37,32 @@ $a = '276,231,271,223,269,261,221,233,217,239,181,180,183,132,178,159,144,157,24
 // $a = implode(',', $a);
 // debugging($a);
 
-// echo date('Y-m-d',1599530605);
+// echo floor(bcmod(7, 3)/3);
+$num = '2g. 33f';
+$num = '\'a2.3aa';
+$num = preg_replace('/[^\d\.]/', '', $num);
+
+$reg = '/[\/:*?"<>|]/'; //9
+// $dir = '\a/b:c*d?e"f<g>h|i';
+$dir = '\\';
+$result = preg_match_all($reg, $dir, $mac); //不识别“\”
 
 // echo strlen('DON’T return the in-game items under any circumsta...');
 $url = "http://www.baidu.com/abc/ab/1.php?id=1#aa";
 $path = parse_url($url);
-// dump($path);
-// dump(substr('a,b,',0, -1));
 
-// echo floor(bcmod(7, 3)/3);
-$num = '2g. 33f';
-$num = preg_replace('/[^\d\.]/', '', $num);
-// dump($num);
+$a = [
+    ['name'=>'seller', 'abate' => 2.3],
+    ['name'=>'pl', 'abate' => 5],
+    ['name'=>'aasfd', 'abate' => 3],
+];
 
-$point = 135000;
-// echo bcmod($point, 50000);
+// $abate = array_column($a, 'abate');
+// array_multisort($abate, SORT_DESC, $a);
+// dump($a);
 
-// echo bcdiv(1,7,5);
-// echo getcwd();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+$a = [1,4];
+dump(implode(',',$a));
 
 
 
