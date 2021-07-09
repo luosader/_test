@@ -9,6 +9,7 @@ require '_lib/func.php';
 // echo 1 <=> 2; //PHP7+太空船操作符
 // $id = [1]; var_dump($id>1); //比较判断
 // echo sprintf('sn_%04d', rand(0,999)); //生成4位数，不足前面补0
+// implode(array('name'=>'lothar','sex'=>1)); //无缝拼接
 // $cool='A'; $cool++; echo $cool; //字母亦可以递增，“A”的ASCII码为65
 // $c = 'z'; echo ++$c . "\n"; //aa的字典顺序是小于z的
 // $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#'; echo $chars[0],$chars{1},PHP_EOL; //连着写，dump也可以; 字符串当作数组取值;
@@ -18,7 +19,7 @@ require '_lib/func.php';
 // $a=null; print_r(is_null($a)?:'b'); //三目运算。is_null($a)作为值返回
 // $a = null; dump($a>-1); //false dump($a==0); //true
 /*$d = <<<EOF
-特殊语言结构：定界符
+特殊语言结构：定界符，结尾一行一定要单纯，不含任何其它字符。
 EOF;*/
 // goto a; echo 'Foo'; a:echo 'Bar'; //断点语句
 
@@ -61,8 +62,15 @@ $a = [
 // array_multisort($abate, SORT_DESC, $a);
 // dump($a);
 
-$a = [1,4];
-dump(implode(',',$a));
+$default = '(func) return 123;';
+$codeStr       = substr($default, 6);
+$error_message = 'error';
+// if (!php_check_syntax($codeStr, $error_message)) {
+//     echo $error_message;
+// }
+echo `php -l $codeStr`;
+
+
 
 
 
