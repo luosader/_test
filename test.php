@@ -2,41 +2,11 @@
 // error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 // error_reporting(0);
 require '_lib/func.php';
-### 荣誉室
-// $k='a';$v='1';$a = "{$k}={$v}$&";echo $a; //变量解析
-// echo 8/2*(2+2); //16
-// echo 1|2|4|8; //位运算符
-// echo 1 <=> 2; //PHP7+太空船操作符
-// $id = [1]; var_dump($id>1); //比较判断
-// echo sprintf('sn_%04d', rand(0,999)); //生成4位数，不足前面补0
-// implode(array('name'=>'lothar','sex'=>1)); //无缝拼接
-// $cool='A'; $cool++; echo $cool; //字母亦可以递增，“A”的ASCII码为65
-// $c = 'z'; echo ++$c . "\n"; //aa的字典顺序是小于z的
-// $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#'; echo $chars[0],$chars{1},PHP_EOL; //连着写，dump也可以; 字符串当作数组取值;
-// $a=['name'=>'张三'],['name'=>'李四','age'=>1];array_walk($a,function(&$v,$k,$p){$v=array_merge($v,$p);},array('age'=>19)); //遍历
-// $otk = function($data,$msg='Empty!'){if(!$data)echo $msg;}; //匿名函数赋值给变量，结尾有分号； eval(code_str)字符串最后必须是分号；
-// $a = 'ABC';$pose = 'strtolower';echo $pose($a); //函数赋值到变量里
-// $a=null; print_r(is_null($a)?:'b'); //三目运算。is_null($a)作为值返回
-// $a = null; dump($a>-1); //false dump($a==0); //true
-/*$d = <<<EOF
-特殊语言结构：定界符，结尾一行一定要单纯，不含任何其它字符。
-EOF;*/
-// goto a; echo 'Foo'; a:echo 'Bar'; //断点语句
-
-### Git探索 E:\WXS\Tools\3安装软件\8版本控制器\Git\Git探索.md
-### Redis缓存 _test\8dev\redis.php
 
 ### 测试区
 // echo ROOT;
 // switch (false) 与 if 哪个效率高
 // echo date('Y-m-d H:i:s',1617086787);
-
-// 排个序
-$a = '276,231,271,223,269,261,221,233,217,239,181,180,183,132,178,159,144,157,241,164,140,193,154,203,249,267,133,134,137,146,156,177,136,257,162,170,172,243,211';
-// $a = explode(',', $a);
-// sort($a);
-// $a = implode(',', $a);
-// debugging($a);
 
 // echo floor(bcmod(7, 3)/3);
 $num = '2g. 33f';
@@ -45,30 +15,51 @@ $num = preg_replace('/[^\d\.]/', '', $num);
 
 $reg = '/[\/:*?"<>|]/'; //9
 // $dir = '\a/b:c*d?e"f<g>h|i';
-$dir = '\\';
+$dir    = '\\';
 $result = preg_match_all($reg, $dir, $mac); //不识别“\”
 
-// echo strlen('DON’T return the in-game items under any circumsta...');
-$url = "http://www.baidu.com/abc/ab/1.php?id=1#aa";
-$path = parse_url($url);
-
-$a = [
-    ['name'=>'seller', 'abate' => 2.3],
-    ['name'=>'pl', 'abate' => 5],
-    ['name'=>'aasfd', 'abate' => 3],
-];
-
-// $abate = array_column($a, 'abate');
-// array_multisort($abate, SORT_DESC, $a);
+$subject = '字符串替换：aabbc|abadd*';
+$pattern = ['/b+/', '/d+/'];
+$replace = '***';
+// $a = str_replace($find, $replace, $subject);
+$a = preg_replace($pattern, $replace, $subject);
 // dump($a);
 
-$default = '(func) return 123;';
-$codeStr       = substr($default, 6);
-$error_message = 'error';
-// if (!php_check_syntax($codeStr, $error_message)) {
-//     echo $error_message;
-// }
-echo `php -l $codeStr`;
+// $pattern = array('/\d/', '/[a-z]/', '/[1a]/');
+// $replace = array('A:$0', 'B:$0', 'C:$0');
+// echo "preg_replace returns\n<pre/>";
+
+// echo strlen('DON’T return the in-game items under any circumsta...');
+$url  = "http://www.baidu.com/abc/ab/1.php?id=1#aa";
+$path = parse_url($url);
+
+// $a = 0.91552*10/30+0.91552*2*10/30+0.91552*100*10/30;
+// echo $a;
+
+// https://c2c.test.xin/user/offer/edit/id/30.html
+
+$statusV=[-2 => 'BANNED', 1 => 'OFFER_ACTIVE', 0 => 'OFFER_EXPIRED', -1 => 'OFFER_DEACTIVATED'];
+$v='OFFER_EXPIRED1';
+$v = array_search($v, $statusV);
+// dump($v);
+
+$a1=array(0=>"Dog",1=>"Cat",2=>"Horse",3=>"Bird");
+$a2=array(0=>"Tiger",1=>"Lion");
+$b = array_splice($a1,0,2,$a2);
+// dump($a1);
+// dump($b);
+
+// dump(implode(',',[41,42,50]));
+
+$users = array(
+    array('name' => 'tom', 'age' => 20),
+    array('name' => 'anny', 'age' => 18),
+    array('name' => 'jack', 'age' => 22)
+);
+$ret = array_column($users,'age');
+// dump($users);
+// dump($ret);
+
 
 
 
@@ -107,7 +98,7 @@ echo `php -l $codeStr`;
 // echo md5(rand(1,999));
 // echo intval('0.00');
 // if ('0.00'<=0) echo "err"; else echo "string";echo '<br>';
-// if('0.00'<=0): echo "err"; else: echo "string"; endif;echo '<br>';
+// if ('0.00'<=0): echo "err"; else: echo "string"; endif;echo '<br>';
 // $c = null;if ($c==0) echo 'ok';else echo 'err';
 
 /*String*/
@@ -134,7 +125,7 @@ $arr = array(3, 45, 60, 9);
 // $path = substr($path,0,strrpos($path,'-'));echo $path;
 
 /*Other*/
-
+;;;
 ?>
 <?php
 /*临时处理*/
@@ -440,7 +431,7 @@ function YAutoload($classname)
 }*/
 
 /*注册函数*/
-// if(DISCUZ_CORE_DEBUG) {
+// if (DISCUZ_CORE_DEBUG) {
 //     register_shutdown_function(array('Debug','fatalError')); //定义PHP程序执行完成后执行的函数
 //     set_error_handler(array('Debug','appError')); // 设置一个用户定义的错误处理函数
 //     set_exception_handler(array('Debug','appException')); //自定义异常处理。
@@ -760,20 +751,20 @@ $l = 4;
 // }
 // $file = 'D:/WWW/discuz/source/plugin/lodatasheet/upload/datasheet/pic/2017-01-22/art大元素使.jpg';
 // $file = 'http://discuz.32/source/plugin/lodatasheet/upload/datasheet/pic/2017-01-22/art大元素使.jpg';
-// if($file!="" && is_file(iconv("utf-8","gb2312",$file))==true){ //判断文件是否存在
+// if ($file!="" && is_file(iconv("utf-8","gb2312",$file))==true){ //判断文件是否存在
 //  $file_name=iconv("utf-8","gb2312",$file); //编码转换
-//  if(file_exists($file_name)){
-//      if(is_writable($file_name)){ //判断文件是否具备写的权限
+//  if (file_exists($file_name)){
+//      if (is_writable($file_name)){ //判断文件是否具备写的权限
 //          $fp=fopen($file_name,"w+"); //打开指定的文件
-//          if(fwrite($fp,$file_content)){ //执行写入的操作
+//          if (fwrite($fp,$file_content)){ //执行写入的操作
 //              echo"<script>alert('文件写入成功!');</script>";
 //          }else{
 //              echo"<script>alert('文件写入失败!');</script>";
 //          }
 //          fclose($fp); //关闭文件
-//      }elseif(is_readable($file_name)){ //判断文件是否具备读的权限
+//      } elseif (is_readable($file_name)){ //判断文件是否具备读的权限
 //          echo"<script>alert('文件只具备读权限!');</script>";
-//      }else{
+//      } else {
 //          echo"<script>alert('文件不具备读、写权限!');</script>";
 //      }
 //  }else{
@@ -868,7 +859,7 @@ var_dump($c);
 // $_SESSION['arr'] = array(1,9);
 // 在test2.php里测试
 //防止数据重复提交
-// if($_POST['sid']!='' && $_POST['sid']==$_SESSION['sid']){
+// if ($_POST['sid']!='' && $_POST['sid']==$_SESSION['sid']){
 //  unset($_SESSION['sid']);
 //  echo '提交成功！';
 // } else {
