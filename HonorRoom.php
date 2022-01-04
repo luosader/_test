@@ -42,3 +42,26 @@ echo `php -l $codeStr`; `io('http://localhost/a');`;
 ### Redis缓存 _test\8dev\redis.php
 
 
+$array = [
+    '2' => ['title' => 'Flower', 'order' => 3],
+    '3' => ['title' => 'Rock', 'order' => 1],
+    '4' => ['title' => 'Grass', 'order' => 2],
+];
+$keys = array_keys($array);
+array_multisort(array_column($array, 'order'), SORT_DESC, SORT_NUMERIC, $array, $keys);
+$array = array_combine($keys, $array);
+print_r($array);
+
+
+
+
+
+
+
+
+
+
+
+
+
+

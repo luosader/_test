@@ -56,24 +56,24 @@ shearphoto采用原生JS面向对象 + 原生PHP面向对象开发，绝对不�
 window.ShearPhoto.MINGGE(function() {
 	//██████████重要设置████████████████
 	var relativeUrl = "shearphoto_common"; //你不要在后面加斜杠，系统会自动给你加上斜杠，不信看下面！   index.html的JS引用路径自己改，很简单的说
-	/*
-			        relativeUrl有必要详细讲一下，这是1.4新加入的API
-			        相对路径设置(后面不要有斜杠)！
-		            当index.html位置变动时，要填入写正确此值，否则会抱出图片无法读取，后端无法连接等情况的情况。专门为TP和YII等框架而加入的
-		            ----------------------------------------------------------------------------------------------------------------------
-		            relativeUrl 相对路径是相对什么而言呢？
-		            index.html 所在的目录位置   与 shearphoto/file 之间的相对目录
-		            这样讲好像你们不太明白?
-		            -----------------------------------------------------------------------------
-		            示例1：假如：index.htm        位于  http://xxx.com/abc/index.html
-		            shearphoto/file  则位于  http://xxx.com/abc/shearphoto/file
-					那么relativeUrl就要写成    relativeUrl:"shearphoto/shearphoto_common"
-					-----------------------------------------------------------------------------
-					 示例2：假如：index.htm        位于  http://xxx.com/abc/shearphot/def/index.html
-		            shearphoto/file  则位于  http://xxx.com/abc/shearphoto/file
-					那么relativeUrl就要写成    relativeUrl:"../shearphoto_common"
-					-----------------------------------------------------------------------------
-					  ，	表达能力有限，如果不懂，请到官网论坛 QQ群向作者资询	
+	/**
+		relativeUrl有必要详细讲一下，这是1.4新加入的API
+		相对路径设置(后面不要有斜杠)！
+		当index.html位置变动时，要填入写正确此值，否则会抱出图片无法读取，后端无法连接等情况的情况。专门为TP和YII等框架而加入的
+		----------------------------------------------------------------------------------------------------------------------
+		relativeUrl 相对路径是相对什么而言呢？
+		index.html 所在的目录位置   与 shearphoto/file 之间的相对目录
+		这样讲好像你们不太明白?
+		-----------------------------------------------------------------------------
+		示例1：假如：index.htm        位于  http://xxx.com/abc/index.html
+		shearphoto/file  则位于  http://xxx.com/abc/shearphoto/file
+		那么relativeUrl就要写成    relativeUrl:"shearphoto/shearphoto_common"
+		-----------------------------------------------------------------------------
+		示例2：假如：index.htm        位于  http://xxx.com/abc/shearphot/def/index.html
+		shearphoto/file  则位于  http://xxx.com/abc/shearphoto/file
+		那么relativeUrl就要写成    relativeUrl:"../shearphoto_common"
+		-----------------------------------------------------------------------------
+		，	表达能力有限，如果不懂，请到官网论坛 QQ群向作者资询	
 	 */
 
 	//█████████重要设置█████████████████

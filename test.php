@@ -3,10 +3,27 @@
 // error_reporting(0);
 require '_lib/func.php';
 
+// B2C 球员卡 Common/Conf/gameinfo.php
+$str = "Garret Wallow/60/LOLB/Core Bronze";
+$arr = explode("\r\n", $str);
+$tmp = [];
+foreach ($arr as $key => $value) {
+    $tmp[$value] = $value;
+}
+// var_export($tmp);
+
 ### 测试区
 // echo ROOT;
 // switch (false) 与 if 哪个效率高
 // echo date('Y-m-d H:i:s',1617086787);
+
+// $a = ['1,2' => 1];
+// dump($a);
+
+$str = '21,23';
+$str = 'a-21,23-';
+$t   = preg_match('/[^,0-9]+/', $str);
+// dump($t);
 
 // echo floor(bcmod(7, 3)/3);
 $num = '2g. 33f';
@@ -32,33 +49,68 @@ $a = preg_replace($pattern, $replace, $subject);
 // echo strlen('DON’T return the in-game items under any circumsta...');
 $url  = "http://www.baidu.com/abc/ab/1.php?id=1#aa";
 $path = parse_url($url);
+// dump($url);
+// dump($path);
 
 // $a = 0.91552*10/30+0.91552*2*10/30+0.91552*100*10/30;
 // echo $a;
 
 // https://c2c.test.xin/user/offer/edit/id/30.html
 
-$statusV=[-2 => 'BANNED', 1 => 'OFFER_ACTIVE', 0 => 'OFFER_EXPIRED', -1 => 'OFFER_DEACTIVATED'];
-$v='OFFER_EXPIRED1';
-$v = array_search($v, $statusV);
+$statusV = [-2 => 'BANNED', 1 => 'OFFER_ACTIVE', 0 => 'OFFER_EXPIRED', -1 => 'OFFER_DEACTIVATED'];
+$v       = 'BANNED';
+$v       = array_search($v, $statusV);
 // dump($v);
 
-$a1=array(0=>"Dog",1=>"Cat",2=>"Horse",3=>"Bird");
-$a2=array(0=>"Tiger",1=>"Lion");
-$b = array_splice($a1,0,2,$a2);
+$a1 = array(0 => 'Dog', 1 => 'Cat', 2 => 'Horse', 3 => 'Bird');
+$a2 = array(0 => 'Tiger', 1 => 'Lion');
+$b  = array_splice($a1, 0, 2, $a2);
 // dump($a1);
 // dump($b);
 
-// dump(implode(',',[41,42,50]));
+// $str = $key . $data['REQ_TIMES'] . $data['REQ_EMAIL'].$data['TNS_GCID'] . $data['PGW_PRICE'];
+// REQ_SIGN = SHA256 ( SECRET_KEY + REQ_TIMES + REQ_EMAIL + CUS_EMAIL + TNS_GCID + BIL_STATUS + BIL_METHOD + PGW_PRICE + PGW_CURRENCY )
+// $str = '6dc2d8f9d128a3df451ded655e29466d77310ba5bde1f08765adf2cf79c9643f1635994446superwood2019@gmail.comC01X0147S30XFQG90.00';
+$str  = '6dc2d8f9d128a3df451ded655e29466d77310ba5bde1f08765adf2cf79c9643f1635994446superwood2019@gmail.com915273691@qq.comC01X0147S30XFQG9refundedC010.00EUR';
+$sign = hash('sha256', $str);
+// dump($sign);
+// ba9c642dcd80736c9e401316b39ad2d450299622c61ebbcb2c8ff1efb2893533
 
-$users = array(
-    array('name' => 'tom', 'age' => 20),
-    array('name' => 'anny', 'age' => 18),
-    array('name' => 'jack', 'age' => 22)
-);
-$ret = array_column($users,'age');
-// dump($users);
-// dump($ret);
+$sku_id = strstr('12,14-', '-', true);
+// dump($sku_id);
+// echo '打不开';
+
+$a = [['a' => 1, 'b' => 2], ['a' => 2, 'b' => 12], ['a' => 3, 'b' => 45]];
+// dump(json_encode($a));
+// dump(array_shift($a));
+// dump(current($a));
+// dump($a);
+
+// // $a = ['a'=>['timestamp'=>'111','_item'=>['age'=>1]], 'b'=>['timestamp'=>time()]];
+// $a = ['a'=>['timestamp'=>'111'], 'b'=>['timestamp'=>time()]];
+// $a = [1=>['timestamp'=>'111'], 10=>['timestamp'=>time()]];
+// $time = array_column($a, 'timestamp');
+// array_multisort($time, SORT_DESC, $a);
+// dump($a);
+
+
+echo '<canvas id="canvas" width="5" height="5"></canvas>
+<script type="text/javascript">
+    var canvas = document.getElementById("canvas");
+    var dataURL = canvas.toDataURL();
+    console.log(dataURL);
+</script>';
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -125,7 +177,7 @@ $arr = array(3, 45, 60, 9);
 // $path = substr($path,0,strrpos($path,'-'));echo $path;
 
 /*Other*/
-;;;
+;
 ?>
 <?php
 /*临时处理*/
