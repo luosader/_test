@@ -232,7 +232,7 @@ window.ShearPhoto.MINGGE(function() {
 			photoalbum.style.display = "none";
 		};
 	} catch (e) {
-		console.log("相册对象检测有误，默认你抱弃这个功能，错误代码：" + e);
+		console.log("相册对象检测有误，默认你放弃这个功能，错误代码：" + e);
 	}
 	/* 相册部份结束.......看好作者是怎么调用方法的*/
 
@@ -247,18 +247,18 @@ window.ShearPhoto.MINGGE(function() {
 		}); //我们示例截图并且传参数，后端文件shearphoto.php用 示例：$_POST["shearphoto"] 接收参数，不需要传参数请清空Shear.SendPHP里面的参数示例 Shear.SendPHP();
 	});
 
-	// 向左旋转
-	Shear.addEvent(document.getElementById("LeftRotate"), "click", function() { //向左旋转事件
+	// 向左旋转事件
+	Shear.addEvent(document.getElementById("LeftRotate"), "click", function() {
 		Shear.Rotate("left");
 	});
 
-	// 向右旋转
-	Shear.addEvent(document.getElementById("RightRotate"), "click", function() { //向右旋转事件
+	// 向右旋转事件
+	Shear.addEvent(document.getElementById("RightRotate"), "click", function() {
 		Shear.Rotate("right");
 	});
 
-	// 重新选择：
-	Shear.addEvent(document.getElementById("againIMG"), "click", function() { //重新选择事件
+	// 重新选择事件
+	Shear.addEvent(document.getElementById("againIMG"), "click", function() {
 		Shear.preview.close_();
 		Shear.again();
 		Shear.HTML5.EffectsReturn();
