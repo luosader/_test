@@ -17,7 +17,7 @@
 
     <form action="form.php&mod=user" method="post" accept-charset="utf-8" enctype="multipart/form-data" name="form_submit">
         <label for="name">Text Input:</label>
-        <input type="text" name="input[name]" id="name" value="" tabindex="1" />
+        <input type="text" name="input[text]" id="name" value="" tabindex="1" />
 
         <h6>Radio & Checkbox Button Choice</h6>
         <div>
@@ -25,22 +25,12 @@
             <label>Choice2: <input checked type="radio" name="input[radio]" tabindex="3" value="radio-2" /></label>&emsp;
             <label>Choice3: <input type="radio" name="input[radio]" /></label>
         </div>
+
         <div>
             <label>Checkbox1:<input type="checkbox" name="input[checkbox][]" value="1" /></label>&emsp;
             <label>Checkbox2:<input checked type="checkbox" name="input[checkbox][]" value="2" /></label>&emsp;
             <label>Checkbox3:<input type="checkbox" name="input[checkbox][]" /></label>
         </div>
-
-        <h6>文件上传</h6>
-        <input type="file" name="file[multiple][]" multiple="multiple" />&emsp;
-        <label>文件1:<input type="file" name="files[]" value="" /></label>&emsp;
-        <label>文件2:<input type="file" name="files[]" value="" /></label>
-
-        <h6>特殊属性</h6>
-        <input required name="required" value="required" />
-        <input disabled name="disabled" value="disabled" />
-        <input readonly name="readonly" value="readonly" />
-        <input pattern="[A-Za-z]{2}" name="pattern" value="CN" title="Three letter country code" />
 
         <h6>Select </h6>
         <label for="select-choice">Select Dropdown Choice:</label>
@@ -54,29 +44,46 @@
             <option selected value="article">Choice 2</option>
             <option>Choice 3</option>
         </select>
-        <br>
+        <p></p>
         Ctrl多选
-        <select name="select[multiple]" multiple="multiple" size="2">
+        <select name="sels" multiple="multiple" size="3" style="width:230px;">
             <option value="volvo">Volvo</option>
             <option value="saab">Saab</option>
             <option value="mercedes">Mercedes</option>
             <option value="audi">Audi</option>
         </select>
-        <select name="select[multiple2][]" multiple="multiple" size="2">
+        <select name="sels[mix][]" multiple="multiple" size="3" style="width:230px;">
             <option value="volvo">Volvo</option>
             <option value="saab">Saab</option>
             <option value="mercedes">Mercedes</option>
             <option value="audi">Audi</option>
         </select>
 
+        <h6>文件上传</h6>
+        <label>单文件1；<input type="file" name="file[]" value="" /></label>&emsp;
+        <label>单文件2：<input type="file" name="file[]" value="" /></label>&emsp;
+        <label>多文件：<input type="file" name="files[]" multiple="multiple" /></label>
+
         <h6>Textarea </h6>
         <label for="jq-textarea"></label>
-        <textarea id="jq-textarea" cols="40" rows="8" name="textarea[field]">请在这里填写内容：</textarea>
+        <textarea id="jq-textarea" cols="40" rows="3" name="textarea[field]">请在这里填写内容：</textarea>
+
+        <h6>特殊属性</h6>
+        日期： <input type="date" name="date" value="">
+        时间： <input type="time" name="time" value="">
+        <br>
+        颜色： <input type="color" name="color" value="">
+
+        <br>
+        正则： <input pattern="[A-Za-z]{3}" name="pattern" value="" placeholder="USD" title="Three letter currency code" />
+        <input required name="required" value="" placeholder=":required" />
+        <input readonly name="readonly" value="" placeholder=":readonly" />
+        <input disabled name="disabled" value="" placeholder=":disabled" />
 
         <div>
             <input type="hidden" name="id" value="1">
             <input type="hidden" name="formhash" value="1234" />
-            <input type="hidden" name="json" value="{"a":1,"b":2}">
+            <input type="hidden" name="json" value='{"a":1,"b":2}'>
 
             <button type="submit">提交</button>
             <!-- <input type="submit" name="btn_act" value="Submit" /> -->
@@ -89,12 +96,18 @@
 </body>
 
 <script type="text/javascript">
-    if ('Notification' in window) {
-        console.log('Notification')
-    }
+    // if ('Notification' in window) {
+    //     console.log('Notification')
+    // }
+
+    // 提交表单
     $('#jq-submit').click(function() {
-        var select = $("select[name='select[multiple2][]']").val();
+        var select = $("select[name='sels']").val();
         console.log(select);
+        var data = {mod: 'user'};
+        $.post('/form.php', data, function(back, textStatus, xhr) {
+            console.log(back);
+        });
     });
 </script>
 </html>

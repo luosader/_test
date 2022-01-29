@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>异步下载，不影响当前页面</title>
+    <script type="text/javascript">
+        function download() {
+            //创建一个form，并提交到隐藏的frame中
+            var form = document.createElement("form");
+            form.action = "http://localmanage/order/admin_delivery/download2.html";
+            form.method = "get";
+            form.target = "exportFrame";
+            //参数提交
+            var input = document.createElement("input");
+            input.type = "hidden";
+            input.name = "param";
+            input.value = document.getElementById("param").value;
+            form.appendChild(input);
+            document.body.appendChild(form);
+            //表单提交
+            form.submit();
+        }
+    </script>
+</head>
+
+<body>
+    <input type="text" name="param" id="param" value="" />
+    <input type="button" onclick="download()" value="下载" />
+    <!-- 隐藏iframe，将form提交到此frame，达到异步提交的效果 -->
+    <iframe name="exportFrame" width="0" height="0" style="display: none;"></iframe>
+</body>
+</html>

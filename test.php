@@ -2,6 +2,7 @@
 // error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 // error_reporting(0);
 require '_lib/func.php';
+define('APP_DEBUG', true);
 
 // B2C 球员卡 Common/Conf/gameinfo.php
 $str = "Garret Wallow/60/LOLB/Core Bronze";
@@ -17,8 +18,22 @@ foreach ($arr as $key => $value) {
 // switch (false) 与 if 哪个效率高
 // echo date('Y-m-d H:i:s',1617086787);
 
-// $a = ['1,2' => 1];
-// dump($a);
+
+
+// dump($oid = substr('ODR15', 3));
+die;
+
+$newFile = [2,3];
+$oldFile = ['',3];
+$uploadproof = array_diff($newFile, $oldFile);
+dump($uploadproof);
+die;
+// 
+$a = [['a'=>1,'b'=>2]];
+$b = ['b'=>'asas','c'=>'1'];
+
+$a = [['a'=>1],['a'=>2]];
+dump(array_column($a, 'b'));die;
 
 $str = '21,23';
 $str = 'a-21,23-';
@@ -35,6 +50,8 @@ $reg = '/[\/:*?"<>|]/'; //9
 $dir    = '\\';
 $result = preg_match_all($reg, $dir, $mac); //不识别“\”
 
+// dump(json_encode(null));
+// dump(json_decode('[]'));die;
 $subject = '字符串替换：aabbc|abadd*';
 $pattern = ['/b+/', '/d+/'];
 $replace = '***';
@@ -94,15 +111,14 @@ $a = [['a' => 1, 'b' => 2], ['a' => 2, 'b' => 12], ['a' => 3, 'b' => 45]];
 // dump($a);
 
 
-echo '<canvas id="canvas" width="5" height="5"></canvas>
+$str = '<canvas id="canvas" width="5" height="5"></canvas>
 <script type="text/javascript">
     var canvas = document.getElementById("canvas");
     var dataURL = canvas.toDataURL();
     console.log(dataURL);
 </script>';
 
-
-
+// dump(is_file('https://www.baidu.com/img/flexible/logo/pc/result.png'));
 
 
 
