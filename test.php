@@ -94,15 +94,14 @@ $a = [['a' => 1, 'b' => 2], ['a' => 2, 'b' => 12], ['a' => 3, 'b' => 45]];
 // dump($a);
 
 
-echo '<canvas id="canvas" width="5" height="5"></canvas>
+$str = '<canvas id="canvas" width="5" height="5"></canvas>
 <script type="text/javascript">
     var canvas = document.getElementById("canvas");
     var dataURL = canvas.toDataURL();
     console.log(dataURL);
 </script>';
 
-
-
+dump(is_file('https://www.baidu.com/img/flexible/logo/pc/result.png'));
 
 
 
