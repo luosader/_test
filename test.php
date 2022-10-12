@@ -14,12 +14,77 @@ foreach ($arr as $key => $value) {
 // var_export($tmp);
 
 ### 测试区
+// $object = new stdClass; //类原型
 // echo ROOT;
 // switch (false) 与 if 哪个效率高
-// echo date('Y-m-d H:i:s',1617086787);
+// echo date('Y-m-d H:i:s', 1617086787);
+
+$a=date('Y-m-d H:i', 1851794429);
+dump($a);die;
+dump(json_decode(base64_decode('W3sibWNfc24iOjEwLCJjaWQiOjEsImdpZCI6MTMzLCJhaWQiOjIwMzEsInBpZCI6W10sImdpdmUiOiIwLjAwIiwicXR5IjoiMC4zMyIsImFtb3VudCI6IjAuMDAiLCJkZWxpdmVyeV9wcmljZSI6IjAuMTAwMCIsImRlbGl2ZXJ5X2Ftb3VudCI6IjAuMDMiLCJub3RlIjoiIiwicXEiOiI5MTUyNzM2OTEiLCJxcV9uaWNrbmFtZSI6Ilx1NmQxYlx1ODQyOCIsInBob25lIjoiMTg3MTU1MTE1MjYiLCJuYW1lIjoiXHU2YzZhIiwicGF5X21ldGhvZCI6Ilx1NjUyZlx1NGVkOFx1NWI5ZCIsImFjY291bnQiOiI5MTUyNzM2OTFAcXEuY29tIn1d'),true));
+die;
+
+$data = [
+    ['id' => 1, 'name' => 'a', 'children' => [
+        [
+            'id' => 2, 'name' => 'b', 'children' => [
+                [
+                    'id' => 3, 'name' => 'c', 'children' => [
+                        [
+                            'id' => 4, 'name' => 'd', 'children' => [],
+                        ]
+                    ],
+                ]
+            ],
+        ]
+    ]],
+];
+dump($data);
+
+$sp = ' - ';
+$tmp = [];
+
+// 暂时只考虑4级嵌套  如何递归？
+foreach ($data as $s1) {
+    // dump($s1);
+    if (!empty($s1['children'])) {
+        foreach ($s1['children'] as $s2) {
+            // dump($s2);
+            if (!empty($s2['children'])) {
+                foreach ($s2['children'] as $s3) {
+                    if (!empty($s3['children'])) {
+                        foreach ($s3['children'] as $s4) {
+                            $tmp[$s4['id']] = $s1['name'] 
+                                . $sp . $s2['name'] 
+                                . $sp . $s3['name'] 
+                                . $sp . $s4['name'];
+                        }
+                    } else {
+                        $tmp[$s3['id']] = $s1['name'] . $sp . $s2['name'] . $sp . $s3['name'];
+                    }
+                }
+            } else {
+                $tmp[$s2['id']] = $s1['name'] . $sp . $s2['name'];
+            }
+        }
+    } else {
+        $tmp[$s1['id']] = $s1['name'];
+    }
+}
+
+function recursion($data, $sp = ' - ')
+{
+    # code...
+}
+dump($tmp);
+die;
 
 
 
+$string = '汉字abc1213; ;';
+$ret = preg_replace("/([[:alnum:]]|[[:space:]]|[[:punct:]])+/U", '', $string);
+dump($ret);
+dump($string);
 // dump($oid = substr('ODR15', 3));
 die;
 
@@ -117,6 +182,7 @@ $str = '<canvas id="canvas" width="5" height="5"></canvas>
     var dataURL = canvas.toDataURL();
     console.log(dataURL);
 </script>';
+
 
 // dump(is_file('https://www.baidu.com/img/flexible/logo/pc/result.png'));
 
