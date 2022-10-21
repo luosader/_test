@@ -4,13 +4,13 @@
 require '_lib/func.php';
 define('APP_DEBUG', true);
 
-// B2C 球员卡 Common/Conf/gameinfo.php
-$str = "Garret Wallow/60/LOLB/Core Bronze";
-$arr = explode("\r\n", $str);
-$tmp = [];
-foreach ($arr as $key => $value) {
-    $tmp[$value] = $value;
-}
+// // B2C 球员卡 Common/Conf/gameinfo.php
+// $str = "Garret Wallow/60/LOLB/Core Bronze";
+// $arr = explode("\r\n", $str);
+// $tmp = [];
+// foreach ($arr as $key => $value) {
+//     $tmp[$value] = $value;
+// }
 // var_export($tmp);
 
 ### 测试区
@@ -19,8 +19,19 @@ foreach ($arr as $key => $value) {
 // switch (false) 与 if 哪个效率高
 // echo date('Y-m-d H:i:s', 1617086787);
 
-$a=date('Y-m-d H:i', 1851794429);
+
+$a = '  {"status":1,"info":{"headers":{"Server":"nginx\/1.11.5","Date":"Wed, 19 Oct 2022 02","Content-Type":"application\/json; charset=utf-8","Transfer-Encoding":"chunked","Connection":"keep-alive","X-Powered-By":"PHP\/7.0.12","Set-Cookie":"PHPSESSID=drhbqgq3cvbdkijp8b6a4hn2k3; path=\/","Expires":"Thu, 19 Nov 1981 08","Cache-Control":"no-store, no-cache, must-revalidate","Pragma":"no-cache"},"body":{"path":"http:\/\/192.168.6.157\/20221019101613836824_0_48_60.png","title":"\u8ba2\u5355\u6570\u91cf\u548c\u91d1\u989d","timestamp":1666145773,"token":"0393c208c490aa0e7577b308557547d5","name":"20221019101613836824","watermark":0,"width":1643,"height":480,"ext":"img","id":"17"},"header_size":396,"http_code":200,"errno":0,"duration":0.304}}';
+$a = json_decode($a,true);
 dump($a);die;
+
+
+echo hash("crc32", ' W3sibWNfc24iOjEwLCJjaWQiOjEsImdpZCI6MTMzLCJhaWQiOjIwMzEsInBpZCI6W10sImdpdmUiOiIwLjAwIiwicXR5IjoiMC4zMyIsImFtb3VudCI6IjAuMDAiLCJkZWxpdmVyeV9wcmljZSI6IjAuMTAwMCIsImRlbGl2ZXJ5X2Ftb3VudCI6IjAuMDMiLCJub3RlIjoiIiwicXEiOiI5MTUyNzM2OTEiLCJxcV9uaWNrbmFtZSI6Ilx1NmQxYlx1ODQyOCIsInBob25lIjoiMTg3MTU1MTE1MjYiLCJuYW1lIjoiXHU2YzZhIiwicGF5X21ldGhvZCI6Ilx1NjUyZlx1NGVkOFx1NWI5ZCIsImFjY291bnQiOiI5MTUyNzM2OTFAcXEuY29tIn1d')."<br/>";
+echo hash("crc32b", ' W3sibWNfc24iOjEwLCJjaWQiOjEsImdpZCI6MTMzLCJhaWQiOjIwMzEsInBpZCI6W10sImdpdmUiOiIwLjAwIiwicXR5IjoiMC4zMyIsImFtb3VudCI6IjAuMDAiLCJkZWxpdmVyeV9wcmljZSI6IjAuMTAwMCIsImRlbGl2ZXJ5X2Ftb3VudCI6IjAuMDMiLCJub3RlIjoiIiwicXEiOiI5MTUyNzM2OTEiLCJxcV9uaWNrbmFtZSI6Ilx1NmQxYlx1ODQyOCIsInBob25lIjoiMTg3MTU1MTE1MjYiLCJuYW1lIjoiXHU2YzZhIiwicGF5X21ldGhvZCI6Ilx1NjUyZlx1NGVkOFx1NWI5ZCIsImFjY291bnQiOiI5MTUyNzM2OTFAcXEuY29tIn1d');
+        die;
+
+$a = [1,2,''];
+dump(implode(',', array_filter($a)));
+
 dump(json_decode(base64_decode('W3sibWNfc24iOjEwLCJjaWQiOjEsImdpZCI6MTMzLCJhaWQiOjIwMzEsInBpZCI6W10sImdpdmUiOiIwLjAwIiwicXR5IjoiMC4zMyIsImFtb3VudCI6IjAuMDAiLCJkZWxpdmVyeV9wcmljZSI6IjAuMTAwMCIsImRlbGl2ZXJ5X2Ftb3VudCI6IjAuMDMiLCJub3RlIjoiIiwicXEiOiI5MTUyNzM2OTEiLCJxcV9uaWNrbmFtZSI6Ilx1NmQxYlx1ODQyOCIsInBob25lIjoiMTg3MTU1MTE1MjYiLCJuYW1lIjoiXHU2YzZhIiwicGF5X21ldGhvZCI6Ilx1NjUyZlx1NGVkOFx1NWI5ZCIsImFjY291bnQiOiI5MTUyNzM2OTFAcXEuY29tIn1d'),true));
 die;
 
