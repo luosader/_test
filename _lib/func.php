@@ -72,6 +72,12 @@ function dump($var, $echo = true, $label = null, $flags = ENT_SUBSTITUTE)
     return $output;
 }
 
+// 打印变量
+function p($arr, $flag = 1) {
+    dump($arr);
+    if ($flag) exit;
+}
+
 /**
  * 自定义终极调试……
  * @param  [type]  $var  数据

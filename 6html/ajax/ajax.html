@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+	</title>
+</head>
+<script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+<body>
+<script type="text/javascript">
+$.ajax({
+    url:"post.php",
+    type:"POST",
+    data:{name:'user_name',pwd:'user_password'},
+    error:function(){
+        alert('错误')
+    },
+    success:function(data,status){
+        console.log(data);
+    }
+})
+</script>
+</body>
+</html>
